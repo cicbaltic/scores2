@@ -1,0 +1,20 @@
+<div>
+    <h3 style="text-align:left;">{{ crit.userAction }}
+        <span style="float:right;">
+            <button id="single-button" type="button" class="btn btn-primary " ng-click="saveCriteria(0)">
+              {{ "Save" }}
+            </button>
+            <button id="single-button" type="button" class="btn btn-primary btn-danger" ng-click="deleteCriteria()">
+              {{ "Delete" }}
+            </button>
+        <span>
+    </h3>
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text" class="form-control" id="name" ng-model="crit.name">
+    </div>
+    <div class="form-group">
+      <label for="usr">Description:</label>
+      <input type="text" class="form-control" id="description" ng-model="crit.description">
+    </div>
+</div>

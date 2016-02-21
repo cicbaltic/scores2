@@ -1,0 +1,69 @@
+
+<div class="nameOfObjectBelow">
+    <p>Scores of {{info.NAME}}</p>
+</div>
+<div class='backgroundColor'>
+    <div class="backgroundforText">
+        <table class='back-table-collNames' table table-relative>
+            <td class="back-table-numbers">#</td>
+            <td class="back-table-names">Team</td>
+            <td class="back-table-totals">Total</td>
+            <td class="back-table-arow"></td>
+        </table>
+    </div>
+</div>
+<uib-accordion close-others='true'>
+    <div class="customAccordion">
+        <uib-accordion-group
+            ng-repeat="row in rows | orderBy:'-Total'"
+            is-open="status.open">
+            <uib-accordion-heading>
+                <div ng-class="{
+                    'accordionClosed': !status.open,
+                    'accordionOpened': status.open
+                }">
+                    <div ng-class="{
+                        'accordionHeadClosed': !status.open,
+                        'accordionHeadOpened': status.open
+                    }">
+                        <table class='accordionHead-Score-view-table-collNames' table table-relative>
+                            <td class="accordionHead-Score-view-table-numbers">{{ $index + 1 }}</td>
+                            <td class="accordionHead-Score-view-table-names">{{row.NAME}}</td>
+                            <td class="accordionHead-Score-view-table-totals">{{row.Total | roundSomeNumbers}}</td>
+                            <td class="accordionHead-Score-view-table-arow">
+                                <div ng-class="{
+                                    'customAccordion-arrowDown': !status.open,
+                                    'customAccordion-arrowUp': status.open
+                                }"></div>
+                            </td>
+                        </table>
+                    </div>
+                </div>
+            </uib-accordion-heading>
+            <div class='accordionBodyScores'>
+                <table class='accordionHeadSimple-table-scores' table table-relative>
+                    <tr ng-repeat="column in cols | filter:'!'+nameFilter | filter:'!'+totalFilter | filter:'!'+descriptionFilter" >
+                        <td class="accordionBody-Score-view-table-numbers"> </td>
+                        <td class="accordionBody-Score-view-table-names">{{column}}</td>
+                        <td class="accordionBody-Score-view-table-totals">{{row[column] | roundSomeNumbers}}</td>
+                        <td class="accordionBody-Score-view-table-arow"> </td>
+                    <tr>
+                </table>
+            </div>
+            <div class='accordionBodyHead'>
+                <table class='accordionHead-Score-view-table-collNames' table table-relative>
+                    <td class="accordionBody-Score-view-table-teamDescription-Numbers"></td>
+                    <td class="accordionHeadSimple-Score-view-table-teamDescription-Name">Team description</td>
+                </table>
+            </div>
+            <div class='accordionBodyScores'>
+                <table class='accordionHeadSimple-table-scores' table table-relative>
+                    <tr>
+                        <td class="accordionBody-Score-view-table-teamDescription-Numbers"></td>
+                        <td class="accordionBodySimple-table-teamDescription-Text">{{row.DESCRIPTION}}</td>
+                    <tr>
+                </table>
+            </div>
+        </uib-accordion-group>
+    </div>
+</uib-accordion>

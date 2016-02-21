@@ -1,0 +1,75 @@
+<div controller="reportController as rc">
+    <div id="report-view">
+        <h1 id="report-label" style="text-align:left;">Report
+            <span style="float:right;">
+                <button class="btn btn-primary" ng-init="hideFilter=true" ng-click="hideFilter=false" >
+                  Filter
+                </button>
+                <button class="btn btn-primary " ng-click="createCSV()">
+                  Download CSV
+                </button>
+            </span>
+        </h1>
+        <form>
+            <table id="filter-table" ng-hide="hideFilter">
+                <tr>
+                    <!-- <td><h4><b>Filter: </b></h4></td> -->
+                    <td class="filter-td">
+                        <input class="form-control" ng-model="judge" placeholder="Judge"
+                        uib-typeahead="judge for judge in judgeArray | filter:$viewValue | limitTo:8"
+                        typeahead-on-select="filterElement.judge($item)">
+                    </td>
+                    <td class="filter-td">
+                        <input class="form-control" ng-model="criteria" placeholder="Criteria"
+                        uib-typeahead="criteria for criteria in criteriaArray | filter:$viewValue | limitTo:8"
+                        typeahead-on-select="filterElement.criteria($item)">
+                    </td>
+                    <td class="filter-td clear-button-td">
+                        <button class="btn btn-primary" ng-click="filterElement.clearFilters()">Clear</button>
+                    </td>
+                <tr>
+            </table>
+        </form>
+        <table class="">
+            <!-- <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                </tr>
+            </thead> -->
+            <tbody>
+                <tr ng-repeat="(judge, criteriaObj) in nestedInfo" ng-init="judgeShort = (judge | removeSpace)">
+                    <td ng-init="criterias = criteriaObj;" ng-class="{'remove' : judgeShort != judgeToHide && judgeFileFilterOn}" class="report-table"><h3 class="judge-name"><b>{{judge}}</b></h3><hr class="judge-hr">
+                        <table class="">
+                            <tr ng-repeat="(criteria, teamObj) in criterias" ng-init="criteriaShort = (criteria | removeSpace)">
+                                <td ng-init="teams = teamObj;" ng-class="{'remove' : criteriaShort != criteriaToHide && criteriaFileFilterOn}"><h4 class="criteria-name"><b>{{criteria}}</b></h4>
+                                    <table>
+                                        <tr>
+                                            <td class="team-name"><b>Team</b></td><td class="team-score"><b>Score</b></td>
+                                        </tr>
+                                        <tr ng-repeat="(team, score) in teams" >
+                                            <td ng-class="{'grey-color': score==null}" class="team-name">{{team}}</td><td class="team-score">{{score}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- <table class="table table-striped">
+    <head>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+    </head>
+    <tbody>
+
+    </tbody>
+</table> -->

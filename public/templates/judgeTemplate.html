@@ -1,0 +1,32 @@
+<div ng-hide='empty'>
+    <div class="nameOfObjectBelow">
+        <p>{{title}}</p>
+    </div>
+        <uib-accordion close-others='true'>
+            <div class="customAccordion">
+            <uib-accordion-group ng-repeat="person in people"  is-open="status.open">
+                <uib-accordion-heading>
+                    <div ng-class="{
+                        'accordionClosed': !status.open,
+                        'accordionOpened': status.open
+                    }">
+                        <div ng-class="{
+                            'accordionHeadClosed': !status.open,
+                            'accordionHeadOpened': status.open
+                        }">
+                        {{person.name + ' ' + person.surname}}
+                        <div ng-class="{
+                            'customAccordion-arrowDown': !status.open,
+                            'customAccordion-arrowUp': status.open
+                        }"></div>
+                        </div>
+                    </div>
+                </uib-accordion-heading>
+                <div class='accordionBodySimpleText'>
+                    {{person.description}}
+                </div>
+            </uib-accordion-group>
+        </div>
+      </uib-accordion>
+      <A NAME="organisers">
+</div>

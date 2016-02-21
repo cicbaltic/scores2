@@ -1,0 +1,238 @@
+/*------------------------------------------------------------------------------
+ LoginTemplate
+------------------------------------------------------------------------------*/
+
+@media screen and (max-width: 500px) {
+    .login-template {
+        margin-left: 4.84375%;
+        margin-right: 4.84375%;
+    }
+    .login-label {
+        padding-top: 28.5vmin;
+    }
+}
+@media screen and (min-width: 501px) {
+    .login-template {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+    .login-label {
+        padding-top: 28.5vmin;
+    }
+}
+@media screen and (min-width: 800px) {
+    .login-template {
+        margin-left: 0;
+        margin-right: 0;
+        width: 30em;
+        margin: auto;
+    }
+    .login-container {
+        text-align: center;
+        padding-top: 3.5em;
+    }
+    .login-label {
+        padding-top: 20vmin;
+    }
+}
+
+.login-template {
+    /*margin-left: 4.84375%;
+    margin-right: 4.84375%;*/
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+#content {
+    min-height: 86vh;
+	margin-bottom: -4.5em;
+}
+#content:after {
+  content: "";
+  display: block;
+}
+#footer, #content::after {
+  /* .push must be the same height as footer */
+	height: 4.5em;
+}
+#footer .push {
+    height: 4.5em;
+    /*position: static;*/
+    /*position:absolute;*/
+    /*bottom:0;*/
+    /*width:90.3125%;*/
+}
+#login-login-button  {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.login-label {
+    /*text-align: center;*/
+    font-size: 2.3em;
+    color: #374242;
+    /*margin-top: 28.169014084507044%;*/
+    /*padding-top: 28.5vmin;*/
+    margin-bottom: 0;
+}
+.login-failed-sign {
+    margin-top: 1.5%;
+    font-size: 1em;
+    color: #e43417;
+}
+.login-success-sign {
+    margin-top: 1.5%;
+    font-size: 1em;
+}
+#login-failed-sign-visable {
+    visibility: visible;
+}
+#login-failed-sign-hidden {
+    visibility: hidden;
+}
+#login-creditentials .form-control {
+    height: auto;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    /*border-color: #c9d3cf;*/
+}
+
+#login-creditentials ::-webkit-input-placeholder  {
+    color: #7f7a82;
+    font-size: 1em;
+}
+#login-creditentials :-moz-placeholder {           /* Firefox 18- */
+    color: #7f7a82;
+    font-size: 1em;
+}
+
+#login-creditentials ::-moz-placeholder {          /* Firefox 19+ */
+    color: #7f7a82;
+    font-size: 1em;
+}
+
+#login-creditentials :-ms-input-placeholder {      /* Internet Explorer */
+    color: #7f7a82;
+    font-size: 1em;
+}
+#login-creditentials .textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
+    border-color: #4545bc;
+    /*box-shadow: 0 0px 0px #4545bc inset, 0 0 8px #4545bc;
+    outline: 0 none;*/
+}
+#login-creditentials-fail .form-control {
+    height: auto;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    border-color: #e43417;
+}
+#login-creditentials-fail .textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
+    border-color: none;
+    /*box-shadow: 0 0px 0px #4545bc inset, 0 0 8px #4545bc;
+    outline: 0 none;*/
+}
+.login-email {
+    margin-top: 5%;
+    font-size: 1em;
+}
+.login-password {
+    margin-top: 3.4%;
+    font-size: 1em;
+}
+.login-login-button {
+    font-size: 1em;
+    margin-top: 10.6%;
+}
+#login-login-button {
+    padding-top: 0.85em;
+    padding-bottom: 0.85em;
+    margin-bottom: 1em;
+}
+.reset-password-label {
+    font-size: 0.9em;
+}
+
+#reset-password {
+    padding-top: 1em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    color: #4545bc;
+    margin-left: auto;
+    margin-right: auto;
+}
+.login-cancel {
+    width: 100%;
+    /*position: absolute;*/
+    /*bottom: 2%;*/
+}
+.login-cancel-hr {
+    height: 1px;
+    background-color: #c9d3cf;
+    color: #c9d3cf;
+    border: 0 none;
+    margin-bottom: 0;
+}
+.login-cancel-button {
+    /*height: 99px;*/
+    font-size: 1em;
+    color: #7f7a82;
+    /*margin-bottom: 4vw;*/
+}
+/*------------------------------------------------------------------------------
+ Button
+------------------------------------------------------------------------------*/
+
+.login-template .btn {
+    text-align: center;
+    border: 0 none;
+    font-weight: bold;
+    border-radius: 4;
+    font-weight: bold;
+}
+.login-template .btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+/*------------------------------------------------------------------------------
+ Button primary
+------------------------------------------------------------------------------*/
+
+
+.login-template .btn-primary {
+
+    background: #5454d1;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    box-shadow: none;
+}
+
+.login-template .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #4545bc;
+}
+
+.login-template .btn-primary:active, .btn-primary.active {
+    background: #4545bc;
+    box-shadow: none;
+}
+
+/*------------------------------------------------------------------------------
+ Button default (cancel)
+------------------------------------------------------------------------------*/
+
+.login-template .btn-default {
+    background: #ffffff;
+    color: #7f7a82;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    box-shadow: none;
+}
+
+.login-template .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+    background: #f6f5f6;
+    color: #7f7a82;
+}
+
+.login-template .btn-default:active, .btn-default.active {
+    background: #f6f5f6;
+    color: #7f7a82;
+    box-shadow: none;
+}

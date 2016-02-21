@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url(./fonts/HELVNEUEFORIBM.OTF);
+}
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url(./fonts/HELVNEUEFORIBM-BOLD.OTF);
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url(./fonts/HELVNEUEFORIBM-ITALIC.OTF);
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url(./fonts/HELVNEUEFORIBM-BOLDITALIC.OTF);
+    font-style: italic;
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url(./fonts/HELVNEUEFORIBM-COND.OTF);
+    font-stretch: condensed;
+}
+@font-face {
+    font-family: 'Helvetica Neue Light';
+    src: url(./fonts/HELVNEUEFORIBM-LIGHT.OTF);
+}
+@font-face {
+    font-family: 'Helvetica Neue Light';
+    src: url(./fonts/HELVNEUEFORIBM-LIGHTCOND.OTF);
+    font-stretch: condensed;
+}
+@font-face {
+    font-family: 'Helvetica Neue Light';
+    src: url(./fonts/HELVNEUEFORIBM-LIGHTITALIC.OTF);
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Helvetica Neue Medium';
+    src: url(./fonts/HELVNEUEFORIBM-MEDIUM.OTF);
+}
+@font-face {
+    font-family: 'Helvetica Neue Medium';
+    src: url(./fonts/HELVNEUEFORIBM-MEDIUMITALIC.OTF);
+    font-style: italic;
+}

@@ -1,0 +1,674 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "Scores API",
+        "description": "Scores app RESTful APIs."
+    },
+    "basePath": "/api",
+    "paths": {
+        "/hackathon/new": {
+            "post": {
+                "description": "Create a NEW hackathon object.\n",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "description": "Hackathon info payload.",
+                        "schema": {
+                            "$ref": "#/definitions/hackathonObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Hackathon successfully created."
+                    },
+                    "400": {
+                        "description": "Malformed request, no hackathon created."
+                    }
+                }
+            }
+        },
+        "/hackathon/info/{hackathonId}": {
+            "get": {
+                "description": "Get basic info on a hackathon by providing it's ID.\n",
+                "parameters": [
+                    {
+                        "name": "hackathonId",
+                        "in": "path",
+                        "description": "Hackathon unique id.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "title": "hackathonObject",
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/hackathonObject"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Hackathon ID not found"
+                    }
+                }
+            },
+            "post": {
+                "description": "Edit info on an EXISTING hackathon.\n",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "description": "Hackathon info payload.",
+                        "schema": {
+                            "$ref": "#/definitions/hackathonObject"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "hackathonId",
+                        "description": "Hackathon unique id.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Hackathon info updates accepted."
+                    },
+                    "400": {
+                        "description": "Malformed update request"
+                    },
+                    "404": {
+                        "description": "Hackathon ID not found"
+                    }
+                }
+            }
+        },
+        "/hackathon/criteria/{hackathonId}": {
+            "get": {
+                "description": "Get criteria list for a selected Hackathon.\n",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "hackathonId",
+                        "description": "Unique Hackathon id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/hackathonCriteriaObjects"
+                        }
+                    },
+                    "404": {
+                        "description": "Hackathon ID not found"
+                    }
+                }
+            },
+            "post": {
+                "description": "Update criteria assignments to a Hackathon. Parameter \"ASSIGN\" within the request body describes the action. Value 'TRUE' creates hackathon-criteria assignment; value 'FALSE' deletes a record from assignment table.\n",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "hackathonId",
+                        "description": "Unique Hackathon id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "JSON Payload with criteria ID and Hackathon ID for assignment",
+                        "schema": {
+                            "$ref": "#/definitions/criteriaAssignmentObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Updates accepted OK"
+                    },
+                    "404": {
+                        "description": "Hackathon ID not found"
+                    }
+                }
+            }
+        },
+        "/criteria/{criteriaId}": {
+            "get": {
+                "description": "Get information on a criteria.\n",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "criteriaId",
+                        "description": "Unique criteria ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/criteriaObject"
+                        }
+                    },
+                    "404": {
+                        "description": "Criteria ID not found"
+                    }
+                }
+            },
+            "post": {
+                "description": "Update criteria name and/or description.\n",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "criteriaId",
+                        "description": "Unique criteria ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "description": "JSON Payload with criteria ID and Hackathon ID for assignment",
+                        "schema": {
+                            "$ref": "#/definitions/criteriaAssignmentObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Criteria updates accepted OK"
+                    },
+                    "400": {
+                        "description": "Malformed criteria update request"
+                    },
+                    "404": {
+                        "description": "Criteria ID not found"
+                    }
+                }
+            }
+        },
+        "/criteria/new": {
+            "post": {
+                "description": "Create a NEW criteria object and immediately assign it to a hackathon\n",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "description": "Criteria info payload.",
+                        "schema": {
+                            "$ref": "#/definitions/newCriteriaAssignmentObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created OK"
+                    },
+                    "400": {
+                        "description": "Malformed create new criteria request"
+                    }
+                }
+            }
+        },
+        "/criteria/assign": {
+            "post": {
+                "description": "Edit criteria assignment to a hackathon.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "description": "Criteria info payload.",
+                        "schema": {
+                            "$ref": "#/definitions/criteriaAssignmentObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Criteria assigned OK"
+                    },
+                    "400": {
+                        "description": "Malformed criteria assignment request"
+                    }
+                }
+            }
+        },
+        "/judge/assign": {
+            "post": {
+                "description": "Assign judge role to a user for a certain hackathon",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Body",
+                        "description": "Judge assignment payload",
+                        "schema": {
+                            "$ref": "#/definitions/judgeAssignmentObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Judge assigned OK"
+                    },
+                    "204": {
+                        "description": "Judge role removed"
+                    },
+                    "400": {
+                        "description": "Malformed request"
+                    }
+                }
+            }
+        },
+        "/authenticate": {
+            "post": {
+                "description": "User authentication\n",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "User name (Email)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "schema": {
+                            "$ref": "#/definitions/authenticationObject"
+                        }
+                    },
+                    "401": {
+                        "description": "Login failed",
+                        "schema": {
+                            "title": "Message of failed login",
+                            "type": "string",
+                            "items": {
+                                "title": "success",
+                                "type": "string",
+                                "properties": {
+                                    "Username or password is incorrect": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/info": {
+            "post": {
+                "description": "Update info on an existing user\n",
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "User info payload",
+                        "schema": {
+                            "$ref": "#/definitions/userObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully updated info"
+                    },
+                    "400": {
+                        "description": "Malformed request"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/user/register": {
+            "post": {
+                "description": "Create a new user.\n",
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "User creation payload",
+                        "schema": {
+                            "$ref": "#/definitions/newUserObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "New user successfully created."
+                    },
+                    "400": {
+                        "description": "Malformed user registration request"
+                    }
+                }
+            }
+        },
+        "/team/info/{teamId}": {
+            "get": {
+                "description": "Get the team information\n",
+                "parameters": [
+                    {
+                        "name": "teamId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Team ID from the database",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "title": "teamObject",
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/teamObject"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Team ID not found"
+                    }
+                }
+            },
+            "post": {
+                "description": "Update team information\n",
+                "parameters": [
+                    {
+                        "name": "teamId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Team ID from the database",
+                        "type": "number"
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "Team info payload",
+                        "schema": {
+                            "title": "Team Info Object",
+                            "items": {
+                                "$ref": "#/definitions/teamObject"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Team info updated accepted OK",
+                        "schema": {
+                            "title": "teamObject",
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/teamObject"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/team/new": {
+            "post": {
+                "description": "Create a brand new team.\n",
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "A payload object containing team name and description",
+                        "schema": {
+                            "$ref": "#/definitions/newTeamObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "New team created OK",
+                        "schema": {
+                            "title": "teamObject",
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/teamObject"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Malformed team creation request"
+                    }
+                }
+            }
+        },
+        "/team/assign": {
+            "post": {
+                "description": "Assign a team to an existing hackathon.\n",
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "description": "An object to assign or unassign team to a Hackathon",
+                        "schema": {
+                            "$ref": "#/definitions/teamAssignmentObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Team assigned OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "teamAssignmentObject": {
+            "title": "Object for assigning team to a hackathon",
+            "type": "object",
+            "properties": {
+                "ASSIGN": {
+                    "type": "boolean"
+                },
+                "HACKATHONID": {
+                    "type": "number"
+                },
+                "TEAMID": {
+                    "type": "number"
+                }
+            }
+        },
+        "newTeamObject": {
+            "title": "Team object for creating a new team",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "teamObject": {
+            "title": "Team object containing team info",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "teamID": {
+                    "type": "number"
+                }
+            }
+        },
+        "newUserObject": {
+            "title": "User object for resgistering a new user",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        },
+        "userObject": {
+            "title": "User object for update info",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "userID": {
+                    "type": "string"
+                }
+            }
+        },
+        "hackathonObject": {
+            "title": "Hackathon object",
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "number"
+                },
+                "NAME": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "DESCRIPTION": {
+                    "type": "string"
+                }
+            }
+        },
+        "hackathonCriteriaObjects": {
+            "title": "Criteria object",
+            "type": "array",
+            "items": {
+                "properties": {
+                    "HACKATHONID": {
+                        "type": "number"
+                    },
+                    "CRITERIAID": {
+                        "type": "number"
+                    },
+                    "NAME": {
+                        "type": "string"
+                    },
+                    "DESCRIPTION": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "criteriaAssignmentObject": {
+            "title": "Criteria assignment",
+            "type": "object",
+            "properties": {
+                "ASSIGN": {
+                    "type": "boolean"
+                },
+                "CRITERIAID": {
+                    "type": "number"
+                },
+                "HACKATHONID": {
+                    "type": "number"
+                }
+            }
+        },
+        "newCriteriaAssignmentObject": {
+            "title": "New Criteria assignment",
+            "type": "object",
+            "properties": {
+                "NAME": {
+                    "type": "string"
+                },
+                "DESCRIPTION": {
+                    "type": "string"
+                },
+                "HACKATHONID": {
+                    "type": "number"
+                }
+            }
+        },
+        "criteriaObject": {
+            "title": "Criteria object",
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "number"
+                },
+                "NAME": {
+                    "type": "string"
+                },
+                "DESCRIPTION": {
+                    "type": "string"
+                }
+            }
+        },
+        "authenticationObject": {
+            "title": "User access rights",
+            "type": "object",
+            "properties": {
+                "HACKATHONID": {
+                    "type": "number"
+                },
+                "ROLEID": {
+                    "type": "number"
+                }
+            }
+        },
+        "judgeAssignmentObject": {
+            "title": "Judge assignment parameters",
+            "type": "object",
+            "properties": {
+                "ASSIGN": {
+                    "type": "boolean"
+                },
+                "HACKATHONID": {
+                    "type": "number"
+                },
+                "USERID": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

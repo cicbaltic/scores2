@@ -1,0 +1,10 @@
+<div class = "container" ng-controller="listController">
+  <b>Phone List (AN EXAMPLE)</b>
+  <ul class="phones">
+    <li ng-repeat="phone in phones">
+      <p>{{phone.name}}</p>
+      <p>{{phone.snippet}}</p>
+      <img ng-src={{phone.imageUrl}} alt="Description" />
+    </li>
+  </ul>
+</div>

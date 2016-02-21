@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>IBM SCORES</title>
+        <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <![endif]-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#374242">
+        <meta name="msapplication-navbutton-color" content="#374242">
+        <meta name="apple-mobile-web-app-status-bar-style" content="#374242">
+        <link rel="stylesheet" href="css/w3.css"> <!-- w3 schools css -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/loginView.css">
+        <link rel="stylesheet" href="css/judgeView.css">
+        <link rel="stylesheet" href="css/leftSidePanel.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/dotMenu.css">
+        <link rel="stylesheet" href="css/accordion.css">
+        <link rel="stylesheet" href="css/landing.css">
+        <link rel="stylesheet" href="css/scoreTable.css">
+        <link rel="stylesheet" href="css/hackathonDetails.css">
+        <link rel="stylesheet" href="css/adminPanel.css">
+        <link rel="stylesheet" href="css/eventModal.css">
+        <link rel="stylesheet" href="css/report.css">
+        <!--link rel="stylesheet" href="css/fonts.css"-->
+
+        <!-- AngularJS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-cookies.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <!-- UI Bootstrap -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <!-- inject:js -->
+        <script src="js/core/run/run.module.js"></script>
+        <script src="js/core/run/run.js"></script>
+        <script src="js/core/router/router.module.js"></script>
+        <script src="js/core/router/router.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/services/userService.js"></script>
+        <script src="js/services/teamService.js"></script>
+        <script src="js/services/scoreTableService.js"></script>
+        <script src="js/services/reportService.js"></script>
+        <script src="js/services/pageRedirectService.js"></script>
+        <script src="js/services/organisersInfo.js"></script>
+        <script src="js/services/mentorService.js"></script>
+        <script src="js/services/loginService.js"></script>
+        <script src="js/services/judgeService.js"></script>
+        <script src="js/services/judgeInfo.js"></script>
+        <script src="js/services/hackathonInfo.js"></script>
+        <script src="js/services/fileUploader.js"></script>
+        <script src="js/services/emailService.js"></script>
+        <script src="js/services/dotMenuService.js"></script>
+        <script src="js/services/criteriaService.js"></script>
+        <script src="js/services/autocomplete.js"></script>
+        <script src="js/services/adminPanelService.js"></script>
+        <script src="js/core/core.module.js"></script>
+        <script src="js/controllers/scoreTableController.js"></script>
+        <script src="js/controllers/reportController.js"></script>
+        <script src="js/controllers/organizerPanelController.js"></script>
+        <script src="js/controllers/organisersController.js"></script>
+        <script src="js/controllers/mentorsController.js"></script>
+        <script src="js/controllers/loginController.js"></script>
+        <script src="js/controllers/listController.js"></script>
+        <script src="js/controllers/leftSidePanelController.js"></script>
+        <script src="js/controllers/landingController.js"></script>
+        <script src="js/controllers/judgeDashController.js"></script>
+        <script src="js/controllers/judgeController.js"></script>
+        <script src="js/controllers/headerController.js"></script>
+        <script src="js/controllers/hackathonController.js"></script>
+        <script src="js/controllers/eventModalController.js"></script>
+        <script src="js/controllers/dotMenuCloseController.js"></script>
+        <script src="js/controllers/detailsController.js"></script>
+        <script src="js/controllers/adminPanelController.js"></script>
+        <script src="js/controllers/adminManagementController.js"></script>
+        <script src="js/directives/userEditView.js"></script>
+        <script src="js/directives/teamEditView.js"></script>
+        <script src="js/directives/onFileSelected.js"></script>
+        <script src="js/directives/criteriaEditView.js"></script>
+        <!-- endinject -->
+
+        <script>
+            function leftSidePanel() {
+                var siteWrapper = document.getElementById("site-wrapper");
+                var siteCanvas = document.getElementById("site-canvas");
+                var opacity = document.getElementById("opacity");
+                if (siteWrapper.className === "show-nav") {
+                    window.setTimeout(hideOverflow,300);//chrome overflow fix
+                    siteWrapper.className = "";
+                    opacity.className = "";
+                } else {
+                    siteWrapper.className = "show-nav";
+                    opacity.className = "opacity";
+                    siteCanvas.className = "" //chrome overflow fix
+                }
+            }
+            function leftSidePanelCloser() {
+                var siteWrapper = document.getElementById("site-wrapper");
+                var opacity = document.getElementById("opacity");
+                siteWrapper.className = "";
+                opacity.className = "";
+                window.setTimeout(hideOverflow,300); //chrome overflow fix
+            }
+            function hideOverflow () {
+                var siteCanvas = document.getElementById("site-canvas");
+                siteCanvas.className = "hide-overflow";
+            }
+        </script>
+    </head>
+    <body ng-app="app">
+        <div ng-include="'templates/header.html'" ng-controller="headerController"></div>
+        <div ng-controller="eventModalController"></div>
+        <div id="site-wrapper">
+            <div id="site-canvas"  class="hide-overflow">
+            <div id="site-menu">
+                <div ng-include="'templates/leftSidePanelTemplate.html'" ng-controller="headerController"></div>
+            </div>
+            <div  id="opacity" onclick="leftSidePanelCloser()"></div>
+            <div ng-controller="dotMenuCloseController as dmcc" ng-show="dmcc.enableDotMenuCloser">
+                <div id="dot-menu-closer" ng-click="dmcc.dotMenuClose()"></div>
+            </div>
+            <div class="container-fluid"></div>
+                    <div class="row content-wrapper">
+                        <div id="main" >
+                            <div ui-view class="main"></div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </body>
+<html>

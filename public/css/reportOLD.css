@@ -1,0 +1,59 @@
+#report-view {
+
+}
+.report-table {
+
+}
+.filter-td {
+    padding: 1em;
+}
+#filter-table {
+    background: #c9d3cf;
+}
+.clear-button-td {
+    width: 3%;
+}
+#report-label {
+    margin: 0;
+    padding: 0.5em;
+    padding-left: 3%;
+}
+.judge-name {
+    margin-bottom: 0.1em;
+    padding-left: 3%;
+    color: #5454d1;
+}
+.judge-hr {
+    height: 1px;
+    background-color: #c9d3cf;
+    color: #c9d3cf;
+    border: 0 none;
+    margin-top: 0;
+}
+.criteria-name {
+    padding-left: 4%;
+    color: #374242;
+}
+.team-label {
+    padding-bottom: 1em;
+}
+.team-name {
+    padding-left: 5%;
+    width: 30%;
+}
+.team-score {
+    width: 70%;
+}
+.grey-color {
+    color: grey;
+}
+#report-view .btn-primary {
+
+    background: #5454d1;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    box-shadow: none;
+}
+.remove {
+    display: none;
+}

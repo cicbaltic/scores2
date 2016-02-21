@@ -1,0 +1,20 @@
+<div>
+    <h3 style="text-align:left;">{{ team.userAction }}
+        <span style="float:right;">
+            <button id="single-button" type="button" class="btn btn-primary " ng-click="addSaveUser">
+              {{ "Save" }}
+            </button>
+            <!--button id="single-button" type="button" class="btn btn-danger " ng-click="deleteUser()" ng-hide="deleteButtonInEditHide">
+              Delete
+          </button-->
+        <span>
+    </h3>
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text" class="form-control" id="name" value="{{ team.name }}">
+    </div>
+    <div class="form-group">
+      <label for="usr">Description:</label>
+      <input type="text" class="form-control" id="description" value="{{ team.description }}">
+    </div>
+</div>

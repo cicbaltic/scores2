@@ -1,0 +1,143 @@
+.customAccordion-judge-add-score {
+    background: url(./svg/plus.svg) center no-repeat;
+    background-size: 3em 3em;
+    height: 0.9em;
+    width: 0.9em;
+    border-width: 0;
+    line-height: normal;
+    vertical-align: text-bottom;
+}
+
+.customAccordion-judge-remove-score {
+    background-color: black;
+    background: url(./svg/minus.svg) center no-repeat;
+    background-size: 3em 3em;
+    height: 0.9em;
+    width: 0.9em;
+    border-width: 0;
+    line-height: normal;
+    vertical-align: text-bottom;
+}
+
+.accordionHead-Score-edit-table-name {
+    width: 80%;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 1px solid #c9d3cf;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: text-bottom;
+}
+
+.accordionHead-Score-edit-table-name > .teamDescription-Text {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #374242;
+    font-weight: normal;
+    font-size: 0.9em;
+    padding-top: 0.9em;
+    padding-bottom: 0em;
+    width: 80%;
+    text-align: left;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.accordionHead-Score-edit-table-minus {
+    width: 5%;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    border-bottom: 1px solid #c9d3cf;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+.accordionHead-Score-edit-table-score {
+    width: 10%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    border-bottom: 1px solid #c9d3cf;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: middle;
+}
+.accordionHead-Score-edit-table-plus {
+    width: 5%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    border-bottom: 1px solid #c9d3cf;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+#save-changed-scores-button {
+    padding-top: 0.85em;
+    padding-bottom: 0.85em;
+    width: 100%;
+}
+
+#save-changed-scores-button-loading {
+    padding-top: 0.85em;
+    padding-bottom: 0.85em;
+    width: 100%;
+}
+
+/*------------------------------------------------------------------------------
+ Button
+------------------------------------------------------------------------------*/
+
+.save-button-at-score-edit .btn {
+    text-align: center;
+    border: 0 none;
+    font-weight: bold;
+    border-radius: 4;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: text-bottom;
+}
+.save-button-at-score-edit .btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+/*------------------------------------------------------------------------------
+ Button primary
+------------------------------------------------------------------------------*/
+
+
+.save-button-at-score-edit .btn-primary {
+
+    background: #5454d1;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    box-shadow: none;
+    line-height: normal;
+    vertical-align: text-bottom;
+}
+
+.save-button-at-score-edit .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #4545bc;
+}
+
+.save-button-at-score-edit .btn-primary:active, .btn-primary.active {
+    background: #4545bc;
+    box-shadow: none;
+}

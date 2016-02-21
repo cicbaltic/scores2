@@ -1,0 +1,124 @@
+CREATE TABLE TEAM
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
+  Name VARCHAR (255),
+  Description VARCHAR(1000)
+);
+
+CREATE TABLE Hackathon
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
+  Name Varchar(255),
+  Description Varchar (1000),
+  Image Varchar(512)
+);
+
+CREATE TABLE Criteria
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
+  Name Varchar(255),
+  Description Varchar (1000)
+);
+
+CREATE TABLE Roles
+(
+  ID INT not null unique,
+  Name Varchar(255),
+  Description Varchar (1000)
+);
+
+CREATE TABLE Users
+(
+  ID Varchar (255) not null primary key unique,
+  Name Varchar(255),
+  Surname Varchar(255),
+  Email Varchar(255),
+  Password Varchar(255),
+  Description Varchar (1000)
+);
+
+
+CREATE TABLE Access
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
+  hackathonID int,
+  roleID int,
+  userID Varchar (255),
+  constraint Access_id_Hackathon_id
+            foreign key (hackathonID)
+            references Hackathon (ID),
+  constraint Role_id_access_id
+            foreign key (roleID)
+            references Roles (ID),
+  constraint Access_id_User_id
+            foreign key (userID)
+            references Users (ID)
+);
+
+CREATE TABLE HackathonTeam
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
+  hackathonID int,
+  TeamID int,
+  constraint HackathonTeam_Hackathon_id
+            foreign key (hackathonID)
+            references Hackathon (ID),
+  constraint HackathonTeam_Team_id
+            foreign key (TeamID)
+            references TEAM (ID)
+);
+
+CREATE TABLE HackathonCriteria
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
+  CriteriaID int,
+  HackathonID int,
+  constraint HackathonCriteria_Criteria_id
+            foreign key (CriteriaID)
+            references Criteria (ID),
+  constraint HackathonCriteria_Hackathon_id
+            foreign key (HackathonID)
+            references Hackathon (ID)
+);
+
+CREATE TABLE SCORE
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+  hackathonID int,
+  CriteriaID int,
+  UserID Varchar (255),
+  TeamID int,
+  Score int,
+  constraint team_score_id
+           foreign key (TeamID)
+           references team (ID),
+  constraint user_id_score_id
+            foreign key (UserID)
+            references Users (ID),
+  constraint criteria_id_score_id
+           foreign key (CriteriaID)
+           references Criteria (ID),
+  constraint Hackathon_id_score_id
+           foreign key (hackathonID)
+           references Hackathon (ID)
+);
+
+CREATE TABLE MENTORS
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
+  Name VARCHAR (255),
+  Description VARCHAR(1000)
+);
+
+CREATE TABLE HackathonMentors
+(
+  ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
+  mentorID int,
+  hackathonID int,
+  constraint HackathonMentors_Mentor_id
+            foreign key (mentorID)
+            references mentors (ID),
+  constraint HackathonMentors_Hackathon_id
+            foreign key (hackathonID)
+            references hackathon (ID)
+);

@@ -1,0 +1,28 @@
+<div ng-controller="leftSidePanelController as lspc">
+    <ul class="left-side-panel-ul" >
+        <li>
+            <a href="" ng-click="lspc.jumpTo('root', true)"
+                onclick="leftSidePanel()" id="{{lspc.id.home}}">Home<a>
+        </li>
+        <li>
+            <a href="" ng-click="lspc.jumpTo('score')"
+                 onclick="leftSidePanel()" id={{lspc.scoreTableTemplate}}>Scores<a>
+        </li>
+        <li>
+            <a href="" ng-click="lspc.jumpTo('details')"
+                onclick="leftSidePanel()" id="{{lspc.hackathonDetails}}">Event info<a>
+        </li>
+        <li>
+            <a href="" ng-click="lspc.jumpTo('judges')"
+                onclick="leftSidePanel()" id="{{lspc.judge}}">Judges<a>
+        </li>
+        <li>
+            <a href="" ng-click="lspc.jumpTo('organisers')"
+                onclick="leftSidePanel()" id="{{lspc.organisers}}">Organizers<a>
+        </li>
+        <li>
+            <a href="" ng-click="lspc.jumpTo('mentors')"
+                onclick="leftSidePanel()" id="{{lspc.mentors}}">Mentors<a>
+        </li>
+    </ul>
+</div>

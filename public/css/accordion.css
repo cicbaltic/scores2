@@ -1,0 +1,173 @@
+/*ACCORDION ================ ============================================*/
+.panel-group >
+.customAccordion >
+.panel-default {
+    margin: 0px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom-width: 1px;
+    border-radius: 0;
+    padding: 0;
+    border-color: #c9d3cf;
+}
+
+.customAccordion
+.panel-default
+.panel-heading {
+    padding: 0;
+}
+
+.customAccordion
+.panel-default
+.panel-heading
+.accordionClosed {
+    background-color: #f6f5f6;
+    border-width: 0;
+    border-radius: 0;
+    padding: 0;
+    padding-top: 0.9em;
+    padding-bottom: 0.9em;
+    border-color: #c9d3cf;
+}
+
+.customAccordion
+.panel-default
+.panel-heading
+.accordionOpened {
+    background-color: white;
+    border-width: 0;
+    border-radius: 0;
+    padding: 0;
+    padding-top: 0.9em;
+    padding-bottom: 0.9em;
+    border-color: #c9d3cf;
+}
+
+.customAccordion >
+.panel-default >
+.panel-heading >
+.panel-title .accordionHeadScores{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+    color: #7f7a82;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 4.84375%;
+    margin-right: 4.84375%;
+}
+
+.customAccordion >
+.panel-default >
+.panel-heading >
+.panel-title .accordionHeadClosed {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+    color: #7f7a82;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 4.84375%;
+    margin-right: 4.84375%;
+    border-color: #c9d3cf;
+}
+
+
+.customAccordion >
+.panel-default >
+.panel-heading >
+.panel-title .accordionHeadOpened {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+    color: #5454d1;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 4.84375%;
+    margin-right: 4.84375%;
+    border-color: #c9d3cf;
+}
+
+
+.customAccordion >
+.panel-default >
+.panel-heading+.panel-collapse >
+.panel-body {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width:  0;
+    border-bottom-width: 0;
+    border-radius: 0;
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0.8em;
+    border-color: #c9d3cf;
+}
+
+
+.customAccordion >
+.panel-default >
+.panel-heading+.panel-collapse >
+.panel-body >
+.accordionBodyHead {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+    color: #5454d1;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 4.84375%;
+    margin-right: 4.84375%;
+    margin-top: 0;
+    margin-bottom: 0.625em;
+    border-color: #c9d3cf;
+}
+/* Used for Simple Description */
+.customAccordion >
+.panel-default >
+.panel-heading+.panel-collapse >
+.panel-body >
+.accordionBodySimpleText {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+    color: #374242;
+    font-size: 0.9em;
+    margin-left: 4.84375%;
+    margin-right: 4.84375%;
+    border-color: #c9d3cf;
+}
+/* Used for Scoring */
+.customAccordion >
+.panel-default >
+.panel-heading+.panel-collapse >
+.panel-body >
+.accordionBodyScoring {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+    color: #374242;
+    font-size: 0.9em;
+    margin-left: 4.84375%;
+    margin-right: 4.84375%;
+    margin-top: 0;
+    margin-bottom: 0.625em;
+}
+/* Used for Scores */
+.customAccordion >
+.panel-default >
+.panel-heading+.panel-collapse >
+.panel-body >
+.accordionBodyScores {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+    color: #374242;
+    font-size: 0.9em;
+    margin-left: 4.84375%;
+    margin-right: 4.84375%;
+    margin-top: 0;
+    margin-bottom: 0.625em;
+}
+/*============================================================================*/

@@ -1,0 +1,206 @@
+.customAccordion-arrowDown {
+    background: url(./svg/arrow-down.svg) center no-repeat;
+    background-size: 3em 3em;
+    height: 0.9em;
+    width: 0.9em;
+    border-width: 0;
+    float:right;
+    vertical-align: baseline;
+    line-height: normal;
+}
+
+.customAccordion-arrowUp {
+    background: url(./svg/arrow-up.svg) center no-repeat;
+    background-size: 3em 3em;
+    height: 0.9em;
+    width: 0.9em;
+    border-width: 0;
+    float:right;
+    vertical-align: baseline;
+    line-height: normal;
+}
+.accordionHead-Score-view-table-numbers {
+    width: 10%;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.accordionHead-Score-view-table-names {
+    width: 65%;
+    text-align: left;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.accordionHead-Score-view-table-totals {
+    width: 10%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    line-height: normal;
+    vertical-align: baseline;
+}
+.accordionHead-Score-view-table-arow {
+    width: 15%;
+    text-align: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.accordionBody-Score-view-table-numbers {
+    padding-top: 1em;
+    padding-bottom: 0.938em;
+    width: 10%;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    border-bottom: 1px solid #c9d3cf;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.accordionBody-Score-view-table-names {
+    padding-top: 1em;
+    padding-bottom: 0.938em;
+    width: 65%;
+    text-align: left;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    border-bottom: 1px solid #c9d3cf;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.accordionBody-Score-view-table-totals {
+    color: #5454d1;
+    padding-top: 1em;
+    padding-bottom: 0.938em;
+    width: 10%;
+    text-align: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    border-bottom: 1px solid #c9d3cf;
+    line-height: normal;
+    vertical-align: baseline;
+}
+.accordionBody-Score-view-table-arow {
+    padding-top: 1em;
+    padding-bottom: 0.938em;
+    width: 15%;
+    text-align: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    border-bottom: 1px solid #c9d3cf;
+    line-height: normal;
+    vertical-align: baseline;
+}
+.accordionBody-Score-view-table-teamDescription-Numbers {
+    padding-top: 0em;
+    padding-bottom: 0em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    width: 10%;
+    text-align: left;
+    font-weight: bold;
+    line-height: normal;
+    vertical-align: baseline;
+}
+.accordionHead-Score-view-table-teamDescription-Name {
+    padding-top: 0.625em;
+    padding-bottom: 0em;
+    width: 90%;
+    text-align: left;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.accordionBody-Score-view-table-teamDescription-Text {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #374242;
+    font-size: 0.9em;
+    padding-top: 0em;
+    padding-bottom: 0em;
+    width: 80%;
+    text-align: left;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.back-table-numbers {
+    width: 10%;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.back-table-names {
+    width: 65%;
+    text-align: left;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.back-table-totals {
+    width: 10%;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+}
+.back-table-arow {
+    width: 15%;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.back-table-collNames {
+    padding: 0;
+    font-size: 0.9em;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: normal;
+    color: black;
+    vertical-align: baseline;
+}
+
+.backgroundforText {
+    margin-left: 4.84375%;
+    margin-right: 4.84375%;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+}
+
+.backgroundColor {
+    background-color: #f6f5f6;
+    border-bottom: 1px solid #c9d3cf;
+}
+
+.nameOfObjectBelow {
+    background-color: #f6f5f6;
+    margin: 0;
+    padding-left: 4.84375%;
+    padding-right: 4.84375%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1.2em;
+}
+
+.nameOfObjectBelow p {
+    margin: 0;
+}

@@ -1,0 +1,82 @@
+@media (max-width: 1200px) {
+    #report-view {
+        width: 1200px;
+    }
+}
+#report-view {
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    padding-bottom: 1em;
+}
+.report-td {
+    float:left;
+}
+.filter-td {
+    padding-left: 0.3em;
+    margin: 1px;
+}
+.clear-button-td {
+    width: 3%;
+}
+#report-label {
+    margin: 0;
+    padding: 0.5em;
+    padding-left: 3%;
+}
+.judge-name {
+    margin-bottom: 0.1em;
+    padding-left: 3%;
+    color: #5904d1;
+}
+.judge-hr {
+    height: 1px;
+    background-color: #c9d3cf;
+    color: #c9d3cf;
+    border: 0 none;
+    margin-top: 0;
+}
+.criteria-label-td {
+    height: 4.5em;
+    width:150px;
+}
+.criteria-name {
+    left: 0px;
+    color: #374242;
+    margin: 0;
+    max-height: 4em;
+    overflow: hidden;
+    padding: 0.1em;
+    text-align: center;
+}
+.criteria-td {
+    height: 4.5em;
+    width:120px;
+}
+.team-label {
+    padding-bottom: 1em;
+}
+.team-name {
+    padding-left: 5%;
+    padding-right: 1em;
+    white-space:nowrap;
+    text-align: center;
+}
+.team-score {
+    text-align: center; 
+}
+#report-view .btn-primary {
+
+    background: #5904d1;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    box-shadow: none;
+}
+.new-line-for-word {
+    text-align: center;
+}
+.border-left {
+    border-left: 1px solid #c9d3cf;
+}
+.remove {
+    display: none;
+}

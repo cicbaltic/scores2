@@ -1,0 +1,191 @@
+@media (min-width: 768px) {
+    .main {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}
+@media (max-width: 260px) {
+    body {
+        width: 260px;
+    }
+}
+@media (min-width: 1200px) {
+    #main {
+        width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .main {
+        background: white;
+    }
+    .content-wrapper {
+        background: #dbdbe3;
+    }
+}
+html{
+    position:relative;
+    height: 100%;
+}
+body {
+    height: 100%;
+    padding-top: 3.5em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+.row {
+    margin: 0;
+    overflow: auto;
+    height: 100%;
+}
+.panel-group {
+    margin: 0;
+}
+.main .page-header {
+    margin-top: 0;
+}
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.placeholders h4 {
+    margin-bottom: 0;
+}
+.placeholder {
+    margin-bottom: 20px;
+}
+.placeholder img {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+
+/*------------------------------------------------------------------------------
+ Score Table
+------------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------*/
+
+.popBody
+{
+    margin: 0px;
+    padding-bottom: 0px;
+    width:100%;
+	height:220px;
+	overflow-y:hidden;
+	overflow-x:auto;
+}
+
+.poptable2
+{
+	width:98.75%;
+    height:auto;
+    margin-bottom: 0px;
+}
+
+.poptable
+{
+	width:100%;
+    height:150px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+#Ingredients
+{
+    text-align: center;
+    display: inline-block;
+	height:160px;
+	overflow-y: auto;
+    overflow-x: hidden;
+	width: 100%;
+}
+
+.number {
+    width: 10px;
+    text-align: center;
+}
+.other {
+    text-align: center;
+    min-width: 100px;
+    width: 100px;
+    max-width: 100px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.other2 {
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+/*.sidebar {
+  display: none;
+}*/
+/*@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #325c80;
+    border-right: 1px solid #eee;
+    color: #FFFFFF;
+  }
+}*/
+
+/* Sidebar navigation */
+/*.nav-sidebar {
+  margin-right: -21px;
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}*/
+
+
+/*
+ * Main content
+ */

@@ -1,0 +1,15 @@
+
+#adminPanelAddButton, #adminPanelHackatonSelectButton {
+    z-index: 500;
+}
+
+#adminPanel {
+    padding-bottom: 1em;
+}
+#adminManagement .btn-primary, #adminPanel .btn-primary {
+
+    background: #5454d1;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    box-shadow: none;
+}

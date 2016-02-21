@@ -1,0 +1,24 @@
+{
+  "name": "scores2",
+  "description": "Scoring application for hackathons.",
+  "main": "",
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "1.4.7",
+    "angular-bootstrap": "0.14.3",
+    "angular-mocks": "1.4.7",
+    "angular-cookies": "1.4.7",
+    "angular-route": "1.4.7",
+    "angular-ui-router": "0.2.15",
+    "angular-smart-table": "2.1.4"
+  }
+}

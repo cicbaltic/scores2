@@ -1,0 +1,68 @@
+<div controller="reportController as rc">
+    <div id="report-view">
+        <h1 id="report-label" style="text-align:left;">Report
+            <span style="float:right;">
+                <form>
+                    <table>
+                        <td class="filter-td">
+                            <input class="form-control judge-filter" ng-model="judge" placeholder="Judge"
+                            uib-typeahead="judge for judge in judgeArray | filter:$viewValue | limitTo:8"
+                            typeahead-on-select="filterElement.judge($item)">
+                        </td>
+                        <td class="filter-td">
+                            <button class="btn btn-default form-control" ng-click="filterElement.clearFilters()" style="margin-bottom: 4px"
+                                ng-class="{disabled : dataLoading}">Clear</button>
+                        </td>
+                        <td class="filter-td">
+                            <button class="btn btn-primary form-control " ng-click="createCSV()" style="margin-bottom: 4px"
+                                ng-class="{disabled : dataLoading}">Download CSV</button>
+                        <td/>
+                    </table>
+                </form>
+            </span>
+        </h1>
+        <table class="">
+            <tbody>
+                <tr ng-repeat="(judge, criteriaObj) in nestedInfo" ng-init="judgeShort = (judge | removeSpace)">
+                    <td ng-init="criterias = criteriaObj;"
+                        ng-class="{'remove' : judgeShort != judgeToHide && judgeFileFilterOn}"
+                        class="report-table"><h3 class="judge-name"><b>{{judge}}</b></h3><hr class="judge-hr">
+                        <table class="report-table">
+                            <tr>
+                                <td class="report-td">
+                                    <table>
+                                        <tr>
+                                            <td class="criteria-label-td">
+                                                <p class="team-name">Team / Criteria</p>
+                                            </td>
+                                        </tr>
+                                        <tr ng-repeat="team in teamAray" >
+                                            <td class="team-name" uib-popover="{{team}}" popover-trigger="mouseenter">{{team | stringCut}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td >
+                                    <table>
+                                        <td ng-repeat="(criteria, teamObj) in criterias" class="border-left"
+                                            ng-init="criteriaShort = (criteria | removeSpace)" >
+                                            <table ng-init="teams = teamObj;" style="display:inline;">
+                                                <table>
+                                                    <tr>
+                                                        <td class="criteria-td"><p class="criteria-name" uib-popover="{{criteria}}" popover-trigger="mouseenter">{{criteria}}</p> </td>
+                                                    </tr>
+                                                    <tr ng-repeat="(team, score) in teams" >
+                                                        <td class="team-score">{{score | checkForNull}} </td>
+                                                    </tr>
+                                                </table>
+                                            </table>
+                                        </td>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

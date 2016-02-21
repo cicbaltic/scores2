@@ -1,0 +1,71 @@
+<div controller="adminManagementController as amc">
+    <div class="container" id="adminManagement">
+        <h1 style="text-align:left;"> Administrators
+        <span style="float:right;">
+            <button id="single-button" type="button" class="btn btn-primary " ng-click="addUser()">
+              Create Administrator
+            </button>
+        </span>
+        </h1>
+        <table class="table list-group  table-hover">
+            <thead>
+               <tr>
+                   <th>Name</th>
+                   <th>Email</th>
+                   <th>Description</th>
+               </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="person in people" ng-click="reveal(person)">
+                    <td>{{person.NAME}} {{person.SURNAME}}</td>
+                    <td>{{person.EMAIL}}</td>
+                    <td>{{person.DESCRIPTION}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div ng-hide="adminEditTableHide">
+            <h3 style="text-align:left;">{{userDisplay}}
+                <span style="float:right;">
+                    <button id="single-button" type="button" class="btn btn-primary "
+                        ng-click="addSaveUser(admin, adminMngForm.adminMngEmailInput.$valid,
+                        adminMngForm.adminMngNameInput.$valid, adminMngForm.adminMngSurnameInput.$valid)">
+                      {{actionButton}}
+                    </button>
+                    <button id="single-button" type="button" class="btn btn-danger "
+                        ng-click="deleteUser(admin)" ng-hide="deleteButtonInEditHide">
+                      Delete
+                    </button>
+                <span>
+            </h3>
+            <form name="adminMngForm">
+                <div class="form-group {{amc.emailRedBorderClass}}" ng-hide="userInputHide">
+                    <label for="usr">Email:</label>
+                    <input type="email" name='adminMngEmailInput' required class="form-control" id="usr" value={{admin.email}}
+                        ng-disabled="emailEditDisable" ng-model="admin.email"
+                        uib-typeahead="people.EMAIL for people in autocomplete | filter:$viewValue | limitTo:8"
+                        typeahead-on-select="onSelect($item, $model, $label)" ng-change="clearInvalidSelection()">
+                    <p style="color:red" ng-show="amc.showInvalidEmailLabel">Please enter valid Email</p>
+                    <p style="color:red" ng-show="amc.showEmailDuiplicateLabel">{{admin.email}} is already in a list</p>
+                </div>
+                <div class="form-group {{amc.nameRedBorderClass}}" ng-hide="userInputHide">
+                    <label for="usr">Name:</label>
+                    <input type="text" name="adminMngNameInput" required class="form-control" id="usr" value={{admin.name}}
+                        ng-model="admin.name" ng-change="clearInvalidSelection()">
+                    <p style="color:red" ng-show="amc.showInvalidNameLabel">Please enter Name</p>
+                </div>
+                <div class="form-group {{amc.surnameRedBorderClass}}" ng-hide="userInputHide">
+                    <label for="usr">Surname:</label>
+                    <input type="text" name="adminMngSurnameInput" required class="form-control" id="usr" value={{admin.surname}}
+                        ng-model="admin.surname" ng-change="clearInvalidSelection()">
+                    <p style="color:red" ng-show="amc.showInvalidSurnameLabel">Please enter Surname</p>
+                </div>
+                <div class="form-group" ng-hide="userInputHide">
+                    <label for="usr">Description:</label>
+                    <input type="text" class="form-control" id="usr" value={{admin.description}}
+                        ng-model="admin.description">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div ng-controller="loginController as lc">
+    <div class="login-container">
+        <div class="login-template">
+            <div id="content">
+                <p class="login-label">
+                    STAFF <strong>LOGIN</strong>
+                </p>
+                    <p class="login-failed-sign" style="visibility: {{lc.failLabel}};"
+                        ng-show="lc.showFailedHideRestLabel">
+                        Login failed. Invalid username or password</p>
+                    <p class=" login-success-sign reset-password-label" style="visibility: {{lc.showResetPassLabel2}};"
+                        ng-hide="lc.showFailedHideRestLabel">
+                        <span style="color:green">Success: </span>Your password has been reset successfully</p>
+                <form role="form" ng-submit="submit(form)">
+                    <div id={{lc.loginFail}}>
+                        <p ng-show="lc.showResetPassLabel1" class="reset-password-label">
+                            In order to reset password enter your Email and<br>tap Reset Password button</p>
+                        <p ng-show="lc.showResetPassLabel3" class="reset-password-label">
+                            Please check your<br>Email address</p>
+                        <input type="text" placeholder="Email"
+                            class="login-email form-control" ng-model="form.username" required>
+                        <input type="password" placeholder="Password" ng-hide="lc.hidePassInput"
+                            class=" login-password {{lc.formControl}}" ng-model="form.password" >
+                    </div>
+                        <button id="login-login-button" type="submit"
+                            class="login-login-button btn btn-group-justified btn-primary">{{lc.buttonLabel}}</button>
+                </form>
+                <a href="" ng-click="resetPassword(true)" id="reset-password" ng-hide="lc.hideResetPassLink">Reset password</a>
+                <div class="push"></div>
+            </div>
+            <div id="footer">
+                <div class="login-cancel">
+                    <hr class="login-cancel-hr">
+                    <button id="login-login-button" type="button"
+                        class=" login-cancel-button btn btn-group-justified btn-default" ng-click="cancel()"><strong>Cancel</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

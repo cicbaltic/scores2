@@ -1,0 +1,24 @@
+
+  <div ng-controller="eventModalController as emc">
+      <!--script type="text/ng-template" id="loginModal.html"-->
+        <div class="modal-body">
+             <h3 class="modal-title">Create Event</h3><br>
+            <form name="form" role="form" ng-submit="submit(emc.event)">
+                <div class="form-group">  </input>
+                    <label for="usr">Event:</label>
+                    <input type="text" class="form-control"
+                        ng-model="emc.event.hackathonName" required>
+                </div>
+                <div class="form-group">  </input>
+                    <label for="usr">Event description:</label>
+                    <input type="text" class="form-control"
+                        ng-model="emc.event.hackathonDescription">
+                </div>
+                <div id="event-modal-buttons">
+                    <p><button type="submit" class="btn btn-primary">Create</button>
+                    <button class="btn btn-primary" type="button" ng-click="cancel()">Cancel</button></p>
+                </div>
+            </form>
+        </div>
+        <!--/script-->
+  </div>

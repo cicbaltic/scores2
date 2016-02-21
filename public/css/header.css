@@ -1,0 +1,88 @@
+@media (min-width: 768px) {
+    .navbar-nav.navbar-right:last-child {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+}
+.navbar-nav  {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0;
+}
+.navbar {
+    min-height: 32px;
+    height: 3.5em;
+    background-color: #374242;
+    vertical-align: middle;
+}
+
+.custom-navbar .fa {font-size:25px}
+
+.custom-navbar .navbar-right {
+    float: right;
+    /*padding-right: 15px;*/
+    height: 3.5em;
+    width: 8em;
+    margin-right: 0;
+}
+/*.custom-navbar .nav.navbar-nav.navbar-right li {	    float: right;	}
+.custom-navbar .nav.navbar-nav.navbar-right li > a {	    padding:8px 5px;	}
+.custom-navbar .navbar-toggle {	    float: left	}
+.custom-navbar .navbar-header {	    float: left;	    width: auto!important;	}
+.custom-navbar .navbar-collapse {	    clear: both;	    float: none;	}*/
+
+.navbar-fixed-top {
+  border: 0;
+}
+.conatainer-fluid {
+
+}
+#header-hambureger-menu {
+    background: url(./svg/hamburger-menu.svg) center no-repeat;
+    background-size: 3.5em 3.5em;
+    height: 3.5em;
+    width: 3.5em;
+    border-width: 0;
+}
+.header-hambureger-menu-opacity {
+    opacity: 0.2;
+}
+#header-app-logo {
+    background:url(./svg/app-logo.svg) center no-repeat;
+    background-size: 7.5em 1em;
+    height: 3.5em;
+    width: 7.5em;
+    border-width: 0;
+}
+#header-login-button {
+    float: right;
+    margin: 9%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 60%;
+    width: auto;
+    font-size: 0.95em;
+    background-color: #374242;
+    color: #aeb8b8;
+    border-color: #aeb8b8;
+    border-style: solid;
+    border-width: 0.1em;
+    font-weight: bold;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+#header-login-button:active {
+     background-color: #aeb8b8;
+     color: #374242;
+     border-color: #aeb8b8;
+}
+#header-3-dot-menu-button {
+    float: right;
+    background: url(./svg/menu.svg) center no-repeat;
+    background-size: 3.5em 3.5em;
+    height: 3.5em;
+    width: 3.5em;
+    border-width: 0;
+    margin-right: 1.5%;
+}

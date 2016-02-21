@@ -1,0 +1,43 @@
+.hack-info-container {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    /*color: #474242;*/
+}
+
+#hack-info-name .ng-binding {
+    margin: 0;
+}
+#hack-info-name {
+    background-color: #f6f5f6;
+    margin: 0;
+    padding-left: 4.84375%;
+    padding-right: 4.84375%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1.2em;
+}
+#hack-info-name p {
+    margin: 0;
+}
+#hack-info-img {
+    margin-bottom: 0.5em;
+    border: 1px solid #c9d3cf;
+}
+.hack-info-info {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.hack-info-info p {
+    padding-bottom: 0.7em;
+    margin-bottom: 0;
+}
+.backgroundColorForDec {
+    background-color: #f6f5f6;
+}
+
+#hack-info-description-header {
+    font-weight: bold;
+    font-size: 0.98em;
+}
+#hack-info-description {
+    font-size: 0.9em;
+}

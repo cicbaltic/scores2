@@ -1,0 +1,78 @@
+<div ng-controller="headerController as hc">
+    <nav class="navbar navbar-inverse navbar-fixed-top custom-navbar" role="navigation"  >
+        <div class="container-fluid">
+            <button id="header-hambureger-menu" class="{{hc.hamburgerMenuOpacity}}"
+                onclick="leftSidePanel()" ng-disabled="hc.disableHamburgerMenu"
+                ng-click="hc.hideDotMenu()"></button>
+            <button id="header-app-logo" ng-click="hc.redirect('home')"
+                onclick="leftSidePanelCloser()"></button>
+            <div class="nav navbar-nav navbar-right">
+                <button ng-show="hc.showHeaderLoginButton" href="#"
+                    id="header-login-button" onclick="leftSidePanelCloser()"
+                    ng-click="hc.redirect('login')">LOG IN</button>
+                <button ng-show="hc.showHeader3dotMenuButton"
+                    id="header-3-dot-menu-button" onclick="leftSidePanelCloser()"
+                    ng-click="hc.revealdotMenu()"></button>
+            </div>
+        </div>
+        <div id="header-3-dot-menu" ng-show="hc.showDotMenu">
+                <ul class="right-side-panel-ul" >
+                    <li id="create-event" ng-show='hc.showCreateEvent'>
+                        <a href="" ng-click="hc.createEvent()">Create Event<a>
+                    </li>
+                    <li id="judgepage" ng-show="hc.showJudgepageOption">
+                        <a href="" ng-click="hc.redirect('judgepage')"
+                            onclick="leftSidePanelCloser()">Judge<a>
+                    </li>
+                    <li id="organiser" ng-show="hc.showOrganiserOption">
+                        <a href="" ng-click="hc.redirect('organiser')"
+                            onclick="leftSidePanelCloser()">Organiser<a>
+                    </li>
+                    <li id="admin" ng-show="hc.showAdminOption">
+                        <a href="" ng-click="hc.redirect('admin')"
+                            onclick="leftSidePanelCloser()">Admin<a>
+                    </li>
+                    <li id="log-out" class={{hc.gapp}}>
+                        <a href="" ng-click="hc.logout()"
+                            onclick="leftSidePanelCloser()">Log out<a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--/.container -->
+    </nav>
+</div>
+
+
+<!-- <button ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" class="navbar-toggle collapsed navbar-right"> -->
+    <!-- <span class="sr-only">Toggle navigation</span> -->
+    <!-- <span class="icon-bar"></span> -->
+    <!-- <span class="icon-bar"></span> -->
+    <!-- <span class="icon-bar"></span> -->
+<!-- </button> -->
+
+
+<!-- leftSidePanel() location index.html -->
+<!-- <div class="navbar-header">
+    <a class="navbar-brand" rel="home" href="#/" title="Help">IBM <b>Scores</b></a>
+</div> -->
+<!-- Non-collapsing right-side icons -->
+<!-- <ul class="nav navbar-nav navbar-right" ng-controller="LoginModal">
+    <li>
+        <button href="#" id="header-login-button" ng-click="open('sm')">{{login}}</button>
+    </li>
+</ul> -->
+<!-- the collapsing menu -->
+<!--div class="visible-xs"-->
+    <!-- <div uib-collapse="navCollapsed" class="collapse navbar-collapse navbar-left">
+        <ul class="nav navbar-nav">
+            <li class="" ng-repeat="item in menu" ng-click="$parent.navCollapsed = !$parent.navCollapsed">
+                    <a ng-click="gotoAnchor($index + 1)" href="">
+                        {{ item.display }}
+                    </a>
+            </li>
+        </ul>
+    </div> -->
+<!--/div-->
+
+<!--/.nav-collapse -->
