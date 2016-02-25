@@ -1,6 +1,5 @@
-//9c4b0568-2202-4969-a718-277317dad341
-//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
-var sendgrid  = require('sendgrid')("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");
+
+var sendgrid  = require('sendgrid')("");
 
 function emailService(req, res) {
 
@@ -21,19 +20,7 @@ function emailService(req, res) {
 
     // add filter settings one at a time
     email.addFilter('templates', 'enable', 1);
-    email.addFilter('templates', 'template_id', '9c4b0568-2202-4969-a718-277317dad341');
-
-    /*
-    // or set a filter using an object literal.
-    email.setFilters({
-        templates: {
-            settings: {
-                enable: 1,
-                template_id: '9c4b0568-2202-4969-a718-277317dad341',
-            }
-        }
-    });
-    */
+    email.addFilter('templates', 'template_id', '');
 
     sendgrid.send(email , function(err, json) {
             if (err) { return console.error(err); }
