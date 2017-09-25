@@ -1,0 +1,27 @@
+
+.default-theme-color{
+    color: rgba(83,146,255,1)!important;
+}
+.main-theme-color{
+    color: #fff!important;
+ background-color: rgb(82, 145, 255)!important;
+ 
+}
+.heart-hover-color
+{
+    color: rgb(0, 0, 0)!important;
+}
+.heart-default-color{
+    color: rgba(216,216,216,1)!important;
+}
+.heart-selected-color
+{
+    color: rgba(83,146,255,1)!important;
+}
+
+
+span.underline {
+    border-bottom: 1px solid gainsboro;
+    display:block;
+    z-index:-999;
+}

@@ -2,8 +2,8 @@
     'use strict';
     angular
         .module('app')
-        .controller ('adminPanelController', ['$location', '$scope', 'adminPanelService', '$rootScope', 'autocomplete', '$window',
-        function($location, $scope, adminPanelService, $rootScope, autocomplete, $window) {
+        .controller ('adminPanelController', ['$location', '$scope', 'adminPanelService', '$rootScope', 'autocomplete', '$window', 'authenticationService',
+        function($location, $scope, adminPanelService, $rootScope, autocomplete, $window, authenticationService) {
             $scope.apc = {};
             $scope.hackathonInputHide = true;
             $scope.organiserEditTableHide = true;
@@ -85,6 +85,7 @@
                     requestParameters.user = organiser;
                     adminPanelService.getInfo(requestParameters).success (function(response) {
                         $scope.people = response.user;
+                        authenticationService.resetCredentials(function(res){});
                         clearFields(true);
                     });
                 }
@@ -108,6 +109,7 @@
                     requestParameters.actionToPerform = 'addUser';
                     adminPanelService.getInfo(requestParameters).success (function(response) {
                         $scope.people = response.user;
+                        authenticationService.resetCredentials(function(res){});
                         clearFields(true);
                     });
                 } else if ($scope.actionButton === 'Create' && $scope.addHackathonSelected) {

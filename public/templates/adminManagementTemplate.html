@@ -2,7 +2,7 @@
     <div class="container" id="adminManagement">
         <h1 style="text-align:left;"> Administrators
         <span style="float:right;">
-            <button id="single-button" type="button" class="btn btn-primary " ng-click="addUser()">
+            <button id="single-button" type="button" class="custom-button-style btn main-theme-color default-button-action " ng-click="addUser()">
               Create Administrator
             </button>
         </span>
@@ -43,8 +43,9 @@
                     <label for="usr">Email:</label>
                     <input type="email" name='adminMngEmailInput' required class="form-control" id="usr" value={{admin.email}}
                         ng-disabled="emailEditDisable" ng-model="admin.email"
-                        uib-typeahead="people.EMAIL for people in autocomplete | filter:$viewValue | limitTo:8"
-                        typeahead-on-select="onSelect($item, $model, $label)" ng-change="clearInvalidSelection()">
+                         ng-change="clearInvalidSelection()">
+                         <!-- uib-typeahead="people.EMAIL for people in autocomplete | filter:$viewValue | limitTo:8"
+                         typeahead-on-select="onSelect($item, $model, $label)" -->
                     <p style="color:red" ng-show="amc.showInvalidEmailLabel">Please enter valid Email</p>
                     <p style="color:red" ng-show="amc.showEmailDuiplicateLabel">{{admin.email}} is already in a list</p>
                 </div>

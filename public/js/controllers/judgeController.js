@@ -1,5 +1,5 @@
-app.controller ('judgeController', ['$scope', '$stateParams', 'judgeInfo',
-    function($scope, $stateParams, judgeInfo) {
+app.controller ('judgeController', ['$scope', '$stateParams', 'judgeInfo', 'hackathonInfo',
+    function($scope, $stateParams, judgeInfo, hackathonInfo) {
         $scope.title = 'Judges';
         $scope.empty = true;
         judgeInfo.getJudgeInfo($stateParams.hackathonId).success (function(response) {
@@ -8,5 +8,22 @@ app.controller ('judgeController', ['$scope', '$stateParams', 'judgeInfo',
                 $scope.people = response;
             }
         });
+
+        var audience;
+
+        hackathonInfo.getHackathon($stateParams.hackathonId).success(function(hackathonData) {
+            audience = hackathonData.VOTINGAUDIENCE
+        });
+
+        $scope.isJudgeVoting = function(){
+            if(audience === 2){ //1 = JUDGES 2 = PULBIC
+                return false;
+            }else {
+                return true;
+            }
+        }
+        
+
+
     }
 ]);

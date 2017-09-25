@@ -10,8 +10,17 @@
 
             var currentHackathonID = parseInt(($location.path()).split("/")[2]);
             var resetState = false;
+            $scope.settingCredentials = false;
             $scope.lc = {};
             pageSetup();
+
+            $scope.isLoaded = function(){
+                if($scope.settingCredentials === false){
+                    return true;
+                }else{
+                    return false;
+                }
+            };
 
             function pageSetup() {
                 $scope.lc.showFailedHideRestLabel = true;
@@ -44,12 +53,16 @@
                     authenticationService.login(form.username, form.password, function(response) {
                         if (response.status === 200 && response.data.userAuth === true) {
                             $rootScope.$emit('headerLoginButtonChanger', 'dotMenu');
-                            authenticationService.setCredentials(response.data.token, function(res) {});
-                            if ($state.current.name === 'root' || $state.current.name === 'landing') {
-                                pageRedirectService.redirect('root');
-                            } else {
-                                pageRedirectService.redirect('home');
-                            }
+                            $scope.settingCredentials = true;
+                            authenticationService.setCredentials(response.data.token, function(res) {
+                                $scope.settingCredentials = false;
+                                if ($state.current.name === 'root' || $state.current.name === 'landing') {
+                                    pageRedirectService.redirect('root');
+                                } else {
+                                    pageRedirectService.redirect('home');
+                                }
+                            });
+                           
                         } else {
                             showFailLogin(true);
                         }

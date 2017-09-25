@@ -1,12 +1,12 @@
 <div controller="adminPanelController as apc">
     <div class="container" id="adminPanel">
-        <h1 style="text-align:left;"> Organisers
+        <h1 style="text-align:left;"> Organisers of "{{hackathonNameLabel}}"
         <span style="float:right;">
             <!-- <button id="single-button" type="button" class="btn btn-primary " ng-click="addUserHackathon(true)">
               Create Event
             </button> -->
             <div class="btn-group" uib-dropdown is-open="status.isopen1" id="adminPanelHackatonSelectButton">
-              <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              <button id="single-button" type="button" class="pointer-button custom-button-style btn main-theme-color default-button-action" uib-dropdown-toggle ng-disabled="disabled">
                 {{hackathonNameLabel}} <span class="caret"></span>
               </button>
               <ul class="uib-dropdown-menu" role="menu" aria-labelledby="single-button">
@@ -14,12 +14,12 @@
                     ng-click="changeHackathon(hackathon)">{{hackathon.NAME}}</a></li>
               </ul>
             </div>
-            <button id="single-button" type="button" class="btn btn-primary " ng-click="addUserHackathon(false)">
+            <button id="single-button" type="button" class="pointer-button custom-button-style btn main-theme-color default-button-action" ng-click="addUserHackathon(false)">
               Create Organiser
             </button>
         </span>
         </h1>
-        <table class="table list-group  table-hover">
+        <table class="table list-group ">
         <thead>
          <tr>
            <th>Name</th>
@@ -27,9 +27,9 @@
            <th>Description</th>
          </tr>
        </thead>
-       <tbody>
-          <tr ng-repeat="person in people" ng-click="reveal(person)">
-            <td>{{person.NAME}} {{person.SURNAME}}</td>
+       <tbody >
+          <tr  class=" table-hover w3-hover-blue pointer-button" ng-repeat="person in people" ng-click="reveal(person)">
+            <td>{{person.NAME}}</td>
             <td>{{person.EMAIL}}</td>
             <td>{{person.DESCRIPTION}}</td>
          </tr>
@@ -39,13 +39,13 @@
     <div ng-hide="organiserEditTableHide">
         <h3 style="text-align:left;">{{userDisplay}}
             <span style="float:right;">
-                <button id="single-button" type="button" class="btn btn-primary "
+                <button id="single-button" type="button" class="pointer-button custom-button-style btn main-theme-color default-button-action"
                     ng-click="addSaveUser(organiser, adminPanelForm.adminEmailInput.$valid,
                     adminPanelForm.adminNameInput.$valid, adminPanelForm.adminSurnameInput.$valid,
                     adminPanelForm.eventName.$valid)">
                   {{actionButton}}
                 </button>
-                <button id="single-button" type="button" class="btn btn-danger "
+                <button id="single-button" type="button" class="pointer-button custom-button-style btn main-theme-color default-button-action"
                     ng-click="deleteUser(organiser)" ng-hide="deleteButtonInEditHide">
                   Delete
                 </button>
@@ -54,7 +54,7 @@
         <form name="adminPanelForm">
             <div class="form-group {{apc.emailRedBorderClass}}" ng-hide="userInputHide">
               <label for="usr">Email:</label>
-              <input type="email" name='adminEmailInput' required class="form-control" value={{organiser.email}}
+              <input type="email" name='adminEmailInput' required class="form-control input-size" value={{organiser.email}}
                 ng-disabled="emailEditDisable" ng-model="organiser.email"
                 uib-typeahead="people.EMAIL for people in autocomplete | filter:$viewValue | limitTo:8"
                 typeahead-on-select="onSelect($item, $model, $label)" ng-change="clearInvalidSelection()">
@@ -63,30 +63,30 @@
             </div>
             <div class="form-group {{apc.nameRedBorderClass}}" ng-hide="userInputHide">
               <label for="usr">Name:</label>
-              <input type="text" name='adminNameInput' required class="form-control" value={{organiser.name}}
+              <input type="text" name='adminNameInput' required class="form-control input-size" value={{organiser.name}}
                 ng-model="organiser.name" ng-change="clearInvalidSelection()">
                 <p style="color:red" ng-show="apc.showInvalidNameLabel">Please enter Name</p>
             </div>
             <div class="form-group {{apc.surnameRedBorderClass}}" ng-hide="userInputHide">
               <label for="usr">Surname:</label>
-              <input type="text" name='adminSurnameInput' required class="form-control" value={{organiser.surname}}
+              <input type="text" name='adminSurnameInput' required class="form-control input-size" value={{organiser.surname}}
                 ng-model="organiser.surname" ng-change="clearInvalidSelection()">
                 <p style="color:red" ng-show="apc.showInvalidSurnameLabel">Please enter Surname</p>
             </div>
             <div class="form-group" ng-hide="userInputHide">
               <label for="usr">Description:</label>
-              <input type="text" class="form-control" value={{organiser.description}}
+              <input type="text" class="form-control input-size" value={{organiser.description}}
                 ng-model="organiser.description">
             </div>
             <div class="form-group {{apc.eventNameRedBorderClass}}" ng-hide="hackathonInputHide" >  </input>
               <label for="usr">Event:</label>
-              <input type="text" class="form-control" value={{organiser.hackathonName}}
+              <input type="text" class="form-control input-size" value={{organiser.hackathonName}}
                 ng-model="organiser.hackathonName" name="eventName" required ng-change="clearInvalidSelection()">
                 <p style="color:red" ng-show="apc.showInvalidEventNameLabel">Please enter Event Name</p>
             </div>
             <div class="form-group"  ng-hide="hackathonInputHide" >  </input>
               <label for="usr">Event description:</label>
-              <input type="text" class="form-control" value={{organiser.hackathonDescription}}
+              <input type="text" class="form-control input-size" value={{organiser.hackathonDescription}}
                 ng-model="organiser.hackathonDescription">
             </div>
         </form>

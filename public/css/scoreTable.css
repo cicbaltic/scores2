@@ -19,6 +19,7 @@
     vertical-align: baseline;
     line-height: normal;
 }
+
 .accordionHead-Score-view-table-numbers {
     width: 10%;
     text-align: left;
@@ -48,6 +49,7 @@
     line-height: normal;
     vertical-align: baseline;
 }
+
 .accordionHead-Score-view-table-arow {
     width: 15%;
     text-align: center;
@@ -81,7 +83,7 @@
 }
 
 .accordionBody-Score-view-table-totals {
-    color: #5454d1;
+    color: #424747;
     padding-top: 1em;
     padding-bottom: 0.938em;
     width: 10%;
@@ -92,6 +94,7 @@
     line-height: normal;
     vertical-align: baseline;
 }
+
 .accordionBody-Score-view-table-arow {
     padding-top: 1em;
     padding-bottom: 0.938em;
@@ -103,6 +106,7 @@
     line-height: normal;
     vertical-align: baseline;
 }
+
 .accordionBody-Score-view-table-teamDescription-Numbers {
     padding-top: 0em;
     padding-bottom: 0em;
@@ -113,6 +117,7 @@
     line-height: normal;
     vertical-align: baseline;
 }
+
 .accordionHead-Score-view-table-teamDescription-Name {
     padding-top: 0.625em;
     padding-bottom: 0em;
@@ -161,6 +166,7 @@
     line-height: normal;
     vertical-align: baseline;
 }
+
 .back-table-arow {
     width: 15%;
     text-align: center;
@@ -175,7 +181,7 @@
     font-size: 0.9em;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: normal;
-    color: black;
+    color: #000000;
     vertical-align: baseline;
 }
 
@@ -194,6 +200,7 @@
 .nameOfObjectBelow {
     background-color: #f6f5f6;
     margin: 0;
+    position: inherit;
     padding-left: 4.84375%;
     padding-right: 4.84375%;
     padding-top: 0.5em;
@@ -201,6 +208,89 @@
     font-size: 1.2em;
 }
 
-.nameOfObjectBelow p {
-    margin: 0;
+    .nameOfObjectBelow p {
+        margin: 0;
+    }
+
+.floating-box-scores {
+    float: left;
+    margin-left:10%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 4.84375%;
+    padding-left: 4.84375%;
+
 }
+
+.floating-box-button {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 4.84375%;
+    padding-left: 4.84375%;
+}
+
+/* ============new styles=============== */
+.accordionHead-team-open{
+    border-bottom: 1px solid #D8D8D8;
+}
+
+.accordionHead-team{
+    background: #FFFFFF;
+}
+
+.accordionBody-personDescription{
+    border-bottom: 1px solid #D8D8D8;
+    border-left: 1px solid #D8D8D8;
+    border-right: 1px solid #D8D8D8;
+}
+
+.accordionBody-criteria{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #424747;
+    letter-spacing: 0.2px;
+    line-height: 20px;
+}
+
+.accordionBody-teamDescription-box{
+    opacity: 0.8;
+    font-family: Helvetica;
+    font-size: 14px;
+    font-style: oblique;
+    color: #424747;
+    letter-spacing: 0.2px;
+    border-top: 1px solid #D8D8D8;
+}
+
+/* === Live scores table related styles === */
+
+.liveScoresTable-teamSection {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.07em;
+    background-color: ivory;
+    font-weight: bold;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.liveScoresTable-teamSection-grouping {
+    border-bottom: 1px solid palegoldenrod;
+}
+
+.liveScoresTable-teamSection:hover {
+    background-color: lemonchiffon;
+}
+
+.liveScoresTable-criteriaSection {
+    font-family: Helvetica;
+    font-size: 10px;
+    color: #424747;
+    letter-spacing: 0.2px;
+    line-height: 12px;
+}
+
+#labelFor_refreshScoresHideCriteria:hover {
+    background-color: silver;
+}
+
+/* === End of: Live scores table related styles === */

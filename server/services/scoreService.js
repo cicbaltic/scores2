@@ -70,7 +70,7 @@ function ScoreService() {
                         'team.id = hackathonteam.teamid ' +
                     'left join (' +
                         'select ' +
-                            'score.*' +
+                            'score.* ' +
                         'from ' +
                             'score ' +
                             'left join access on ' +
@@ -134,6 +134,47 @@ function ScoreService() {
         });
     };
 
+    // payload = { hackathonId: 123, userId = "anonymous" };
+    self.getScoresForAnonymous = function getScoresForAnonymous(payload, callback) {
+        self.getCriteriaForJudges(payload, function (criteriaCols) {
+            var statement = '' +
+                'select ' +
+                'team.name, ' +
+                'team.id ' +
+                (criteriaCols ? (', ' + criteriaCols) : ' ') +
+                'from ' +
+                'hackathonteam ' +
+                'left join team on ' +
+                'team.id = hackathonteam.teamid ' +
+                'left join (' +
+                'select ' +
+                'score.*' +
+                'from ' +
+                'score ' +
+                'left join access on ' +
+                'score.userid = access.userid ' +
+                'and score.hackathonid = access.hackathonid ' +
+                'where ' +
+                'access.roleid = 3 ' +
+                'and score.userid = ? ' +
+                ') score on ' +
+                'score.hackathonid = hackathonteam.hackathonid ' +
+                'and score.teamid = hackathonteam.teamid ' +
+                'left join criteria on ' +
+                'criteria.id = score.criteriaid ' +
+                'where ' +
+                'hackathonteam.hackathonid = ? ' +
+                'group by ' +
+                'team.name, ' +
+                'team.id;';
+            sqlService.queryDb(statement, ["anonymous", payload.hackathonId], function (result) {
+                // console.log(result);
+                callback(result);
+            });
+        });
+    };
+
+
     /*
     self.getScoresForJudge = function getScoresForJudge(payload, callback) {
         self.getScoresForJudge2(payload, function(criteriaCols) {
@@ -194,21 +235,30 @@ function ScoreService() {
         var insertValues = [];
         var updateValues = [];
 
-        var splitResults = function(payload, result) {
-            // console.log(payload);
-            // console.log(result);
+        var splitResults = function (payload, result) {
             for (var i = 0; i < payload.length; i++) {
                 var foundUpdate = false;
                 var foundLine = false;
                 for (var j = 0; j < result.length; j++) {
-                    var payloadLine = payload[i].criteriaID + '-' + payload[i].teamID;
-                    var checkLine = result[j].CRITERIAID + '-' + result[j].TEAMID;
 
-                    if (payloadLine === checkLine) {
+                    //var payloadLine = payload[i].criteriaID + '-' + payload[i].teamID;
+                    //var checkLine = result[j].CRITERIAID + '-' + result[j].TEAMID;
+
+                    //console.log("typeof payload[i].criteriaID: ", typeof payload[i].criteriaID);
+                    //console.log("typeof result[j].CRITERIAID: ", typeof result[j].CRITERIAID);
+                    //console.log("typeof payload[i].teamID: ", typeof payload[i].teamID);
+                    //console.log("typeof result[j].TEAMID: ", typeof result[j].TEAMID);
+                    //typeof payload[i].criteriaID:  string
+                    //typeof result[j].CRITERIAID:  number
+                    //typeof payload[i].teamID:  number
+                    //typeof result[j].TEAMID:  number
+
+                    //if (payloadLine === checkLine) { // 50 ms
+                    if (payload[i].teamID == result[j].TEAMID && payload[i].criteriaID == result[j].CRITERIAID) { // 40 ms
                         foundLine = true;
                         if (payload[i].Score !== result[j].SCORE) {
                             foundUpdate = true;
-                            console.log("but of course");
+                            //console.log("but of course");
                             var tmp = result[j];
                             tmp.SCORE = payload[i].Score;
                             updateValues.push(tmp);
@@ -221,6 +271,7 @@ function ScoreService() {
                 }
             }
         };
+        // end of splitResults
 
         var generateInsertStatement = function(insertValues) {
             var statement = 'insert into ' +
@@ -291,6 +342,127 @@ function ScoreService() {
             }
             //console.log(JSON.stringify(transactionPayload, null, "  "));
             sqlService.transactDb(transactionPayload, function(result) {
+                // console.log(JSON.stringify(result, null, " "));
+                console.log(result);
+                callback(result);
+            });
+        });
+    };
+
+    self.setScoresForAnonymous = function setScore(payload, callback) {
+        var hackathonID = payload[0].hackathonID;
+
+        var insertValues = [];
+        var updateValues = [];
+
+        var splitResults = function (payload, result) {
+            for (var i = 0; i < payload.length; i++) {
+                var foundUpdate = false;
+                var foundLine = false;
+                for (var j = 0; j < result.length; j++) {
+
+                    //var payloadLine = payload[i].criteriaID + '-' + payload[i].teamID;
+                    //var checkLine = result[j].CRITERIAID + '-' + result[j].TEAMID;
+
+                    //console.log("typeof payload[i].criteriaID: ", typeof payload[i].criteriaID);
+                    //console.log("typeof result[j].CRITERIAID: ", typeof result[j].CRITERIAID);
+                    //console.log("typeof payload[i].teamID: ", typeof payload[i].teamID);
+                    //console.log("typeof result[j].TEAMID: ", typeof result[j].TEAMID);
+                    //typeof payload[i].criteriaID:  string
+                    //typeof result[j].CRITERIAID:  number
+                    //typeof payload[i].teamID:  number
+                    //typeof result[j].TEAMID:  number
+
+                    //if (payloadLine === checkLine) { // 50 ms
+                    if (payload[i].teamID == result[j].TEAMID && payload[i].criteriaID == result[j].CRITERIAID) { // 40 ms
+                        foundLine = true;
+                        if (payload[i].Score !== result[j].SCORE) {
+                            foundUpdate = true;
+                            //console.log("but of course");
+                            var tmp = result[j];
+                            tmp.SCORE = payload[i].Score;
+                            updateValues.push(tmp);
+                        }
+                        j = result.length;
+                    }
+                }
+                if (foundLine === false && payload[i].Score !== undefined && payload[i].Score !== null) {
+                    insertValues.push(payload[i]);
+                }
+            }
+        };
+        // end of splitResults
+
+
+        var generateInsertStatement = function (insertValues) {
+            var statement = 'insert into ' +
+                'score (hackathonid, teamid, criteriaid, userid, score) values ';
+            var params = [];
+            for (var i = 0; i < insertValues.length; i++) {
+                var row = '(?, ?, ?, ?, ?), ';
+                statement += row;
+                params.push(hackathonID);
+                params.push(insertValues[i].teamID);
+                params.push(insertValues[i].criteriaID);
+                params.push("anonymous");
+                params.push(insertValues[i].Score);
+            }
+            statement = statement.substring(0, statement.length - 2) + ';';
+            return { statement: statement, parameters: params };
+        };
+
+        var generateUpdateStatements = function (updateValues) {
+            var statements = [];
+            for (var i = 0; i < updateValues.length; i++) {
+                statements.push({
+                    statement: 'update score set score = score + ? where id = ?;',
+                    parameters: [
+                        updateValues[i].SCORE = (
+                            updateValues[i].SCORE === undefined ? null : updateValues[i].SCORE
+                        ),
+                        updateValues[i].ID]
+                });
+            }
+            return statements;
+        };
+
+        var generateLabelsForCheck = function (payload) {
+            var labels = '';
+            for (var i = 0; i < payload.length; i++) {
+                var label = '' +
+                    '\'' + payload[i].teamID + '-' +
+                    payload[i].criteriaID + '\',';
+                labels += label;
+            }
+            labels = labels.substring(0, labels.length - 1);
+            return labels;
+        };
+
+        var checkStatement = '' +
+            'select ' +
+            'id, ' +
+            'teamid, ' +
+            'criteriaid, ' +
+            'score ' +
+            'from ' +
+            'score ' +
+            'where ' +
+            'userid = \'anonymous\' ' +
+            'and hackathonid = ? ' +
+            'and concat(teamid, concat(\'-\', criteriaid)) in (' +
+            generateLabelsForCheck(payload) + ') ' +
+            'order by ' +
+            'teamid, ' +
+            'criteriaid;';
+
+        sqlService.queryDb(checkStatement, [hackathonID], function (result) {
+            splitResults(payload, result);
+            var transactionPayload = generateUpdateStatements(updateValues);
+            if (insertValues.length > 0) {
+                transactionPayload.push(generateInsertStatement(insertValues));
+            }
+            //console.log(JSON.stringify(transactionPayload, null, "  "));
+            sqlService.transactDb(transactionPayload, function (result) {
                 // console.log(JSON.stringify(result, null, " "));
                 console.log(result);
                 callback(result);

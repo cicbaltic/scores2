@@ -22,19 +22,26 @@
                         <input type="password" placeholder="Password" ng-hide="lc.hidePassInput"
                             class=" login-password {{lc.formControl}}" ng-model="form.password" >
                     </div>
-                        <button id="login-login-button" type="submit"
-                            class="login-login-button btn btn-group-justified btn-primary">{{lc.buttonLabel}}</button>
+                    <div style="text-align:center;">
+                        <button id="login-login-button" style="box-shadow: none" type="submit"
+                            class="login-login-button w3-btn main-theme-color custom-button-style">{{lc.buttonLabel}}</button>
+                    </div>
                 </form>
                 <a href="" ng-click="resetPassword(true)" id="reset-password" ng-hide="lc.hideResetPassLink">Reset password</a>
                 <div class="push"></div>
             </div>
-            <div id="footer">
+            <!-- <div id="footer">
                 <div class="login-cancel">
                     <hr class="login-cancel-hr">
                     <button id="login-login-button" type="button"
                         class=" login-cancel-button btn btn-group-justified btn-default" ng-click="cancel()"><strong>Cancel</strong></button>
                 </div>
-            </div>
+            </div> -->
         </div>
+    </div>
+</div>
+<div ng-if="!isLoaded()" class="loading" >
+    <div class="w3-display-middle">
+        <i class="fa fa-spinner fa-spin fa-5x "></i>
     </div>
 </div>

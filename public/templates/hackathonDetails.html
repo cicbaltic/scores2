@@ -1,12 +1,21 @@
-<div class="hack-info-container">
-    <div id="hack-info-name">
+<!-- <div class="w3-container ">  -->
+<div >
+    <!-- <div id="hack-info-name">
         <p>{{info.NAME}}</p>
+    </div> -->
+    <div id="hack-info-name">
+        <p>Description</p>
     </div>
-    <div class="backgroundColorForDec">
-        <div class="hack-info-info">
-            <img id="hack-info-img" src={{info.image}} class="img-responsive"></img>
-            <p id="hack-info-description-header">Event description</p>
-            <p id="hack-info-description">{{info.DESCRIPTION}}</p>
+    <div class="w3-panel">
+        <div style="background-color: #FCFCFC;">
+                <!-- class="backgroundColorForDec" -->
+            <div class="w3-bar w3-bar-item">
+                <img id="hack-info-img" ng-src={{info.image}} class="img-responsive"></img>
+                <p id="hack-info-description" ng-if="info.DESCRIPTION=='undefined'"> Empty description.</p>
+                <p id="hack-info-description" ng-if="!info.DESCRIPTION=='undefined'">{{info.DESCRIPTION}}</p>
+            </div>
         </div>
     </div>
 </div>
+<!-- </div> -->
+

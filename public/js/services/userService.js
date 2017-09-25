@@ -16,9 +16,14 @@
             return $http.post('./api/user/register', payload);
         }
 
+        function informAboutNewRole(payload) {
+            return $http.post('./api/user/informemail', payload);
+        }
+
         return {
             updateUserInfo: updateUserInfo,
-            registerNewUser: registerNewUser
+            registerNewUser: registerNewUser,
+            informAboutNewRole: informAboutNewRole
         };
     }
 })();

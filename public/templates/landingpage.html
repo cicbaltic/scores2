@@ -1,11 +1,93 @@
-<div class="landing-page">
-    <p class="landing-page-title">{{ "Home" }}</p>
-    <h3 class="landing-page-list-heading">{{ "Event name" }}</h3>
-    <div class="landing-page-list">
-        <h3 class="landing-page-list-item"
-            ng-click="redirect(hackathon.id)"
-            ng-repeat="hackathon in hackathons">
-            <a href="">{{ hackathon.name }}</a><!---->
-        </h3>
+
+<!-- <div class="landing-page" > -->
+     
+        <div class="w3-container">
+                <div  class="fa fa-list fa-2x custom-menu"  aria-hidden="true"></div>
+                <p class="landing-page-title" >Hackathons</p>
+        </div>
+    <!-- <p class="landing-page-title">{{ "Home" }}</p> -->
+    <div class="landing-page-list ">
+    <div after-render >
+        <div ng-repeat="hackathon in hackathons" 
+            ng-class="{'w3-hover-blue': hackathonIsSetup(hackathon),
+                        'w3-hover-light-grey': !hackathonIsSetup(hackathon)}";
+            class="w3-margin w3-panel w3-padding-small w3-border w3-hover-text-white"
+            style="background-color:#FCFCFC;" >
+            
+            <div class="w3-cell-row " ng-if="hackathonIsSetup(hackathon)" style="min-height:40px;cursor: pointer;"
+            ng-click="redirect(hackathon.id)" id="hoverContainer">
+                <div class="w3-container w3-cell w3-cell-middle" style="width:90%;">
+                    <p style="margin-bottom:0px;font-weight:bold;cursor: pointer;">{{ hackathon.name }}</p>
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="width:10%;text-align:right;height:100%">
+                    <span class="fa fa-chevron-right custom-arrowRight fa-1x" aria-hidden="true" style="height:50%" id="colorIcon"></span>
+                </div>
+            </div>
+
+            <div class="w3-cell-row " ng-if="!hackathonIsSetup(hackathon)" style="min-height:40px;cursor: not-allowed;" id="hoverContainer">
+                <div class="w3-container w3-cell w3-cell-middle" style="width:90%;">
+                    <p style="margin-bottom:0px;font-weight:bold;color:grey;cursor: not-allowed;">{{ hackathon.name }} - (pending)</p>
+                </div>
+                <div class="w3-container w3-cell w3-cell-middle" style="width:10%;text-align:right;height:100%">
+                    <span class="fa fa-chevron-right custom-arrowRight fa-1x" aria-hidden="true" style="height:50%" id="colorIcon"></span>
+                </div>
+            </div>
+
+            <!-- <h3 class="landing-page-list-item  w3-container" ng-if="!hackathonIsSetup(hackathon)">
+                <div class="w3-row">
+                    <div class="w3-col" style="width:90%">
+                        <a href="" style="color:grey">{{ hackathon.name }} - (pending)</a>
+                    </div>
+                    <div class="w3-col" style="width:10%;text-align:center">
+                        <span class=" fa fa-chevron-right custom-arrowRight fa-1x" aria-hidden="true"></span>
+                    </div>
+                </div>
+               
+               
+            </h3> -->
+        </div>
+    </div>
+        <!-- <table class="w3-table w3-centered" ng-repeat="hackathon in hackathons" style="background-color:#FCFCFC">
+            <tr ng-if="hackathonIsSetup(hackathon)" ng-click="redirect(hackathon.id)">
+                <td>
+                        {{ hackathon.name }}
+                </td>
+                <td>
+                        <span class="fa fa-chevron-right custom-arrowRight fa-1x" aria-hidden="true"></span> 
+                </td>
+            </tr>
+            <tr ng-if="!hackathonIsSetup(hackathon)">
+                    <td>
+                        {{ hackathon.name }} - (pending)
+                    </td>
+                    <td>
+                        <span class="fa fa-chevron-right custom-arrowRight fa-1x" aria-hidden="true"></span> 
+                    </td>
+                </tr>
+        </table> -->
+
+        <!-- <div class="w3-margin w3-panel w3-padding-small w3-border w3-hover-blue" id="addBtn" ng-show="showCreateEvent()" style="background-color:#FCFCFC;">
+            <h3 class="landing-page-list-item  w3-container" style="text-align:center;"
+                ng-click="createEvent()">
+                    <a href=""><span style="color: rgba(83,146,255,1)" class="fa fa-plus fa-2x" id="addIcon"></span></a>
+            </h3>
+        </div> -->
+        <div class="w3-margin w3-panel w3-padding-small w3-border w3-hover-blue" id="hoverContainer" ng-click="createEvent()" ng-show="showCreateEvent()" 
+            style="background-color:#FCFCFC;cursor: pointer;">
+            <!-- <h3 class="landing-page-list-item  w3-container" style="text-align:center;"
+                "> -->
+                <div style="text-align:center;">
+                    <span style="color: rgba(83,146,255,1)" class="fa fa-plus fa-2x" id="colorIcon"></span>
+                </div>
+            <!-- </h3> -->
+        </div>
+        <br>
+    <!-- </div> -->
+    </div>   
+<!-- </div> -->
+<!-- class="next round" -->
+<div ng-if="!isLoaded()" class="loading" >
+    <div class="w3-display-middle">
+        <i class="fa fa-spinner fa-spin fa-5x "></i>
     </div>
 </div>

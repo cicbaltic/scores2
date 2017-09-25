@@ -1,0 +1,64 @@
+﻿<div class="w3-cell-row nameOfObjectBelow">
+    <div class="w3-cell w3-cell-middle" style="width:80%;">
+        <span>&nbsp;&nbsp;Scores&nbsp;of&nbsp;{{info.NAME}}</span>
+    </div>
+    <div class="w3-cell w3-cell-middle" ng-show="showLiveBtn()">
+        <button id="refreshScoresButton" style="font-size:0.5em;" class="w3-left w3-button main-theme-color custom-button-style" ng-click="refreshScores()">Refresh</button>
+        <nobr>
+            &nbsp;<label id="labelFor_refreshScoresHideCriteria" for="refreshScoresHideCriteria" style="font-weight:normal;font-size:0.6em;color:dodgerblue;vertical-align:middle;">&nbsp;Hide&nbsp;criteria:&nbsp;</label>&nbsp;<input type="checkbox" id="refreshScoresHideCriteria" title="Hide criteria" checked="checked" ng-click="refreshScoresHideCriteria()" />
+        </nobr>
+    </div>
+</div>
+<div class="w3-panel">
+    <table style="width:100%;" cellpadding="4">
+        <tr style="font-weight:bold;background-color:black;color:white;">
+            <td style="width:3%;text-align:center;">#</td>
+            <td>Team</td>
+            <td style="width:15%;text-align:right;">Total</td>
+            <td style="width:1%"></td>
+        </tr>
+    </table>
+    <div after-render>
+        <div ng-repeat="row in rows | orderBy:'-Total'">
+            <table class="liveScoresTable-teamSection-grouping" style="width:100%;" cellpadding="2">
+                <tr class="liveScoresTable-teamSection" style="line-height:1.2;">
+                    <td style="width:3%;text-align:center;">{{ $index + 1 }}</td>
+                    <td>{{row.NAME}}</td>
+                    <td style="width:9%;text-align:right;">{{row.Total | roundSomeNumbers}}</td>
+                    <td style="width:2%;">&nbsp;</td>
+                </tr>
+                <tr class="liveScoresTable-teamSection" style="margin-top:0px;">
+                    <td style="width:3%"></td>
+                    <td colspan="2">
+                        <div style="color:#286090;font-weight:bold;font-size:0.64em;letter-spacing:0px;">
+                            <i ng-repeat="star in row.starsText" class="fa fa-align-justify"></i>
+                            <span style="font-weight:normal;font-size:0.9em;color:gray">&nbsp;{{row.totalPercentageText}}&nbsp;<span style="font-size:0.9em;">%&nbsp;of&nbsp;Grand&nbsp;total</span></span>
+                        </div>
+                    </td>
+                    <td style="width:2%;">&nbsp;</td>
+                </tr>
+            </table>
+            <div class="liveScoresTable-criteriaSection" style="visibility:{{refreshScoresCriteriaVisibility}};display:{{refreshScoresCriteriaDisplay}};" ng-repeat="col in cols | filter:'!'+nameFilter | filter:'!'+descriptionFilter | filter:'!'+totalFilter">
+                <table style="width:100%;" cellpadding="4">
+                    <tr style="line-height:2;">
+                        <td style="width:4%;"></td>
+                        <td>{{col}}</td>
+                        <td style="width:9%;text-align:right">{{row[col] | roundSomeNumbers}}</td>
+                        <td style="width:2%;">&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <table style="width:100%;" cellpadding="2">
+            <tr class="liveScoresTable-teamSection" style="border-bottom:1px solid palegoldenrod;">
+                <td style="text-align:right"><span style="font-weight:normal;font-size:0.73em;color:gray;">Grand&nbsp;total:&nbsp;&nbsp;</span>{{grandTotal}}</td>
+                <td style="width:2%"></td>
+            </tr>
+        </table>
+    </div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+</div>
+<div ng-if="!isLoaded()" class="loading">
+    <div class="w3-display-middle"><i class="fa fa-spinner fa-spin fa-5x "></i></div>
+</div>

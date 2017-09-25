@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('app').factory('pageRedirectService', [ '$location',
-    '$stateParams', function($location, $stateParams) {
+    '$stateParams', '$rootScope', function($location, $stateParams, $rootScope) {
         var pageRedirectService = {};
 
         pageRedirectService.redirect = function(redirectLocation, optHackID) {
@@ -20,7 +20,11 @@
                     break;
                 }
                 case 'admin': {
-                    changeLocation('/admin', hackathonID);
+                    if(hackathonID){
+                        changeLocation('/admin', hackathonID);
+                    }else{
+                        changeLocation('/admin', $rootScope.defaultHackathonId);
+                    }
                     break;
                 }
                 case 'organiser': {
@@ -31,8 +35,16 @@
                     changeLocation('/judge', hackathonID);
                     break;
                 }
+                case 'voting': {
+                    changeLocation('/voting', hackathonID);
+                    break;
+                }
                 case 'landing': {
                     changeLocation('/landing', hackathonID);
+                    break;
+                }
+                case 'live': {
+                    changeLocation('/live', hackathonID);
                     break;
                 }
                 case 'report': {

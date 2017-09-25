@@ -10,7 +10,11 @@ CREATE TABLE Hackathon
   ID INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) unique,
   Name Varchar(255),
   Description Varchar (1000),
-  Image Varchar(512)
+  Image Varchar(512),
+  VotingAudience int,
+  VotingType int,
+  ScoreMin int,
+  ScoreMax int
 );
 
 CREATE TABLE Criteria

@@ -3,21 +3,9 @@
 
 var db = require('ibm_db');
 var imgService = require('./server/services/imageService');
+var environment = require('./server/services/vcapService');
 
 var errors = [];
-
-// module.exports = function(args) {
-//     console.log(args);
-//     readArguments(args, function(a) {
-//         if (args[2] === 'install' && errors.length > 0) {
-//             console.log('At least one table in the schema is already in place.\nAborting installation.');
-//             // process.exit(1);
-//         } else {
-//             console.log('\nOperation perfomed successfully!\n');
-//             require('./server/app');
-//         }
-//     });
-// };
 
 readArguments(process.argv, function(a) {
     if (process.argv[2] === 'install' && errors.length > 0) {
@@ -30,13 +18,15 @@ readArguments(process.argv, function(a) {
 
 function readArguments(args, callback) {
     var cmd = args[2];
-    var email = args[3];
-    var password = args[4];
+    var name = args[3];
+    var surname = args[4];
+    var email = args[5];
+    var password = args[6];
 
     if (cmd === 'uninstall') { // drop database tables
         transactDb(generateDropStatements(), callback);
     } else if (cmd === 'install') { // set up database and roles and admin
-        transactDb(generateSchemaStatements(email, password), callback);
+        transactDb(generateSchemaStatements(name, surname, email, password), callback);
         setTimeout(function() {
             createImageContainer(); // will create an image container, to avoid callback hell
         }, 5000);
@@ -66,7 +56,7 @@ function deleteImageContainer(callback) {
     imgService.deleteImageContainer();
 }
 
-function generateSchemaStatements(email, password) {
+function generateSchemaStatements(name, surname, email, password) {
     var hash = require('./server/services/hashingService');
     var statmentPayload = [];
     var tableStatements = require('fs')
@@ -90,12 +80,20 @@ function generateSchemaStatements(email, password) {
         ]
     });
     statmentPayload.push({
+        statement: 'insert into users (id, name, surname, email, password) values(?, ?, ?, ?, ?);',
+        parameters: [hash.hashEmail(email), name, surname, email, hash.hashPassword(password)]
+    });
+    statmentPayload.push({ // Anonymous voters
         statement: 'insert into users (id, email, password) values(?, ?, ?);',
-        parameters: [hash.hashEmail(email), email, hash.hashPassword(password)]
+        parameters: ['anonymous', null, null]
     });
     statmentPayload.push({
         statement: 'insert into access (userid, roleid) values (?, 1);',
         parameters: [hash.hashEmail(email)]
+    });
+    statmentPayload.push({ // Set anonymous user role to judge
+        statement: 'insert into access (userid, roleid) values (?, 3);',
+        parameters: ['anonymous']
     });
     return statmentPayload;
 }
@@ -159,19 +157,26 @@ function transactDb(statements, callback) {
 function getConn() {
     var vcap;
     try {
-        vcap = JSON.parse(process.env.VCAP_SERVICES).sqldb[0].credentials;
+        vcap = environment.getVCAP()["dashDB For Transactions"][0].credentials;
+        // vcap = JSON.parse(process.env.VCAP_SERVICES)["dashDB For Transactions"][0].credentials;
+        
     } catch (err) {
         vcap = JSON.parse(
             require('fs').readFileSync('dataBaseCreds', 'utf8')
-        ).sqldb[0].credentials;
+        ).db2oncloud[0].credentials;
     }
+
+    console.log('' +
+    'DRIVER={DB2};' +
+    'DATABASE=' + vcap.db +
+    ';UID=' + vcap.username +
+    ';PWD=' + vcap.password +
+    ';HOSTNAME=' + vcap.hostname +
+    ';port=' + vcap.port);
+
     return '' +
-        'DRIVER={DB2};' +
-        'DATABASE=' + vcap.db +
-        ';UID=' + vcap.username +
-        ';PWD=' + vcap.password +
-        ';HOSTNAME=' + vcap.hostname +
-        ';port=' + vcap.port;
+        'DRIVER={DB2};' + vcap.ssldsn;
+
 }
 
 function scriptUsage() {
@@ -179,6 +184,8 @@ function scriptUsage() {
         '\nIBM SCORES v0.1 installation script.' +
         '\nCommands:\n' +
         '\n  -install: sets up the database schema, access roles and first admin user. Takes parameters:' +
+            '\n    name: name of the admin user;' +
+            '\n    surname: surname of the admin user;' +
             '\n    email: valid email address of the admin user;' +
             '\n    password: admin user password to log on;' +
             '\n  usage: npm run install-project -- install email@server.com password\n' +

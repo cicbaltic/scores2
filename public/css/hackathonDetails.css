@@ -5,6 +5,7 @@
 
 #hack-info-name .ng-binding {
     margin: 0;
+    
 }
 #hack-info-name {
     background-color: #f6f5f6;
@@ -39,5 +40,18 @@
     font-size: 0.98em;
 }
 #hack-info-description {
-    font-size: 0.9em;
+    /* font-size: 0.9em; */
+    /* new style */
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #414141;
+    /* letter-spacing: 0.33px; */
+    line-height: 20px;
+    margin: 0;
+    float: left;
+    width: auto;
+    border: none;
+    outline: none;
+    display: block;
+    padding: 8px 16px;
 }

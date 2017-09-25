@@ -1,21 +1,65 @@
 <div ng-controller="headerController as hc">
-    <nav class="navbar navbar-inverse navbar-fixed-top custom-navbar" role="navigation"  >
-        <div class="container-fluid">
-            <button id="header-hambureger-menu" class="{{hc.hamburgerMenuOpacity}}"
+    <!-- <nav class="navbar navbar-inverse navbar-fixed-top custom-navbar" role="navigation"  > -->
+    <div class="w3-bar w3-border w3-black" id="header-app-navbar">   
+        <!-- <div class="container-fluid"> -->
+            <!-- <button id="header-hambureger-menu" class="{{hc.hamburgerMenuOpacity}} w3-bar-item"
                 onclick="leftSidePanel()" ng-disabled="hc.disableHamburgerMenu"
-                ng-click="hc.hideDotMenu()"></button>
-            <button id="header-app-logo" ng-click="hc.redirect('home')"
+                ng-click="hc.hideDotMenu()"></button> -->
+                <!-- BACK BTN -->
+            <button ng-show="hc.showBackBtn" href="#"
+               class="w3-button w3-bar-item w3-left fa fa-arrow-left fa-2x " 
+               style="color:#5392FF; height:100%;"
+               ng-click="hc.absRedirect(hc.backBtnRedirect)">
+           </button>
+                <!-- LOGO -->
+            <button id="header-app-logo" ng-click="hc.redirect('home')" class="w3-bar-item"
                 onclick="leftSidePanelCloser()"></button>
-            <div class="nav navbar-nav navbar-right">
-                <button ng-show="hc.showHeaderLoginButton" href="#"
-                    id="header-login-button" onclick="leftSidePanelCloser()"
-                    ng-click="hc.redirect('login')">LOG IN</button>
-                <button ng-show="hc.showHeader3dotMenuButton"
+                <!--  -->
+            <!-- <div class="nav navbar-nav navbar-right"> -->
+            <!-- <div class="w3-bar-item w3-right"> -->
+                
+                <!-- LOGIN BTN -->
+                <button ng-show="hc.showHeaderLoginButton && !hc.showCancelBtn" href="#"
+                     onclick="leftSidePanelCloser()"
+                    class="w3-button w3-bar-item w3-right fa fa-sign-in fa-2x " 
+                    style="color:#5392FF; height:100%;"
+                    ng-click="hc.absRedirect('login')">
+                </button>
+                <!-- LOGOUT BTN  -->
+                <button ng-show="hc.showHeader3dotMenuButton" href="#"
+                        onclick="leftSidePanelCloser()"
+                        class="w3-button w3-bar-item w3-right fa fa-sign-out fa-2x " 
+                        style="color:#5392FF; height:100%;"
+                        ng-click="hc.logout()">
+                </button>
+                <!-- ORGANIZER OPTION -->
+                <button ng-show="hc.showOrganiserOption" href="#"
+                    onclick="leftSidePanelCloser()"
+                    class="w3-button w3-bar-item w3-right fa fa-pencil fa-2x " 
+                    style="color:#5392FF; height:100%;"
+                    ng-click="hc.redirect('organiser')">
+                </button>
+                <!-- ADMIN OPTION -->
+                <button ng-show="hc.showAdminOption" href="#"
+                    onclick="leftSidePanelCloser()"
+                    class="w3-button w3-bar-item w3-right fa fa-cog fa-2x " 
+                    style="color:#5392FF; height:100%;"
+                    ng-click="hc.redirect('admin')">
+                </button>
+                <!-- CANCEL BTN -->
+                <button ng-show="hc.showCancelBtn" href="#"
+                    onclick="leftSidePanelCloser()"
+                    class="w3-button main-theme-color w3-bar-item w3-right fa fa-times fa-2x" 
+                    style="color:black; height:100%;"
+                    ng-click="hc.absRedirect(hc.cancelBtnRedirect)">
+                </button>
+                    <!-- LOG IN id="header-login-button"-->
+                <!-- <button ng-show="hc.showHeader3dotMenuButton && !hc.showCancelBtn"
                     id="header-3-dot-menu-button" onclick="leftSidePanelCloser()"
-                    ng-click="hc.revealdotMenu()"></button>
-            </div>
+                    ng-click="hc.revealdotMenu()"></button> -->
+            <!-- </div> -->
         </div>
-        <div id="header-3-dot-menu" ng-show="hc.showDotMenu">
+        <!-- <div id="header-3-dot-menu" ng-show="hc.showDotMenu">
                 <ul class="right-side-panel-ul" >
                     <li id="create-event" ng-show='hc.showCreateEvent'>
                         <a href="" ng-click="hc.createEvent()">Create Event<a>
@@ -37,10 +81,10 @@
                             onclick="leftSidePanelCloser()">Log out<a>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </div> -->
+    </div>
         <!--/.container -->
-    </nav>
+    <!-- </nav> -->
 </div>
 
 
@@ -76,3 +120,4 @@
 <!--/div-->
 
 <!--/.nav-collapse -->
+<!-- <div ng-class="{loading: !isLoaded()}"></div> -->

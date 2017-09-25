@@ -16,7 +16,7 @@
         margin-right: auto;
     }
     .main {
-        background: white;
+        background: #f6f5f6;
     }
     .content-wrapper {
         background: #dbdbe3;
@@ -24,15 +24,17 @@
 }
 html{
     position:relative;
-    height: 100%;
+    height: auto;
 }
 body {
-    height: 100%;
-    padding-top: 3.5em;
+    height: auto;
+    /* padding-top: 3.5em; */
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 0;
     overflow: hidden;
+    padding-bottom: 5%;
+    background: #f6f5f6;
 }
 .sub-header {
     padding-bottom: 10px;
@@ -79,7 +81,7 @@ body {
 
 /*-------------------------------------------------------------------------*/
 
-.popBody
+/* .popBody
 {
     margin: 0px;
     padding-bottom: 0px;
@@ -133,8 +135,8 @@ body {
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    white-space: nowrap; 
+}*/
 
 
 /*
@@ -189,3 +191,200 @@ body {
 /*
  * Main content
  */
+ .custom-button-style{
+    border-radius: 0;
+    font-size:13px;
+ }
+.custom-button-style:hover {
+    box-shadow: none;}
+
+.custom-button-style:active {
+  transform: translateY(4px);
+  -webkit-transform: translateY(4px);
+  -ms-transform: translateY(4px);
+}
+
+
+
+.loading {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0.5);
+    /* background-image: url("http://i.stack.imgur.com/MnyxU.gif"); */
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+/* custom radio button */
+input[type='radio'] {
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    border:1px solid darkgray;
+    border-radius:50%;
+    outline:none;
+    box-shadow:0 0 5px 0px gray inset;
+  }
+  
+  input[type='radio']:hover {
+    box-shadow:0 0 5px 0px orange inset;
+  }
+  
+  input[type='radio']:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;    
+    border-radius:50%;    
+  }
+  input[type='radio']:checked:before {
+    background:rgb(82, 145, 255)!important;
+  }
+
+
+.custom-btn {
+    display: inline-block;
+    margin-bottom: 0;
+    height: 42px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid rgba(216,216,216,1);
+    white-space: nowrap;
+    padding: 8px 11px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* custom button for organiser - remove*/
+.organiser-remove-button {
+    color:  rgba(83,146,255,1)!important;
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid gray;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color:  #FFFFFF !important;
+}
+.organiser-remove-button:hover {
+    background-color:  #d9534f !important;
+    color:  white !important;
+}
+.organiser-spin-icon{
+    background-color:  #FFFFFF !important;
+    color: rgb(82, 145, 255)!important;
+    border-radius:0;
+}
+/* organiser-add-button */
+.organiser-add-button{
+    height: 42px;
+    color:  rgba(83,146,255,1)!important;
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid gray;
+    white-space: nowrap;
+    padding: 6px 35px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color:  #FFFFFF !important;
+
+}
+.organiser-add-button:hover {
+    background-color:  #d9534f !important;
+    color:  white !important;
+}
+.input-size{
+    border-radius: 0;
+    height: 42px;
+}
+.button-action-size{
+    height: 42px;
+    width: 42px;
+}
+
+.custom-radio-button-alignment{
+    vertical-align: super;
+}
+
+.default-button-action {
+    text-decoration: none;
+    height: 42px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: default;
+    background-image: none;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    
+}
+.button-action-save-all {
+    text-decoration: none;
+    height: 42px;
+    width: 123px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+}
+.spin-action-save-all {
+    text-decoration: none;
+    height: 42px;
+    width: 123px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: default;
+    background-image: none;
+    border: 1px solid gray;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.pointer-button{
+    cursor: pointer;
+}

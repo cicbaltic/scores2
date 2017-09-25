@@ -1,24 +1,38 @@
-
-<div class="nameOfObjectBelow">
-    <p>Scores of {{info.NAME}}</p>
-</div>
-<div class='backgroundColor'>
-    <div class="backgroundforText">
-        <table class='back-table-collNames' table table-relative>
-            <td class="back-table-numbers">#</td>
-            <td class="back-table-names">Team</td>
-            <td class="back-table-totals">Total</td>
-            <td class="back-table-arow"></td>
-        </table>
+<div class="w3-cell-row nameOfObjectBelow">
+    <div class="w3-cell w3-cell-middle">
+        <span>&nbsp;Scores&nbsp;of&nbsp;{{info.NAME}}</span>
+    </div>
+    <div class="w3-cell w3-cell-middle" style="width:1%" ng-show="showLiveBtn()">
+        <button class="w3-left w3-button main-theme-color custom-button-style" ng-click="redirectToLive()">Show live scores</button>
+    </div>
+    &nbsp;
+    <div class="w3-cell w3-cell-middle" style="width:1%" ng-show="showVoteBtn()">
+        <button class="w3-right w3-button main-theme-color custom-button-style" ng-click="redirectToJudgePage()">Cast your vote</button>
     </div>
 </div>
-<uib-accordion close-others='true'>
-    <div class="customAccordion">
-        <uib-accordion-group
-            ng-repeat="row in rows | orderBy:'-Total'"
-            is-open="status.open">
-            <uib-accordion-heading>
-                <div ng-class="{
+<div class="w3-panel">
+
+    <!-- BAR ROW SOLUTION WORKING -->
+    <!-- <div class="w3-bar w3-black w3-row" style="font-weight:bold;line-height: 0.5;">
+        <span class="w3-bar-item w3-col s1 m1 l1">#</span>
+        <span class="w3-bar-item w3-col s4 m2 l2">Team</span>
+        <span class="w3-bar-item w3-col s1 m1 l1 w3-right"></span>
+        <span class="w3-bar-item w3-col s2 m1 l1 w3-right" style="text-align:center">Total</span>
+        <span class="w3-bar-item w3-col w3-rest"></span>
+    </div> -->
+    <table class="w3-table-all">
+        <tr class="w3-black" style="font-weight:bold;line-height: 0.5;">
+            <td style="width:10%">#</td>
+            <td style="width:60%">Team</td>
+            <td style="width:20%;text-align:right">Total</td>
+            <td style="width:10%"></td>
+        </tr>
+    </table>
+    <uib-accordion close-others='true'>
+        <div class="customAccordion" after-render>
+                <uib-accordion-group ng-repeat="row in rows | orderBy:'-Total'" is-open="status.open">
+                    <uib-accordion-heading>
+                        <!-- <div ng-class="{
                     'accordionClosed': !status.open,
                     'accordionOpened': status.open
                 }">
@@ -27,6 +41,7 @@
                         'accordionHeadOpened': status.open
                     }">
                         <table class='accordionHead-Score-view-table-collNames' table table-relative>
+
                             <td class="accordionHead-Score-view-table-numbers">{{ $index + 1 }}</td>
                             <td class="accordionHead-Score-view-table-names">{{row.NAME}}</td>
                             <td class="accordionHead-Score-view-table-totals">{{row.Total | roundSomeNumbers}}</td>
@@ -38,32 +53,111 @@
                             </td>
                         </table>
                     </div>
+                </div> -->
+
+                        <!-- BAR ROW SOLUTION WORKING -->
+                        <!-- <div ng-class="{
+                    'customAccordion-front-panel-text': !status.open,
+                    'customAccordion-front-panel-text-open accordionHead-team': status.open
+                }" class="w3-bar w3-row">
+                    <span class="w3-bar-item w3-col s1 m1 l1">{{ $index + 1 }}</span>
+                    <span class="w3-bar-item w3-col s4 m2 l2">{{row.NAME}}</span>
+                    <span class="w3-bar-item w3-col s1 m1 l1 w3-right" style="color:#5392FF;padding-left:6px;">
+                        <span style="font-size: 20pt;width:100%;height:100%" ng-class="{
+                            'fa fa-angle-down fa-lg': !status.open,
+                            'fa fa-angle-up fa-lg': status.open
+                        }">
+                        </span>
+                    </span>
+                    <span class="w3-bar-item w3-col s2 m1 l1 w3-right" style="text-align:right">{{row.Total | roundSomeNumbers}}</span>
+                    <span class="w3-bar-item w3-col w3-rest"></span>
+                </div> -->
+
+                        <table class="w3-table" ng-class="{
+                    'customAccordion-front-panel-text': !status.open,
+                    'customAccordion-front-panel-text-open': status.open}">
+                            <tr class="accordionHead-team">
+                                <td style="width:10%">{{ $index + 1 }}</td>
+                                <td style="width:60%" ng-class="{'accordionHead-team-open': status.open}">{{row.NAME}}</td>
+                                <td style="width:20%;text-align:right" ng-class="{'accordionHead-team-open': status.open}">{{row.Total | roundSomeNumbers}}</td>
+                                <td style="width:10%;color:#5392FF;">
+                                    <span style="font-size: 20pt;" ng-class="{
+                            'fa fa-angle-down fa-lg': !status.open,
+                            'fa fa-angle-up fa-lg': status.open
+                            }">
+                            </span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </uib-accordion-heading>
+
+                    <div ng-class="{
+                        '': !status.open,
+                        'customAccordion-group-open': status.open
+                    }">
+                        <!-- <div class='accordionBodyScores'>
+                    <table class='accordionHeadSimple-table-scores w3-table' table table-relative>
+                        <tr ng-repeat="column in cols | filter:'!'+nameFilter | filter:'!'+totalFilter | filter:'!'+descriptionFilter">
+                            <td class="accordionBody-Score-view-table-numbers"> </td>
+                            <td class="accordionBody-Score-view-table-names">{{column}}</td>
+                            <td class="accordionBody-Score-view-table-totals">{{row[column] | roundSomeNumbers}}</td>
+                            <td class="accordionBody-Score-view-table-arow"> </td>
+                            <tr>
+                    </table>
                 </div>
-            </uib-accordion-heading>
-            <div class='accordionBodyScores'>
-                <table class='accordionHeadSimple-table-scores' table table-relative>
-                    <tr ng-repeat="column in cols | filter:'!'+nameFilter | filter:'!'+totalFilter | filter:'!'+descriptionFilter" >
-                        <td class="accordionBody-Score-view-table-numbers"> </td>
-                        <td class="accordionBody-Score-view-table-names">{{column}}</td>
-                        <td class="accordionBody-Score-view-table-totals">{{row[column] | roundSomeNumbers}}</td>
-                        <td class="accordionBody-Score-view-table-arow"> </td>
-                    <tr>
-                </table>
-            </div>
-            <div class='accordionBodyHead'>
-                <table class='accordionHead-Score-view-table-collNames' table table-relative>
-                    <td class="accordionBody-Score-view-table-teamDescription-Numbers"></td>
-                    <td class="accordionHeadSimple-Score-view-table-teamDescription-Name">Team description</td>
-                </table>
-            </div>
-            <div class='accordionBodyScores'>
-                <table class='accordionHeadSimple-table-scores' table table-relative>
-                    <tr>
+                <div class='accordionBodyHead'>
+                    <table class='accordionHead-Score-view-table-collNames' table table-relative>
                         <td class="accordionBody-Score-view-table-teamDescription-Numbers"></td>
-                        <td class="accordionBodySimple-table-teamDescription-Text">{{row.DESCRIPTION}}</td>
-                    <tr>
-                </table>
-            </div>
-        </uib-accordion-group>
+                        <td class="accordionHeadSimple-Score-view-table-teamDescription-Name">Team description</td>
+                    </table>
+                </div>
+                <div class='accordionBodyScores'>
+                    <table class='accordionHeadSimple-table-scores' table table-relative>
+                        <tr>
+                            <td class="accordionBody-Score-view-table-teamDescription-Numbers"></td>
+                            <td class="accordionBodySimple-table-teamDescription-Text">{{row.DESCRIPTION}}</td>
+                            <tr>
+                    </table>
+                </div> -->
+
+                        <!-- BAR ROW SOLUTION WORKING -->
+                        <!-- <div class="w3-bar w3-row accordionBody-criteria" ng-repeat="column in cols | filter:'!'+nameFilter | filter:'!'+totalFilter | filter:'!'+descriptionFilter">
+                    <span class="w3-bar-item w3-col s1 m1 l1"></span>
+                    <span class="w3-bar-item w3-col s4 m2 l2">{{column}}</span>
+                    <span class="w3-bar-item w3-col s1 m1 l1 w3-right" style="padding-left:6px;">
+                    </span>
+                    <span class="w3-bar-item w3-col s2 m1 l1 w3-right" style="text-align:right">{{row[column] | roundSomeNumbers}}</span>
+                    <span class="w3-bar-item w3-col w3-rest"></span>
+                </div>
+                <div class="w3-bar w3-row accordionBody-teamDescription-box">
+                    <span class="w3-bar-item w3-col s1 m1 l1"></span>
+                    <span class="w3-bar-item w3-col w3-threequarter">Description: {{row.DESCRIPTION}}</span>
+                    <span class="w3-bar-item w3-col s1 m1 l1 w3-right" style="padding-left:6px;"></span>
+                </div> -->
+
+                        <table class="w3-table">
+                            <tr class="accordionBody-criteria" ng-repeat="column in cols | filter:'!'+nameFilter | filter:'!'+totalFilter | filter:'!'+descriptionFilter">
+                                <td style="width:10%"></td>
+                                <td style="width:60%">{{column}}</td>
+                                <td style="width:20%;text-align:right">{{row[column] | roundSomeNumbers}}</td>
+                                <td style="width:10%"></td>
+                            </tr>
+                        </table>
+                        <table class="w3-table">
+                            <tr>
+                                <td style="width:10%"></td>
+                                <td style="width:80%" class="accordionBody-teamDescription-box">Description: {{row.DESCRIPTION}}</td>
+                                <td style="width:10%"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </uib-accordion-group>
+        </div>
+    </uib-accordion>
+</div>
+<div ng-if="!isLoaded()" class="loading" >
+        <div class="w3-display-middle">
+            <i class="fa fa-spinner fa-spin fa-5x "></i>
+        </div>
     </div>
-</uib-accordion>

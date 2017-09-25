@@ -32,6 +32,32 @@ function UserService() {
         console.log('emailSent');
 
     };
+
+    self.informAboutNewRole = function(userData, callback){
+        //email, name, surname, hackatonID, role
+        var statement = '' +
+        'SELECT ' +
+            'NAME ' +
+        'FROM ' +
+            'HACKATHON ' +
+        'WHERE ' +
+            'ID = ? ;';
+        dataBaseService.queryDb(statement, [userData.hackathonId], function(response) {
+            var someInformation = {
+                emailTo: userData.email,
+                emailJson: {
+                    name: userData.name,
+                    surname: userData.surname,
+                    eventName: response[0].NAME,
+                    role: userData.role
+                },
+                emailSubject: 'IBM SCORES new role'
+            };
+            emailSender.informAboutNewRole(someInformation);
+            callback("OK");
+        });
+    };
+
     self.checkUser = function checkUser(email, callback) {
         var message = 'SELECT ID FROM USERS WHERE EMAIL = ? ;';
         dataBaseService.queryDb(message, [email], function(response) {
@@ -77,7 +103,7 @@ function UserService() {
                 }
                 dataBaseService.queryDb(statement, params, function() {
                     console.log('TODO: remove comment to send email');
-                    // self.outbox(usernameHash, password); // TODO: remove comment to send email
+                    self.outbox(usernameHash, password); // TODO: remove comment to send email
                     callback(usernameHash);
                     return;
                 });

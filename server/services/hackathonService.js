@@ -20,7 +20,11 @@ function HackathonService() {
                 'id, ' +
                 'name, ' +
                 'description, ' +
-                'image as "image" ' +
+                'image as "image", ' +
+                'VOTINGAUDIENCE, ' +
+                'VOTINGTYPE, ' +
+                'SCOREMIN, ' +
+                'SCOREMAX ' +
             'from ' +
                 'hackathon ' +
             'where ' +
@@ -75,26 +79,57 @@ function HackathonService() {
         return returnStatement;
     };
 
-    // payload: { ID:123, NAME: "xyz", DESCRIPTION: "xyz", image: "xyz" }
+        // payload: { ID:123, NAME: "xyz", DESCRIPTION: "xyz", image: "xyz" }
     this.editHackathonInfo = function editHackathonInfo(payload, callback) {
         var hackathonId = payload.hackathonId;
+        var VOTINGAUDIENCE = payload.VOTINGAUDIENCE;
         delete payload.hackathonId;
         delete payload.ID;
         payload = self.serializeForUpdate(payload);
         payload.params.push(hackathonId);
         var statement = '' +
-                'UPDATE ' +
-                    'hackathon ' +
-                'SET ' +
-                    payload.set + ' ' +
-                'WHERE ' +
-                    'id = ?;';
-        self.getHackathonInfo({ hackathonId: hackathonId }, function(result) {
+            'UPDATE ' +
+            'hackathon ' +
+            'SET ' +
+            payload.set + ' ' +
+            'WHERE ' +
+            'id = ?;';
+        self.getHackathonInfo({ hackathonId: hackathonId }, function (result) {
             if (result.length < 1) {
                 result.push('404');
                 callback(result);
             } else {
-                db.queryDb(statement, payload.params, function(result) {
+                db.queryDb('select * from access where hackathonid = ' + hackathonId + ' and userid = \'anonymous\'', null, function (result) {
+                    console.log("anonymousAccess");
+                    console.log(result);
+                    var anonymousAccess = result;
+                    if (VOTINGAUDIENCE == 2) { // Public voting selected
+                        console.log("audience == public");
+                        if (anonymousAccess.length == 0) {
+                            console.log("anonymous access not found");
+                            console.log("adding access");
+                            db.queryDb('insert into access (hackathonid, roleid, userid) values (' + hackathonId + ', 3, \'anonymous\')', null, function (result) {
+                                console.log("access added");
+                            });
+                        }else{
+                            console.log("access found, no action needed");
+                        }
+                    }
+                    else{ // Closed voting selected
+                        if (anonymousAccess.length > 0) {
+                            console.log("audience == closed");
+                            console.log("anonymous access found");
+                            console.log("deleting access");
+                            db.queryDb('delete from access where hackathonid = ' + hackathonId + ' and userid = \'anonymous\'', null, function (result) {
+                                console.log("access deleted");
+                            });
+                        }else{
+                            console.log("access not found, no action needed");
+                        }
+                    }
+                });
+                
+                db.queryDb(statement, payload.params, function (result) {
                     callback(result);
                 });
             }
@@ -192,7 +227,9 @@ function HackathonService() {
                 'id as "id", ' +
                 'name as "name", ' +
                 'description as "description", ' +
-                'image as "image" ' +
+                'image as "image", ' +
+                'votingaudience, ' +
+                'votingtype ' +
             'from ' +
                 'hackathon ' +
             'order by ' +

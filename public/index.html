@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>IBM SCORES</title>
@@ -10,7 +10,7 @@
         <meta name="theme-color" content="#374242">
         <meta name="msapplication-navbutton-color" content="#374242">
         <meta name="apple-mobile-web-app-status-bar-style" content="#374242">
-        <link rel="stylesheet" href="css/w3.css"> <!-- w3 schools css -->
+        <!-- <link rel="stylesheet" href="css/w3.css"> w3 schools css -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/main.css">
@@ -21,11 +21,15 @@
         <link rel="stylesheet" href="css/dotMenu.css">
         <link rel="stylesheet" href="css/accordion.css">
         <link rel="stylesheet" href="css/landing.css">
+        <link rel="stylesheet" href="css/colors.css">
         <link rel="stylesheet" href="css/scoreTable.css">
         <link rel="stylesheet" href="css/hackathonDetails.css">
         <link rel="stylesheet" href="css/adminPanel.css">
         <link rel="stylesheet" href="css/eventModal.css">
         <link rel="stylesheet" href="css/report.css">
+        <!-- w3 css lib -->
+        <link rel="stylesheet" href="css/w3-css/w3.css">
+    
         <!--link rel="stylesheet" href="css/fonts.css"-->
 
         <!-- AngularJS -->
@@ -80,14 +84,18 @@
         <script src="js/controllers/headerController.js"></script>
         <script src="js/controllers/hackathonController.js"></script>
         <script src="js/controllers/eventModalController.js"></script>
+        <script src="js/controllers/captchaModalController.js"></script>
         <script src="js/controllers/dotMenuCloseController.js"></script>
         <script src="js/controllers/detailsController.js"></script>
         <script src="js/controllers/adminPanelController.js"></script>
         <script src="js/controllers/adminManagementController.js"></script>
+        <script src="js/controllers/anonymousVotingController.js"></script>
         <script src="js/directives/userEditView.js"></script>
         <script src="js/directives/teamEditView.js"></script>
         <script src="js/directives/onFileSelected.js"></script>
         <script src="js/directives/criteriaEditView.js"></script>
+        <script src="js/directives/renderCallBack.js"></script>
+        
         <!-- endinject -->
 
         <script>
@@ -117,10 +125,40 @@
                 siteCanvas.className = "hide-overflow";
             }
         </script>
+        <script type="text/javascript" src="js/timers.js"></script>
+        <script type="text/javascript">
+            var refreshTimer;
+
+            window.onload = function (e) {
+                if (refreshTimer) {
+                    refreshTimer.clearTimer();
+                }
+                refreshTimer = new RefreshTimer();
+                refreshTimer.setTimer(
+                    function () {
+                        try {
+                            var refreshScoresButton = window.document.getElementById("refreshScoresButton");
+                            if (refreshScoresButton) {
+                                refreshScoresButton.click();
+                            }
+                        } catch (e) {
+                            console.log("Error", e);
+                        }
+                    }, 2000
+                );
+            }
+
+            window.onunload = function (e) {
+                if (refreshTimer) {
+                    refreshTimer.clearTimer();
+                }
+            }
+        </script>
     </head>
     <body ng-app="app">
         <div ng-include="'templates/header.html'" ng-controller="headerController"></div>
         <div ng-controller="eventModalController"></div>
+        <div ng-controller="captchaModalController"></div>
         <div id="site-wrapper">
             <div id="site-canvas"  class="hide-overflow">
             <div id="site-menu">
@@ -132,11 +170,11 @@
             </div>
             <div class="container-fluid"></div>
                     <div class="row content-wrapper">
-                        <div id="main" >
+                        <div id="main">
                             <div ui-view class="main"></div>
                         </div>
                     </div>
             </div>
         </div>
     </body>
-<html>
+</html>

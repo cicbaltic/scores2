@@ -5,15 +5,10 @@ var db = require('ibm_db');
 //var db = new Pool();
 
 var environment = require('./vcapService');
-var vcap  = environment.getVCAP().sqldb[0].credentials;
+var vcap  = environment.getVCAP()["dashDB For Transactions"][0].credentials;
 
 var cn = '' +
-    'DRIVER={DB2};' +
-    'DATABASE=' + vcap.db +
-    ';UID=' + vcap.username +
-    ';PWD=' + vcap.password +
-    ';HOSTNAME=' + vcap.hostname +
-    ';port= ' + vcap.port;
+    'DRIVER={DB2};' + vcap.ssldsn;
 
 function SqlService() {
     console.log("-----------\nINVOKING sqlService module\n-----------\n\n");

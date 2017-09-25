@@ -10,6 +10,13 @@ app.factory('scoreInfo', ['$http', function($http) {
     scoreInfo.setScoresForJudge = function(payload) {
         return $http.post('/api/scores/postjudgescores', payload);
     };
+    // payload = { hackathonId: 123, userId: "xyz" }
+    scoreInfo.getScoresForAnonymous = function (payload) {
+        return $http.post('/api/scores/getanonymousscores', payload);
+    };
+    scoreInfo.setScoresForAnonymous = function (payload) {
+        return $http.post('/api/scores/postanonymousscores', payload);
+    };
 
     return scoreInfo;
 }]);

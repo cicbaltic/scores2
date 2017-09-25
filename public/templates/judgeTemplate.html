@@ -1,12 +1,13 @@
-<div ng-hide='empty'>
-    <div class="nameOfObjectBelow">
-        <p>{{title}}</p>
-    </div>
-        <uib-accordion close-others='true'>
-            <div class="customAccordion">
-            <uib-accordion-group ng-repeat="person in people"  is-open="status.open">
-                <uib-accordion-heading>
-                    <div ng-class="{
+<div ng-hide='empty' ng-show="isJudgeVoting()">
+        <div class="nameOfObjectBelow">
+            <p>{{title}}</p>
+        </div>
+        <div class="w3-panel">
+            <uib-accordion close-others='true'>
+                <div class="customAccordion">
+                    <uib-accordion-group ng-repeat="person in people" is-open="status.open">
+                        <uib-accordion-heading>
+                            <!-- <div ng-class="{
                         'accordionClosed': !status.open,
                         'accordionOpened': status.open
                     }">
@@ -14,19 +15,42 @@
                             'accordionHeadClosed': !status.open,
                             'accordionHeadOpened': status.open
                         }">
-                        {{person.name + ' ' + person.surname}}
-                        <div ng-class="{
+                            {{person.name + ' ' + person.surname}}
+                            <div ng-class="{
                             'customAccordion-arrowDown': !status.open,
                             'customAccordion-arrowUp': status.open
                         }"></div>
                         </div>
-                    </div>
-                </uib-accordion-heading>
-                <div class='accordionBodySimpleText'>
-                    {{person.description}}
+                    </div> -->
+
+                            <div class="w3-bar w3-row customAccordion-front-panel-text">
+                                <span class="w3-bar-item w3-col w3-threequarter">{{person.name + ' ' + person.surname}}</span>
+                                <span class="w3-bar-item w3-col s1 m1 l1 w3-right" style="color:#5392FF;padding-left:6px;">
+                            <span style="font-size: 20pt;" ng-class="{
+                                'fa fa-angle-down fa-lg': !status.open,
+                                'fa fa-angle-up fa-lg': status.open
+                            }">
+                            </span>
+                                </span>
+                                <span class="w3-bar-item w3-col w3-rest"></span>
+                            </div>
+                        </uib-accordion-heading>
+                        <div ng-class="{
+                        '': !status.open,
+                        'accordionBody-personDescription': status.open
+                    }">
+                            <div class='w3-bar w3-row'>
+                                <!-- accordionBodySimpleText -->
+                                <span class="w3-bar-item w3-col w3-threequarter">{{person.description}}</span>
+                                <span class="w3-bar-item w3-col s1 m1 l1 w3-right" style="padding-left:6px;">
+                            </span>
+                                <span class="w3-bar-item w3-col w3-rest"></span>
+
+                            </div>
+                        </div>
+                    </uib-accordion-group>
                 </div>
-            </uib-accordion-group>
+            </uib-accordion>
         </div>
-      </uib-accordion>
-      <A NAME="organisers">
-</div>
+        <!-- <A NAME="organisers"> -->
+    </div>

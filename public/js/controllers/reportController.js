@@ -8,7 +8,7 @@
                 var eventID = parseInt(($location.path()).split("/")[2]);
                 $scope.dataLoading = true;
                 pageSetup();
-
+                
                 function pageSetup() {
                     $scope.dataLoading = true;
                     $scope.criterias = {};
@@ -24,7 +24,12 @@
                 function nestToObject() {
                     $scope.nestedInfo = {};
                     for (var i = 0, l = $scope.judges.length; i < l; i++) {
-                        var fullName = $scope.judges[i].judgeName + ' ' + $scope.judges[i].judgeSurname;
+
+                        if($scope.judges[i].judgeName === null && $scope.judges[i].judgeSurname === null){
+                            var fullName = 'anonymous';
+                        }else{
+                            var fullName = $scope.judges[i].judgeName + ' ' + $scope.judges[i].judgeSurname;
+                        }
                         if (Object.keys($scope.nestedInfo).length === 0) {
                             $scope.nestedInfo[fullName] = {};
                         }
@@ -35,7 +40,11 @@
                         }
                     }
                     for (var i = 0, l = $scope.judges.length; i < l; i++) {
-                        var fullName = $scope.judges[i].judgeName + ' ' + $scope.judges[i].judgeSurname;
+                        if($scope.judges[i].judgeName === null && $scope.judges[i].judgeSurname === null){
+                            var fullName = 'anonymous';
+                        }else{
+                            var fullName = $scope.judges[i].judgeName + ' ' + $scope.judges[i].judgeSurname;
+                        }
                         for (var key in $scope.judges[i]) {
                             if (key !== 'judgeName' && key !== 'judgeSurname' && key !== 'teamName') {
                                 if ($scope.nestedInfo[fullName][key] === undefined) {

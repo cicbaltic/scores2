@@ -78,7 +78,20 @@ function adminPanelService(req, res, next) {
                                 info.user = response;
                                 info.statusCode = 201;
                                 req.data = info;
-                                next();
+                                if(requestParameters.roleID != 1){ //if not admin
+                                    userService.informAboutNewRole(
+                                        {
+                                            name: requestParameters.user.name,
+                                            surname: requestParameters.user.surname,
+                                            email: requestParameters.user.email,
+                                            hackathonId: requestParameters.hackathonID,
+                                            role: "ORGANIZER"
+                                        },
+                                        function(res){
+                                            next();
+                                        }
+                                    );
+                                }
                             });
                         });
                     });
@@ -91,7 +104,31 @@ function adminPanelService(req, res, next) {
                             info.user = response;
                             info.statusCode = 200;
                             req.data = info;
-                            next();
+                            if(requestParameters.roleID != 1){ //if not admin
+                                userService.informAboutNewRole(
+                                    {
+                                        name: requestParameters.user.name,
+                                        surname: requestParameters.user.surname,
+                                        email: requestParameters.user.email,
+                                        hackathonId: requestParameters.hackathonID,
+                                        role: "ORGANIZER"
+                                    },
+                                    function(res){
+                                        var userForUpdate = {userID: userID,
+                                            name: requestParameters.user.name,
+                                            surname: requestParameters.user.surname,
+                                            description: requestParameters.user.description};
+                                        userService.updateUser (userForUpdate, function() {
+                                            dataBaseService.queryDb(getAllUserInfoMsg.querry, [requestParameters.hackathonID, requestParameters.roleID], function(response) {
+                                                info.user = response;
+                                                info.statusCode = 200;
+                                                req.data = info;
+                                                next();
+                                            });
+                                        });
+                                    }
+                                );
+                            }
                         });
                     });
                 }
@@ -101,8 +138,11 @@ function adminPanelService(req, res, next) {
             var message = {querry: "INSERT INTO HACKATHON (NAME, DESCRIPTION) VALUES ('" +
                 requestParameters.user.hackathonName + "','" +
                 requestParameters.user.hackathonDescription + "') " };
+                console.log(message);
             dataBaseService.queryDb(message.querry, [], function(response) {
+                console.log(response);
                 dataBaseService.queryDb(getAllHackathonInfoMsg.querry, [], function(response) {
+                    console.log(response);
                     var statement = '' +
                         'SELECT ' +
                             'ID ' +
@@ -111,6 +151,7 @@ function adminPanelService(req, res, next) {
                         'WHERE ' +
                             'NAME = ? ;';
                     dataBaseService.queryDb(statement, [requestParameters.user.hackathonName], function(response) {
+                        console.log(response);
                         console.log(response[0].ID);
                         info.hackathon = response;
                         info.statusCode = 201;

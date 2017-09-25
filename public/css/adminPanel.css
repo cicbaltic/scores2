@@ -1,4 +1,6 @@
-
+#test {
+    color: wheat;
+}
 #adminPanelAddButton, #adminPanelHackatonSelectButton {
     z-index: 500;
 }

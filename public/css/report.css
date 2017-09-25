@@ -20,13 +20,14 @@
 }
 #report-label {
     margin: 0;
-    padding: 0.5em;
-    padding-left: 3%;
+    /* padding: 0.5em;
+    padding-left: 3%; */
 }
 .judge-name {
-    margin-bottom: 0.1em;
-    padding-left: 3%;
-    color: #5904d1;
+    /* margin-bottom: 0.1em;
+    padding-left: 3%; */
+    /* color: #5904d1; */
+    color: rgba(83,146,255,1)!important;
 }
 .judge-hr {
     height: 1px;
@@ -64,9 +65,9 @@
 .team-score {
     text-align: center; 
 }
-#report-view .btn-primary {
+#report-view  {
 
-    background: #5904d1;
+    background: rgba(83,146,255,1)!important;
     color: #ffffff;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     box-shadow: none;

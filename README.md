@@ -1,3 +1,5 @@
+## Bluemix Installation
+
 To deploy this application in your own bluemix account, do the following:
 
 1. Fork this project to your own repository. To do this click the 'FORK PROJECT' button in Jazz Hub. In the dialog, type in the name for your new project and make sure to uncheck "Make this a Bluemix Project" option for the time being. Click create and follow further instructions on the page.
@@ -35,3 +37,12 @@ To deploy this application in your own bluemix account, do the following:
     cf push "${CF_APP}" -n [application_name] -c "node server/app.js"
     ```
 7. You may now create a new event with the admin account that you created in steps 3 and 4.
+
+
+## Usage
+### Roles
+The application has the following roles:
+1. Administrator - creates events and assigns organizers.
+2. Organizer - curates events by adding event details, voting type (for judges or open to public), creates teams and voting criteria, assigns judges.
+3. Judge - assesses teams according to provided criteria.
+4. Anonymous - if public voting enabled, assess teams according to provided criteria (no registration needed).

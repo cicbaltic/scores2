@@ -43,6 +43,24 @@ function UserController() {
         });
     };
 
+    self.informAboutNewRole = function(request, response){
+        var user = {
+            name: request.body.name,
+            surname: request.body.surname,
+            email: request.body.email,
+            hackathonId: request.body.hackathonId,
+            role: request.body.role
+        };
+        userService.informAboutNewRole(user, function(res){
+            
+            response.writeHead(201, {
+                "Content-Type": "application/json;charset=utf-8",
+                // "Content-Length": payload.length
+            });
+            response.end(JSON.stringify({status: "OK"}));
+        });
+    };
+
 }
 
 module.exports = UserController;

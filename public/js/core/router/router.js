@@ -1,7 +1,7 @@
 /*jshint browser: true, es5:true*/
 /*jshint latedef: nofunc*/
 /*global angular */
-(function() {
+(function () {
     'use strict';
 
     angular.module('app.core.router').config(configure);
@@ -65,6 +65,11 @@
                 //     }
                 // ]
             })
+            .state('voting', {
+                url: '/event/:hackathonId/voting',
+                templateUrl: 'templates/votingPageTemplate.html',
+                controller: 'anonymousVotingController',
+            })
             .state('login', {
                 url: '/event/:hackathonId/login',
                 templateUrl: 'templates/loginTemplate.html',
@@ -84,6 +89,10 @@
                 url: '/event/:hackathonId/landing',
                 templateUrl: 'templates/landingpage.html',
                 controller: 'landingController'
+            })
+            .state('live', {
+                url: '/event/:hackathonId/live',
+                templateUrl: 'templates/bedsheetLive.html'
             });
     }
 

@@ -17,8 +17,10 @@
                         roles = Object.keys($rootScope.globals.roles[hackathonID]);
                     }
                 }
-                if ($rootScope.globals.roles.null !== undefined) {
-                    roles.push('ADMIN');
+                if($rootScope.globals.roles){
+                    if ($rootScope.globals.roles.null !== undefined && $rootScope.globals.roles.null.ADMIN === true) {
+                        roles.push('ADMIN');
+                    }
                 }
                 return roles;
 

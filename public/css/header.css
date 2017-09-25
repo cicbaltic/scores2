@@ -50,10 +50,21 @@
 #header-app-logo {
     background:url(./svg/app-logo.svg) center no-repeat;
     background-size: 7.5em 1em;
-    height: 3.5em;
+    /* height: 3.5em; */
+    height: 100%;
     width: 7.5em;
     border-width: 0;
+    margin-left: 1em;
 }
+#header-app-navbar {
+    /* background:url(./svg/app-logo.svg) center no-repeat; */
+    /* background-size: 7.5em 1em; */
+    height: 3.5em;
+    /* width: 7.5em;
+    border-width: 0;
+    margin-left: 1em; */
+}
+
 #header-login-button {
     float: right;
     margin: 9%;

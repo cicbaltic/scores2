@@ -39,7 +39,8 @@ function TokenService() {
     };
 
     self.generateToken = function generateToken(payload) {
-        return jwt.sign(payload, server.tokenSecret, {
+        // var secret = '812geuyfdgsjfyefuwefewjygwfyewifgewdejfewuewyfdgdskufdsygfdsfyudafewdedgfwdyugewyudgiyedgqudsadjdgdajftef6eitdsafdsgfyudsftdsyfdfyftdyftdfyduftsdgciudshcdsyucgscyucgsiduygcdisfgyusfgieysyfdsgfdyfgdfydsugdsucdsyfgdsfiudsygfyudsiftdsfyutdiutsiuftdsiytcgcdhd';
+        return jwt.sign(payload, server.tokenSecret, { // secret
             expiresIn: 60 * 60 * 24 * 3 // expires in seconds
         });
     };

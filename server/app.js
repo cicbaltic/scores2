@@ -4,6 +4,25 @@
 // node.js starter application for Bluemix
 //------------------------------------------------------------------------------
 
+var agent = require('bluemix-autoscaling-agent');
+
+process.on('uncaughtException', function (error) {
+    if (error) {
+        console.error("Error type: uncaughtException");
+        if (error.name) {
+            console.error("Error name:", error.name);
+        }
+        if (error.message) {
+            console.error("Error message:", error.message);
+        }
+        if (error.stack) {
+            console.error("Error stack:", error.stack);
+        }
+    } else {
+        console.error("Error: uncaughtException");
+    }
+});
+
 console.log(JSON.stringify(process.argv, null, ' '));
 if (process.argv[2]) {
     //console.log(process.argv);
@@ -89,7 +108,8 @@ var services = {
     mentorService: require('./services/mentorController'),
     tokenService: require('./services/tokenController'),
     passwordResetController: require('./services/passwordResetController'),
-    reportService: require('./services/reportService')
+    reportService: require('./services/reportService'),
+    captchaService: require('./services/captchaService')
 };
 
 // Secret variable for tokengen
@@ -100,12 +120,18 @@ if (process.env.jwtKey) {
     try {
         var enVars = require('fs').readFileSync('local_VCAP', 'utf8');
         var envObje = JSON.parse(enVars);
-        jwtKey = envObje.jwtKey;
+        if(envObje.jwtKey){
+            jwtKey = envObje.jwtKey;
+        }else{
+            throw 'jwtKey is undefined';
+        }
+
     } catch (e) {
         jwtKey = require('./services/helpers/rndString')(256);
     }
 
 }
+jwtKey = "9F6b6T0X00dF3RMi27BNC6WNn4o4CAt49zJQaORBltA57MVy4DeahACsOPVj67f206oW2RXqO0DFR8sG12t1kI06d39hHv1d9Bh11ucxsoTYR720j1b0Xd62b8y1iHCVu9Ak16frEfcIq00wKCl3afF8z6pZ2Hp1VXzksrgNr6Gvo7502D6rpsYi7w1B9uwcOP9EU68M5H2x99mx9N1lPbmztVJSlA94ZSXt4A7dqJJg9g7b754D39c4WkY9P5b9";
 app.set('tokenSecret', jwtKey);
 
 // setting up the Routes

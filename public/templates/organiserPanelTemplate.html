@@ -1,373 +1,376 @@
 <div ng-controller="organizerPanelController">
-    <div class = "container" >
-        <div class="row">
-            <h1 style="text-align:left;">Event
-                <span style="float:right;">
-                    <button class="btn btn-primary" ng-click="redirect('report')" >
-                      Reports
-                    </button>
-                </span>
-            </h1>
-            <form name="hackathonForm">
-                <h2>Info</h2>
-                <div class="form-group">
-                        <label for="hackathon-title">Title: </label>
+        <div class="container w3-margin-bottom">
+            <div class="w3-row ">
+                <div class="w3-bar ">
+                    <a href="" style="z-index:999 " ng-click="openTab($event, 'EventInfo');">
+                        <div class=" w3-bottombar w3-bar-item  w3-mobile tablink  w3-border-blue w3-padding">Event information</div>
+                    </a>
+                    <a href="" style="z-index:999" ng-click="openTab($event, 'Reports');">
+                        <div class=" w3-bottombar tablink  w3-bar-item w3-mobile w3-padding">Reports &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</div>
+                    </a>
+                </div>
+                <span class="underline"></span>
+            </div>
+            <div id="event-modal-buttons">
+                <div id="EventInfo" class="tab">
                     <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"
-                            ng-class="{'has-error': editHackathon && hackathonForm.title.$invalid}">
-                            <input
-                                required
-                                id="hackathon-title"
-                                placeholder="Hackathon title"
-                                type="text"
-                                class="form-control"
-                                ng-model="hackathon.NAME"
-                                name="title"></input>
-                                <p style="color:red" ng-show="editHackathon && hackathonForm.title.$invalid">Name required</p>
+                        <h1 style="text-align:left;">Hackhathon information
+                            <span style="float:right;">
+                                                            <button 
+                                                                ng-hide="buttons.hackathon.saving"
+                                                                id="single-button" type="button"
+                                                                style="box-shadow: none;"
+                                                                class="custom-button-style btn main-theme-color button-action-save-all input-size"
+                                                                ng-class="{ disabled: buttons.hackathon.disabled }"
+                                                                ng-click="save(hackathon, 0, 'hackathonForm', 
+                                                                                hackathonForm.title.$valid && hackathonForm.desc.$valid 
+                                                                                && hackathonForm.voting.$valid && hackathonForm.scoring.$valid
+                                                                                && hackathonForm.min.$valid && hackathonForm.max.$valid
+                                                                                )">Save changes</button>
+                                                            <button type="button" class="spin-action-save-all organiser-spin-icon" ng-show="buttons.hackathon.saving">
+                                                                <i class="fa fa-cog fa-spin"></i>
+                                                            </button>
+                                                        </span>
+                </h1>
+                <form name="hackathonForm">
+                        <div class="w3-cell-row">
+                                <div class="form-group w3-cell">
+                                    <label for="hackathon-title">Name: </label>
+                                    <div class="row">
+                                        <div ng-class="{'has-error': editHackathon && hackathonForm.title.$invalid}">
+                                            <input required id="hackathon-title" placeholder="Hackathon title" type="text" class="form-control input-size" ng-model="hackathon.NAME"
+                                                name="title"></input>
+                                            <p style="color:red" ng-show="editHackathon && hackathonForm.title.$invalid">Name required</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w3-cell" style="width:4%">
+                                    </div>
+                                    <div class="form-group  w3-cell" style="width:60%">
+                                        <label>Description:</label>
+                                        <div class="row">
+                                            <div ng-class="{'has-error': editHackathon && hackathonForm.desc.$invalid}">
+                                                <textarea id="hackathon-desc" placeholder="Hackathon description" type="text" style="height: 42px" class="form-control input-size"
+                                                    ng-model="hackathon.DESCRIPTION" name="desc"></textarea>
+                                                <p style="color:red" ng-show="editHackathon && hackathonForm.desc.$invalid">Description required</p>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                 </div>
+                    <div class="form-group">
+
+                            <div class="w3-cell-row">
+                                    <div class="w3-cell">
+                                        <br>
+                                        <label for="hackathon-logo">Logo:</label>
+                                        </br>
+                                        <img class="img-responsive" ng-src="{{ hackathon.image }}" />
+                                        <div class="row">
+                                            <div>
+                                                <input id="hackathon-logo" style="width: 100%" type="file" class="custom-btn btn-default btn-file input-size" onchange="angular.element(this).scope().selectFile(this.files)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w3-cell" style="width:4%"> </div>
+                                    <div class="w3-cell" style="width:60%">
+                                        <br></br>
+                                        <div class="row"></div>
+                                    </div>
+                                </div>
                         </div>
+                <!-- <div class="w3-cell" style="width:4%"> </div> -->
+
+                <div class="w3-cell-row">
+                            <div>
+                                <div class="w3-left" style="margin-right: 30px">
+                                    <br> <label>Voting Type:</label></br>
+                                    <p>
+                                        <input type="radio" name="voting" value="1" required ng-model="hackathon.VOTINGAUDIENCE" checked>
+                                        <span class="custom-radio-button-alignment"> Judges</span>
+                                        <br>
+                                        <span class="w3-cell w3-cell-middle"><input type="radio" name="voting" value="2" required ng-model="hackathon.VOTINGAUDIENCE">
+                                        <span class="custom-radio-button-alignment" > Public</span>
+                                        <br>
+                                        <p style="color:red" ng-show="editHackathon && hackathonForm.voting.$invalid">Voting Type required</p>
+                                    </p>
+                                </div>
+                                <div class="w3-left" style="margin-right: 30px">
+                                        
+                                        <br> <label>Scoring Type:</label> <br>
+                                        <p>
+                                            <input type="radio" name="scoring" value="1" required ng-model="hackathon.VOTINGTYPE" checked>
+                                            <span class="custom-radio-button-alignment"> Like/Dislike</span>
+                                            <br>
+                                            <input type="radio" name="scoring" value="2" required ng-model="hackathon.VOTINGTYPE">
+                                            <span class="custom-radio-button-alignment"> Scoring</span>
+                                            <br>
+                                            <p style="color:red" ng-show="editHackathon && hackathonForm.scoring.$invalid">Scoring Type required</p>
+                                        </p>
+        
+                                    </div>
+
+                                    <div >
+                                            <br>
+                                            <label for="hackathon-title">Votes (min/max):</label>
+                                            </br>
+                                            <span class="w3-cell ">
+                                                                <input class="input-size" name="min"  type="number" style="width:53px; text-align: center" ng-required="!scoringLimits()"
+                                                                                ng-disabled="scoringLimits()" ng-model="hackathon.SCOREMIN">
+                                                                                <span >&nbsp/&nbsp</span>
+                                            <input class="input-size" name="max" type="number" style="width:53px; text-align: center" ng-required="!scoringLimits()"
+                                                ng-disabled="scoringLimits()" ng-model="hackathon.SCOREMAX">
+                                            </span>
+                                <p style="color:red" ng-show="editHackathon && hackathonForm.min.$invalid">Scoring MIN limit required</p>
+                                <p style="color:red" ng-show="editHackathon && hackathonForm.max.$invalid">Scoring MAX limit required</p>
+                            </div>
+                        </div>
+                  
+    
                     </div>
+    
+
+
+                                                       
+                                       <!-- <div class="form-group">
+                       
+                    </div> -->
+                    <br>
+                </form>
+                <h2>Criteria</h2>
+                <form name="criteriaForm">
+                    <table class="table list-group  table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Name</th>
+                                <th class="col-md-5 col-sm-5 col-xs-5">Description</th>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="crit in criteria">
+                                <td ng-init="
+                                                                    name = 'name' + $index;
+                                                                    description = 'description' + $index;
+                                                                    " ng-class="{'has-error': newCriteria && criteriaForm[name].$invalid}">
+                                    <input required ng-disabled="buttons.criteria.saving[$index]" type="text" name="{{ name }}" class="form-control input-size" id="name" ng-model="crit.name">
+                                    <p style="color:red" ng-show="newCriteria && criteriaForm[name].$invalid">Name required</p>
+                                </td>
+                                <td ng-class="{'has-error': newCriteria && criteriaForm[description].$invalid}">
+                                    <input required ng-disabled="buttons.criteria.saving[$index]" type="text" name="{{ description }}" class="form-control input-size" id="description" ng-model="crit.description">
+                                    <p style="color:red" ng-show="newCriteria && criteriaForm[description].$invalid">Description required</p>
+                                </td>
+                                <td style="vertical-align:middle;">
+
+
+                                    <button id="single-button"  type="button" class="organiser-remove-button button-action-size" ng-click="disableClick();save(criteria, $index, 'criteriaForm', criteriaForm[name].$valid && criteriaForm[description].$valid)"
+                                        style="width: 40px;" ng-hide="buttons.criteria.saving[$index]" ng-class="{ disabled: buttons.criteria.disable }">
+                                                                        <span class="glyphicon glyphicon-floppy-disk" ></span>
+                                                                    </button>
+                                    <button type="button" class="btn btn-primary organiser-spin-icon button-action-size" ng-show="buttons.criteria.saving[$index]" style="width: 40px;">
+                                                                        <i class="fa fa-cog fa-spin " ></i>
+                                                                    </button>
+                                    <button id="single-button" type="button" class="organiser-remove-button button-action-size" ng-click="removeElement(criteria, $index)" ng-hide="buttons.criteria.deleting[$index]"
+                                        ng-class="{ disabled: buttons.criteria.disable }">
+                                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                                    </button>
+                                    <button type="button" class="organiser-remove-button button-action-size" ng-show="buttons.criteria.deleting[$index]" style="width: 40px;">
+                                                                        <i class="fa fa-cog fa-spin"></i>
+                                                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td> <button type="button" class="organiser-add-button" ng-click="addNew(criteria)">
+                                                <span class="fa fa-plus" aria-hidden="true" ></span>
+                                                </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <div ng-hide="hideJudges()">
+                    <h2>Judges</h2>
+                    <form name='judgesForm'>
+                        <p style="color:red" ng-show="newJudgeError">{{newJudgeErrorMsg}}</p>
+                        <table class="table list-group  table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2 col-sm-2 col-xs-2">Email</th>
+                                    <th class="col-md-1 col-sm-2 col-xs-2">Name</th>
+                                    <th class="col-md-1 col-sm-2 col-xs-2">Surname</th>
+                                    <th class="col-md-3 col-sm-3 col-xs-3">Description</th>
+                                    <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-click="toggleJudgeEditTable($index)" ng-repeat="person in judges">
+                                    <td ng-class="{ 'has-error': newJudge && judgesForm[email].$invalid }" ng-init="
+                                                                        email = 'email' + $index;
+                                                                        name = 'name' + $index;
+                                                                        surname = 'surname' + $index;
+                                                                        ">
+                                        <input required type="email" name="{{ email }}" class="form-control input-size" ng-disabled="($index) < judgesOriginal.length"
+                                            ng-model="person.email" uib-typeahead="nPerson.EMAIL for nPerson in autoJudges | filter:$viewValue | limitTo:8"
+                                            typeahead-on-select="onSelectJudge($item, $model, $label, $index)">
+                                        <p style="color:red" ng-show="newJudge && judgesForm[email].$invalid">Email not valid</p>
+                                    </td>
+                                    <td ng-class="{ 'has-error': newJudge && judgesForm[name].$invalid }">
+                                        <input ng-disabled="buttons.judges.saving[$index]" required type="text" name="{{ name }}" class="form-control input-size" ng-model="person.name">
+                                        <p style="color:red" ng-show="newJudge && judgesForm[name].$invalid">Name required</p>
+                                    </td>
+                                    <td ng-class="{ 'has-error': newJudge && judgesForm[surname].$invalid }">
+                                        <input ng-disabled="buttons.judges.saving[$index]" required type="text" name="{{ surname }}" class="form-control input-size" ng-model="person.surname">
+                                        <p style="color:red" ng-show="newJudge && judgesForm[surname].$invalid">Surname required</p>
+                                    </td>
+                                    <td>
+                                        <input ng-disabled="buttons.judges.saving[$index]" type="text" class="form-control input-size" id="name" ng-model="person.description "></td>
+                                    <td style="vertical-align:middle;">
+                                        <button id="single-button" type="button" class="organiser-remove-button button-action-size" ng-click="disableClick();save(judges, $index, 'judgesForm', judgesForm[email].$valid && judgesForm[name].$valid && judgesForm[surname].$valid )"
+                                            ng-hide="buttons.judges.saving[$index]" ng-class="{ disabled: buttons.judges.disable }"
+                                            style="width: 40px;">
+                                                                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                                                                        </button>
+                                        <button type="button" class="btn btn-primary  organiser-spin-icon button-action-size" ng-show="buttons.judges.saving[$index]" style="width: 40px;">
+                                                                            <i class="fa fa-cog fa-spin "></i>
+                                                                        </button>
+                                        <button id="single-button" type="button" class="organiser-remove-button button-action-size" ng-click="removeElement(judges, $index)" ng-hide="buttons.judges.deleting[$index]"
+                                            ng-class="{ disabled: buttons.judges.disable }" style="width: 40px;">
+                                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                                        </button>
+                                        <button type="button" class="organiser-remove-button button-action-size" ng-show="buttons.judges.deleting[$index]" style="width: 40px;">
+                                                                            <i class="fa fa-cog fa-spin"></i>
+                                                                        </button>
+                                    </td>
+                                </tr>
+                                </button>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> <button type="button" class="organiser-add-button" ng-click="addNew(judges)">
+                                                        <span class="fa fa-plus" aria-hidden="true" ></span>
+                                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label>Description:</label>
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10"
-                            ng-class="{'has-error': editHackathon && hackathonForm.desc.$invalid}">
-                            <textarea
-                                required
-                                rows="4"
-                                id="hackathon-desc"
-                                placeholder="Hackathon description"
-                                class="form-control"
-                                ng-model="hackathon.DESCRIPTION"
-                                name="desc">{{ hackathon.DESCRIPTION }}</textarea>
-                                <p style="color:red" ng-show="editHackathon && hackathonForm.desc.$invalid">Description required</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                        <label for="hackathon-logo">Logo:</label><br>
-                        <img class="img-responsive" ng-src="{{ hackathon.image }}"/>
-                        <br>
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                            <input
-                                id="hackathon-logo"
-                                type="file"
-                                class="btn btn-default btn-file"
-                                onchange="angular.element(this).scope().selectFile(this.files)">
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button
-                        ng-hide="buttons.hackathon.saving"
-                        id="single-button" type="button"
-                        class="btn btn-primary"
-                        ng-class="{ disabled: buttons.hackathon.disabled }"
-                        ng-click="save(hackathon, 0, 'hackathonForm', hackathonForm.title.$valid && hackathonForm.desc.$valid)">Update event info</button>
-                    <button type="button" class="btn btn-primary" ng-show="buttons.hackathon.saving">
-                        <i class="fa fa-cog fa-spin"></i>
-                    </button>
-                </div>
-            </form>
-            <h2>Criteria</h2>
-            <form name="criteriaForm">
-                <table class="table list-group  table-hover">
-                    <thead>
-                        <tr>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Name</th>
-                            <th class="col-md-5 col-sm-5 col-xs-5">Description</th>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="crit in criteria">
-                            <td ng-init="
-                                name = 'name' + $index;
-                                description = 'description' + $index;
-                                "
-                                ng-class="{'has-error': newCriteria && criteriaForm[name].$invalid}">
-                                <input required type="text" name="{{ name }}" class="form-control" id="name" ng-model="crit.name">
-                                <p style="color:red" ng-show="newCriteria && criteriaForm[name].$invalid">Name required</p>
-                            </td>
-                            <td ng-class="{'has-error': newCriteria && criteriaForm[description].$invalid}">
-                                <input required type="text" name="{{ description }}" class="form-control" id="description" ng-model="crit.description">
-                                <p style="color:red" ng-show="newCriteria && criteriaForm[description].$invalid">Description required</p>
-                            </td>
-                            <td>
-                                <button
-                                    id="single-button"
-                                    type="button"
-                                    class="btn btn-primary "
-                                    ng-click="save(criteria, $index, 'criteriaForm', criteriaForm[name].$valid && criteriaForm[description].$valid)"
-                                    ng-hide="buttons.criteria.saving[$index]"
-                                    ng-class="{ disabled: buttons.criteria.disable }"
-                                    style="width: 40px;">
-                                    <span class="glyphicon glyphicon-floppy-disk"></span>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    ng-show="buttons.criteria.saving[$index]"
-                                    style="width: 40px;">
-                                    <i class="fa fa-cog fa-spin"></i>
-                                </button>
-                                <button
-                                    id="single-button"
-                                    type="button"
-                                    class="btn btn-danger"
-                                    ng-click="removeElement(criteria, $index)"
-                                    ng-hide="buttons.criteria.deleting[$index]"
-                                    ng-class="{ disabled: buttons.criteria.disable }"
-                                    style="width: 40px;">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-danger"
-                                    ng-show="buttons.criteria.deleting[$index]"
-                                    style="width: 40px;">
-                                    <i class="fa fa-cog fa-spin"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr ng-click="addNew(criteria)">
-                            <td><strong>Add new Criteria</strong></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <h2>Judges</h2>
-            <form name='judgesForm'>
-                <table class="table list-group  table-hover">
-                    <thead>
-                        <tr>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Email</th>
-                            <th class="col-md-1 col-sm-2 col-xs-2">Name</th>
-                            <th class="col-md-1 col-sm-2 col-xs-2">Surname</th>
-                            <th class="col-md-3 col-sm-3 col-xs-3">Description</th>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-click="toggleJudgeEditTable($index)" ng-repeat="person in judges">
-                            <td ng-class="{ 'has-error': newJudge && judgesForm[email].$invalid }"
-                                ng-init="
-                                email = 'email' + $index;
-                                name = 'name' + $index;
-                                surname = 'surname' + $index;
-                                "><input
-                                required
-                                type="email"
-                                name="{{ email }}"
-                                class="form-control "
-                                ng-disabled="($index) < judgesOriginal.length"
-                                ng-model="person.email"
-                                uib-typeahead="nPerson.EMAIL for nPerson in autoJudges | filter:$viewValue | limitTo:8"
-                                typeahead-on-select="onSelectJudge($item, $model, $label, $index)">
-                                <p style="color:red" ng-show="newJudge && judgesForm[email].$invalid">Email not valid</p>
-                            </td>
-                            <td ng-class="{ 'has-error': newJudge && judgesForm[name].$invalid }">
-                                <input
-                                    required type="text"
-                                    name="{{ name }}"
-                                    class="form-control"
-                                    ng-model="person.name">
-                                <p style="color:red" ng-show="newJudge && judgesForm[name].$invalid">Name required</p>
-                            </td>
-                            <td ng-class="{ 'has-error': newJudge && judgesForm[surname].$invalid }">
-                                <input required type="text" name="{{ surname }}" class="form-control" ng-model="person.surname">
-                                <p style="color:red" ng-show="newJudge && judgesForm[surname].$invalid">Surname required</p>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="name" ng-model="person.description  "></td>
-                            <td>
-                                <button
-                                    id="single-button"
-                                    type="button"
-                                    class="btn btn-primary "
-                                    ng-click="save(judges, $index, 'judgesForm', judgesForm[email].$valid && judgesForm[name].$valid && judgesForm[surname].$valid )"
-                                    ng-hide="buttons.judges.saving[$index]"
-                                    ng-class="{ disabled: buttons.judges.disable }"
-                                    style="width: 40px;">
-                                    <span class="glyphicon glyphicon-floppy-disk"></span>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    ng-show="buttons.judges.saving[$index]"
-                                    style="width: 40px;">
-                                    <i class="fa fa-cog fa-spin"></i>
-                                </button>
-                                <button
-                                    id="single-button"
-                                    type="button"
-                                    class="btn btn-danger"
-                                    ng-click="removeElement(judges, $index)"
-                                    ng-hide="buttons.judges.deleting[$index]"
-                                    ng-class="{ disabled: buttons.judges.disable }"
-                                    style="width: 40px;">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-danger"
-                                    ng-show="buttons.judges.deleting[$index]"
-                                    style="width: 40px;">
-                                    <i class="fa fa-cog fa-spin"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr ng-click="addNew(judges)">
-                            <td><strong>Add new Judge</strong></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <h2>Teams</h2>
-            <form name='teamsForm'>
-                <table class="table list-group  table-hover">
-                    <thead>
-                        <tr>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Name</th>
-                            <th class="col-md-5 col-sm-5 col-xs-5">Description</th>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-click="toggleTeamEditTable($index)" ng-repeat="team in teams">
-                            <td ng-class="{ 'has-error': newTeam && teamsForm[name].$invalid }"
-                                ng-init="
-                                name = 'name' + $index;
-                                description = 'description' + $index;
-                                ">
-                                <input required type="text" name="{{ name }}" class="form-control" id="name" ng-model="team.name">
-                                <p style="color:red" ng-show="newTeam && teamsForm[name].$invalid">Name required</p>
-                            </td>
-                            <td ng-class="{ 'has-error': newTeam && teamsForm[description].$invalid }">
-                                <input required type="text" name="{{ description }}" class="form-control" id="name" ng-model="team.description">
-                                <p style="color:red" ng-show="newTeam && teamsForm[description].$invalid">Description required</p>
-                            </td>
-                            <td>
-                                <button
-                                    id="single-button"
-                                    type="button"
-                                    class="btn btn-primary "
-                                    ng-click="save(teams, $index, 'teamsForm', teamsForm[name].$valid && teamsForm[description].$valid)"
-                                    ng-hide="buttons.teams.saving[$index]"
-                                    ng-class="{ disabled: buttons.teams.disable }"
-                                    style="width: 40px;">
-                                    <span class="glyphicon glyphicon-floppy-disk"></span>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    ng-show="buttons.teams.saving[$index]"
-                                    style="width: 40px;">
-                                    <i class="fa fa-cog fa-spin"></i>
-                                </button>
-                                <button
-                                    id="single-button"
-                                    type="button"
-                                    class="btn btn-danger"
-                                    ng-click="removeElement(teams, $index)"
-                                    ng-hide="buttons.teams.deleting[$index]"
-                                    ng-class="{ disabled: buttons.teams.disable }"
-                                    style="width: 40px;">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-danger"
-                                    ng-show="buttons.teams.deleting[$index]"
-                                    style="width: 40px;">
-                                    <i class="fa fa-cog fa-spin"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr ng-click="addNew(teams)">
-                            <td><strong>Add new Team</strong></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-            <h2>Mentors</h2>
-            <form name="mentorsForm">
-                <table class="form-group table list-group  table-hover">
-                    <thead>
-                        <tr>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Name</th>
-                            <th class="col-md-5 col-sm-5 col-xs-5">Description</th>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-click="toggleMentorEditTable($index)" ng-repeat="mentor in mentors">
-                            <td ng-class="{'has-error': newMentor && mentorsForm[name].$invalid}"
-                                ng-init="
-                                name = 'name' + $index;
-                                description = 'description' + $index;
-                                ">
-                                <input required name="{{ name }}" type="text" class="form-control" id="name" ng-model="mentor.name">
-                                <p style="color:red" ng-show="newMentor && mentorsForm[name].$invalid">Name required</p>
-                            </td>
-                            <td ng-class="{'has-error': newMentor && mentorsForm[description].$invalid}">
-                                <input required name="{{ description }}" type="text" class="form-control" id="name" ng-model="mentor.description">
-                                <p style="color:red" ng-show="newMentor && mentorsForm[description].$invalid">Description required</p>
-                            </td>
-                            <td>
-                                <button
-                                    id="single-button"
-                                    type="button"
-                                    class="btn btn-primary "
-                                    ng-click="save(mentors, $index, 'mentorsForm', mentorsForm[name].$valid && mentorsForm[description].$valid)"
-                                    ng-hide="buttons.mentors.saving[$index]"
-                                    ng-class="{ disabled: buttons.mentors.disable }"
-                                    style="width: 40px;">
-                                    <span class="glyphicon glyphicon-floppy-disk"></span>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    ng-show="buttons.mentors.saving[$index]"
-                                    style="width: 40px;">
-                                    <i class="fa fa-cog fa-spin"></i>
-                                </button>
-                                <button
-                                    id="single-button"
-                                    type="button"
-                                    class="btn btn-danger"
-                                    ng-click="removeElement(mentors, $index)"
-                                    ng-hide="buttons.mentors.deleting[$index]"
-                                    ng-class="{ disabled: buttons.mentors.disable }"
-                                    style="width: 40px;">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-danger"
-                                    ng-show="buttons.mentors.deleting[$index]"
-                                    style="width: 40px;">
-                                    <i class="fa fa-cog fa-spin"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr ng-click="addNew(mentors)">
-                            <td><strong>Add new Mentor</strong></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+                <h2>Teams</h2>
+                <form name='teamsForm'>
+                    <table class="table list-group  table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Name</th>
+                                <th class="col-md-5 col-sm-5 col-xs-5">Description</th>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-click="toggleTeamEditTable($index)" ng-repeat="team in teams">
+                                <td ng-class="{ 'has-error': newTeam && teamsForm[name].$invalid }" ng-init="
+                                                                    name = 'name' + $index;
+                                                                    description = 'description' + $index;
+                                                                    ">
+                                    <input ng-disabled="buttons.teams.saving[$index]" required type="text" name="{{ name }}" class="form-control input-size" id="name" ng-model="team.name">
+                                    <p style="color:red" ng-show="newTeam && teamsForm[name].$invalid">Name required</p>
+                                </td>
+                                <td ng-class="{ 'has-error': newTeam && teamsForm[description].$invalid }">
+                                    <input ng-disabled="buttons.teams.saving[$index]" required type="text" name="{{ description }}" class="form-control input-size" id="name" ng-model="team.description">
+                                    <p style="color:red" ng-show="newTeam && teamsForm[description].$invalid">Description required</p>
+                                </td>
+                                <td style="vertical-align:middle;">
+                                    <button id="single-button" type="button" class="organiser-remove-button button-action-size" ng-click="disableClick();save(teams, $index, 'teamsForm', teamsForm[name].$valid && teamsForm[description].$valid)"
+                                        ng-hide="buttons.teams.saving[$index]" ng-class="{ disabled: buttons.teams.disable }"
+                                        style="width: 40px;">
+                                                                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                                                                    </button>
+                                    <button type="button" class="btn btn-primary organiser-spin-icon button-action-size" ng-show="buttons.teams.saving[$index]" style="width: 40px;">
+                                                                        <i class="fa fa-cog fa-spin"></i>
+                                                                    </button>
+                                    <button id="single-button" type="button" class="organiser-remove-button button-action-size" ng-click="removeElement(teams, $index)" ng-hide="buttons.teams.deleting[$index]"
+                                        ng-class="{ disabled: buttons.teams.disable }" style="width: 40px;">
+                                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                                    </button>
+                                    <button type="button" class="organiser-remove-button button-action-size" ng-show="buttons.teams.deleting[$index]" style="width: 40px;">
+                                                                        <i class="fa fa-cog fa-spin"></i>
+                                                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td> <button type="button" class="organiser-add-button" ng-click="addNew(teams)">
+                                                        <span class="fa fa-plus" aria-hidden="true" ></span>
+                                                        </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <h2>Mentors</h2>
+                <form name="mentorsForm">
+                    <table class="form-group table list-group  table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Name</th>
+                                <th class="col-md-5 col-sm-5 col-xs-5">Description</th>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-click="toggleMentorEditTable($index)" ng-repeat="mentor in mentors">
+                                <td ng-class="{'has-error': newMentor && mentorsForm[name].$invalid}" ng-init="
+                                                                    name = 'name' + $index;
+                                                                    description = 'description' + $index;
+                                                                    ">
+                                    <input ng-disabled="buttons.mentors.saving[$index]" required name="{{ name }}" type="text" class="form-control input-size" id="name" ng-model="mentor.name">
+                                    <p style="color:red" ng-show="newMentor && mentorsForm[name].$invalid">Name required</p>
+                                </td>
+                                <td ng-class="{'has-error': newMentor && mentorsForm[description].$invalid}">
+                                    <input ng-disabled="buttons.mentors.saving[$index]" required name="{{ description }}" type="text" class="form-control input-size" id="name" ng-model="mentor.description">
+                                    <p style="color:red" ng-show="newMentor && mentorsForm[description].$invalid">Description required</p>
+                                </td>
+                                <td style="vertical-align:middle;">
+                                    <button id="single-button" type="button" class="organiser-remove-button button-action-size" ng-click="disableClick();save(mentors, $index, 'mentorsForm', mentorsForm[name].$valid && mentorsForm[description].$valid)"
+                                        ng-hide="buttons.mentors.saving[$index]" ng-class="{ disabled: buttons.mentors.disable }"
+                                        style="width: 40px;">
+                                                                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                                                                    </button>
+                                    <button type="button" class="btn btn-primary organiser-spin-icon button-action-size" ng-show="buttons.mentors.saving[$index]" style="width: 40px;">
+                                                                        <i class="fa fa-cog fa-spin"></i>
+                                                                    </button>
+                                    <button id="single-button" type="button" class="organiser-remove-button button-action-size" ng-click="removeElement(mentors, $index)" ng-hide="buttons.mentors.deleting[$index]"
+                                        ng-class="{ disabled: buttons.mentors.disable }" style="width: 40px;">
+                                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                                    </button>
+                                    <button type="button" class="organiser-remove-button button-action-size" ng-show="buttons.mentors.deleting[$index]" style="width: 40px;">
+                                                                        <i class="fa fa-cog fa-spin"></i>
+                                                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td> <button type="button" class="organiser-add-button" ng-click="addNew(mentors)">
+                                                        <span class="fa fa-plus" aria-hidden="true" ></span>
+                                                        </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div id="Reports" class="tab" style="display:none">
+            <div id="reportService" ng-include="'templates/reportBedsheetTemplate.html'" ng-controller="reportController"></div>
         </div>
     </div>
 </div>
+<div ng-if="!isLoaded()" class="loading">
+        <div class="w3-display-middle">
+            <i class="fa fa-spinner fa-spin fa-5x "></i>
+        </div>
+    </div>

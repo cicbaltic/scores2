@@ -31,10 +31,23 @@ function ScoreController() {
         console.log(request.authentication);
     };
 
-
+    self.getScoresForAnonymous = function getScoresForAnonymous(request, response) {
+        scoreService.getScoresForAnonymous(request.body, function (result) {
+            var resultTxt = JSON.stringify(result, null, "  ");
+            makeResponse(200, resultTxt, response);
+        });
+        console.log(request.authentication);
+    };
 
     self.setScoresForJudge = function setScoresForJudge(request, response) {
         scoreService.setScore(request.body, function(result) {
+            var resultTxt = JSON.stringify(result, null, "  ");
+            makeResponse(201, resultTxt, response);
+        });
+    };
+
+    self.setScoresForAnonymous = function setScoresForAnonymous(request, response) {
+        scoreService.setScoresForAnonymous(request.body, function (result) {
             var resultTxt = JSON.stringify(result, null, "  ");
             makeResponse(201, resultTxt, response);
         });

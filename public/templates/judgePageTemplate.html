@@ -2,56 +2,268 @@
     <p>Scores of {{info.NAME}}</p>
 </div>
 
-<uib-accordion close-others='true'>
-    <div class="customAccordion">
-        <uib-accordion-group ng-repeat="line in lines" is-open="status.open">
+<div class="w3-panel">
+    <!-- <div class="w3-bar w3-black w3-row" style="font-weight:bold;line-height: 0.5;">
+        <span class="w3-bar-item w3-col s4 m2 l2">#  Team</span>
+        <span class="w3-bar-item w3-col s1 m1 l1 w3-right"></span>
+        <span class="w3-bar-item w3-col s2 m1 l1 w3-right" style="text-align:center">Total</span>
+        <span class="w3-bar-item w3-col w3-rest"></span>
+    </div> -->
 
-            <uib-accordion-heading>
+    <table class="w3-table-all">
+        <tr class="w3-black" style="font-weight:bold;line-height: 0.5;">
+            <td style="width:10%">#</td>
+            <td style="width:60%">Team</td>
+            <td style="width:20%;text-align:right">Total</td>
+            <td style="width:10%"></td>
+        </tr>
+    </table>
+    <uib-accordion close-others='true'>
+        <div class="customAccordion" after-render>
+            <!-- <div ng-class="{
+                    '': !status.open,
+                    'customAccordion-group-open': status.open
+                }" > -->
+            <uib-accordion-group ng-repeat="line in lines" is-open="status.open">
+
+
+                <uib-accordion-heading>
+
+                    <!-- <div ng-class="{
+                        'accordionClosed': !status.open,
+                        'accordionOpened': status.open
+                    }"> -->
+                    <!-- <div ng-class="{
+                            'accordionHeadClosed': !status.open,
+                            'accordionHeadOpened': status.open
+                        }"> -->
+                    <!-- <table class="accordionHead-Score-view-table-collNames">
+                                <td class="accordionHead-Score-view-table-numbers ng-binding"> {{line.NAME}} </td>
+                                <td> <span style="float:right" ng-bind="teamScores[{{line.ID}}]"></span> </td>
+                                <td class="accordionHead-Score-view-table-totals ng-binding" > 
+                                    <div style="color:blueviolet" ng-class="{
+                                        'customAccordion-arrowDown': !status.open,
+                                        'customAccordion-arrowUp': status.open
+                                    }"></div>
+                                </td>
+                            </table> -->
+
+                    <!-- accordion header panel -->
+                    <!-- <div ng-class="{
+                                'customAccordion-front-panel-text': !status.open,
+                                'customAccordion-front-panel-text-open': status.open
+                            }" class="w3-bar w3-row">
+                        <span class="w3-bar-item w3-col s3 m3 l3">{{line.NAME}}</span>
+                        <span class="w3-bar-item w3-col s1 m1 l1 w3-right" style="color:#5392FF;padding-left:6px;">
+                                    <span style="font-size: 20pt;width:100%;height:100%" ng-class="{
+                                        'fa fa-angle-down fa-lg': !status.open,
+                                        'fa fa-angle-up fa-lg': status.open
+                                    }">
+                                    </span>
+                        </span>
+                        <span class="w3-bar-item w3-col s2 m1 l1 w3-right" style="text-align:center" ng-bind="teamScores[{{line.ID}}]">-</span>
+                        <span class="w3-bar-item w3-col w3-rest"></span>
+                    </div> -->
+
+                    <table class="w3-table" ng-class="{
+                        'customAccordion-front-panel-text': !status.open,
+                        'customAccordion-front-panel-text-open': status.open}">
+                        <tr class="accordionHead-team">
+                            <td style="width:10%"></td>
+                            <td style="width:60%" ng-class="{'accordionHead-team-open': status.open}">{{line.NAME}}</td>
+                            <td style="width:20%;text-align:right" ng-class="{'accordionHead-team-open': status.open}" ng-bind="teamScores[{{line.ID}}]">-</td>
+                            <td style="width:10%;color:#5392FF;">
+                                <span style="font-size: 20pt;" ng-class="{
+                                'fa fa-angle-down fa-lg': !status.open,
+                                'fa fa-angle-up fa-lg': status.open
+                                }">
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- </div> -->
+                    <!-- </div> -->
+                </uib-accordion-heading>
+                <!-- <div class='accordionBodyScoring'> -->
+                <!-- <table class='accordionHeadSimple-table-scoring' table table-relative>
+                        <tr ng-repeat="key in kegen | filter:'!' + 'NAME' | filter:'!' + 'ID'">
+                            <td class="accordionHead-Score-edit-table-name">
+                                {{displayName(key)}}
+                                <div class="teamDescription-Text">
+                                    {{displayDesc(key)}}
+                                </div>
+                            </td>
+                            <td ng-if="info.VOTINGTYPE == 2" class="accordionHead-Score-edit-table-minus">
+                                <button class="customAccordion-judge-remove-score" ng-click="decrement(line[key], line, key); getTeamScore(line.ID);"></button>
+                            </td>
+                            <td ng-if="info.VOTINGTYPE == 2" class="accordionHead-Score-edit-table-score">
+                                <span ng-model="line[key]">{{line[key]}}</span>
+                            </td>
+                            <td ng-if="info.VOTINGTYPE == 1" class="accordionHead-Score-edit-table-plus">
+                                <span style="color:#5392FF;" 
+                                    ng-class="{'fa fa-heart fa-2x': hover, 'fa fa-heart-o fa-2x': !hover}" 
+                                    ng-show="line[key] == 0 || line[key] == null"  
+                                    ng-init="hover = false" 
+                                    ng-mouseenter="hover = true" 
+                                    ng-mouseleave="hover = false" 
+                                    ng-click="increment(line[key], line, key); prepPayloadLike(line, key, true); getTeamScore(line.ID);"></span> 
+                                <span style="color:#5392FF;" 
+                                    ng-class="{'fa fa-heart fa-2x': !hover, 'fa fa-heart-o fa-2x': hover}" 
+                                    ng-show="line[key] == 1" 
+                                    ng-init="hover = false" 
+                                    ng-mouseenter="hover = true" 
+                                    ng-mouseleave="hover = false" 
+                                    ng-click="decrement(line[key], line, key); prepPayloadLike(line, key, false); getTeamScore(line.ID);"></span>
+                            </td>
+                            <td ng-if="info.VOTINGTYPE == 2" class="accordionHead-Score-edit-table-plus">
+                                <button class="customAccordion-judge-add-score" ng-click="increment(line[key], line, key); getTeamScore(line.ID);"></button>
+                            </td>
+                        <tr>
+                    </table> -->
+
+                <!-- voting on criteria -->
                 <div ng-class="{
-                    'accordionClosed': !status.open,
-                    'accordionOpened': status.open
+                    '': !status.open,
+                    'customAccordion-group-open': status.open
                 }">
-                    <div ng-class="{
-                        'accordionHeadClosed': !status.open,
-                        'accordionHeadOpened': status.open
-                    }">
-                        {{line.NAME}}
-                        <div ng-class="{
-                            'customAccordion-arrowDown': !status.open,
-                            'customAccordion-arrowUp': status.open
-                        }"></div>
+                    <!-- <div class="w3-bar w3-row customAccordion-front-panel-text" ng-repeat="key in kegen | filter:'!' + 'NAME' | filter:'!' + 'ID'"> -->
+
+
+                        <!-- space -->
+                        <!-- <span class="w3-bar-item w3-col s1 m1 l1 w3-right" ng-if="info.VOTINGTYPE == 1">
+                        </span> -->
+                        <!-- like / unlike -->
+                        <!-- <span class="w3-bar-item w3-col s2 m1 w3-right" style="color:#5392FF;text-align:center;" ng-if="info.VOTINGTYPE == 1">
+                            <span 
+                            ng-class="{'fa fa-heart heart-hover-color fa-2x': hover, 'fa fa-heart heart-default-color fa-2x': !hover}"  
+                                ng-show="line[key] == 0 || line[key] == null"  
+                                ng-init="hover = false" 
+                                ng-mouseenter="hover = true" 
+                                ng-mouseleave="hover = false" 
+                                ng-click="increment(line[key], line, key); prepPayloadLike(line, key, true); getTeamScore(line.ID);"></span>
+                        <span class="heart-selected-color"
+                            ng-class="{'fa fa-heart heart-hover-color fa-2x': !hover, 'fa fa-heart heart-default-color fa-2x': hover}" 
+                            ng-show="line[key] == 1" 
+                            ng-init="hover = false"
+                            ng-mouseenter="hover = true" 
+                            ng-mouseleave="hover = false" 
+                            ng-click="decrement(line[key], line, key); prepPayloadLike(line, key, false); getTeamScore(line.ID);"></span>
+                        </span>
+                        <td ng-if="info.VOTINGTYPE == 1" class="accordionHead-Score-edit-table-plus">
+
+                        </td> -->
+
+                        <!-- button plus -->
+                        <!-- <span class="w3-bar-item w3-col s1 m1 l1 w3-right" ng-if="info.VOTINGTYPE == 2" style="color:#5392FF;padding-left:8px;">
+                                <span class="fa fa-plus fa-lg" ng-click="increment(line[key], line, key); getTeamScore(line.ID);"></span>
+                        </span> -->
+                        <!-- number -->
+                        <!-- <span class="w3-bar-item w3-col s2 m1 w3-right" style="text-align:center;" ng-if="info.VOTINGTYPE == 2">
+                            <span style="color:black" ng-model="line[key]">{{line[key]}}</span>
+                        </span> -->
+                        <!-- button minus -->
+                        <!-- <span class="w3-bar-item w3-col s1 m1 w3-right" ng-if="info.VOTINGTYPE == 2" style="color:#5392FF;text-align:center;">
+                                <span class="fa fa-minus fa-lg" ng-click="decrement(line[key], line, key); getTeamScore(line.ID);"></span>
+                        </span> -->
+                        <!-- name -->
+                        <!-- <span class="w3-bar-item w3-col w3-twothird">
+                            <div class="w3-row">
+                                <p class="customAccordion-criteria w3-col s3 m1 l1">{{displayName(key)}}</p>
+                            </div>
+                            <div class="w3-row">
+                                <p class="customAccordion-criteria-desc w3-col w3-rest">{{displayDesc(key)}}</p>
+                            </div>
+                        </span>
+                    </div> -->
+
+                    <table class="w3-table" ng-if="info.VOTINGTYPE == 2">
+                        <tr class="customAccordion-front-panel-criteria-text" ng-repeat="key in kegen | filter:'!' + 'NAME' | filter:'!' + 'ID'">
+                            <td style="width:10%"></td>
+                            <td style="width:60%">
+                                <div class="w3-cell-row">
+                                    <p class="customAccordion-criteria">{{displayName(key)}}</p>
+                                </div>
+                                <div class="w3-cell-row">
+                                    <p class="customAccordion-criteria-desc">{{displayDesc(key)}}</p>
+                                </div>
+                            </td>
+                            <!-- <td style="width:10%;color:#5392FF;text-align:right">
+                                
+                            </td> -->
+                            <td style="width:20%;text-align:right">
+                                <span class="fa fa-minus fa-lg" ng-click="decrement(line[key], line, key); getTeamScore(line.ID);" style="color:#5392FF;padding-right:10px;"></span>
+                                <span style="color:black" ng-model="line[key]">{{line[key]}}</span>
+                            </td>
+                            <td style="width:10%;color:#5392FF">
+                                <span class="fa fa-plus fa-lg" ng-click="increment(line[key], line, key); getTeamScore(line.ID);"></span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="w3-table" ng-if="info.VOTINGTYPE == 1">
+                            <tr class="customAccordion-front-panel-text" ng-repeat="key in kegen | filter:'!' + 'NAME' | filter:'!' + 'ID'">
+                                <td style="width:10%"></td>
+                                <td style="width:70%">
+                                    <div class="w3-cell-row">
+                                        <p class="customAccordion-criteria">{{displayName(key)}}</p>
+                                    </div>
+                                    <div class="w3-cell-row">
+                                        <p class="customAccordion-criteria-desc">{{displayDesc(key)}}</p>
+                                    </div>
+                                </td>
+                                <td style="width:10%;text-align:right">
+                                    <span class="fa fa-heart heart-default-color fa-2x"
+                                        style="cursor: pointer"
+                                        ng-show="line[key] == 0 || line[key] == null"  
+                                        ng-click="increment(line[key], line, key); prepPayloadLike(line, key, true); getTeamScore(line.ID);">
+                                    </span>
+                                    <!-- ng-class="{'fa fa-heart heart-hover-color fa-2x': hover, 'fa fa-heart heart-default-color fa-2x': !hover}" 
+                                    ng-init="hover = false" 
+                                    ng-mouseenter="hover = true" 
+                                    ng-mouseleave="hover = false"   -->
+                                    <span class="fa fa-heart heart-selected-color fa-2x"
+                                        style="cursor: pointer"
+                                        ng-show="line[key] == 1" 
+                                        ng-click="decrement(line[key], line, key); prepPayloadLike(line, key, false); getTeamScore(line.ID);"></span>
+                                    </span>
+                                     <!-- ng-init="hover = false"
+                                    ng-mouseenter="hover = true" 
+                                    ng-mouseleave="hover = false"
+                                    ng-class="{'fa fa-heart heart-hover-color fa-2x': !hover, 'fa fa-heart heart-default-color fa-2x': hover}"  -->
+                                </td>
+                                <td style="width:10%;">
+                                </td>
+                            </tr>
+                        </table>
+                       
+
+                    <!-- <div ng-if="info.VOTINGTYPE == 2" class="save-button-at-score-edit">
+                        <button ng-hide="savejudgeScore" id="save-changed-scores-button" type="button" class="btn btn-primary" value="Save" ng-click=" status.open = !status.open; prepPayload(lines)">
+                            {{ "Save" }}
+                        </button>
+                        <button type="button" class="btn btn-primary" id="save-changed-scores-button-loading" ng-show="savejudgeScore">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </button>
+                    </div> -->
+
+                    <div style="text-align:center;" ng-if="info.VOTINGTYPE == 2">
+                        <button ng-hide="savejudgeScore" type="button" style="width:50%;box-shadow: none;" class="custom-button-style btn main-theme-color" value="Save" ng-click=" status.open = !status.open; prepPayload(lines)">
+                            {{ "Submit voting results" }}
+                        </button>
+                        <button type="button" class="custom-button-style btn main-theme-color" ng-show="savejudgeScore">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </button>
                     </div>
                 </div>
-            </uib-accordion-heading>
-            <div class='accordionBodyScoring'>
-                <table class='accordionHeadSimple-table-scoring' table table-relative>
-                    <tr ng-repeat="key in kegen | filter:'!' + 'NAME' | filter:'!' + 'ID'">
-                        <td class="accordionHead-Score-edit-table-name">
-                            {{displayName(key)}}
-                            <div class="teamDescription-Text">
-                                {{displayDesc(key)}}
-                            </div>
-                        </td>
-                        <td class="accordionHead-Score-edit-table-minus">
-                            <button class="customAccordion-judge-remove-score" ng-click="decrement(line[key], line, key);"></button>
-                        </td>
-                        <td class="accordionHead-Score-edit-table-score">
-                            <span ng-model="line[key]">{{line[key]}}</span>
-                        </td>
-                        <td class="accordionHead-Score-edit-table-plus">
-                            <button class="customAccordion-judge-add-score" ng-click="increment(line[key], line, key);"></button>
-                        </td>
-                    <tr>
-                </table>
-                <div class="save-button-at-score-edit">
-                    <button ng-hide="savejudgeScore" id="save-changed-scores-button" type="button" class="btn btn-primary" value="Save"  ng-click=" status.open = !status.open; prepPayload(lines)">
-                        {{ "Save" }}
-                    </button>
-                    <button type="button" class="btn btn-primary" id="save-changed-scores-button-loading" ng-show="savejudgeScore">
-                        <i class="fa fa-cog fa-spin""></i>
-                    </button>
-                </div>
-            </div>
-        </uib-accordion-group>
+                <!-- </div> -->
+            </uib-accordion-group>
+        </div>
+    </uib-accordion>
+</div>
+<br>
+<div ng-if="!isLoaded()" class="loading" >
+        <div class="w3-display-middle">
+            <i class="fa fa-spinner fa-spin fa-5x "></i>
+        </div>
     </div>
-</uib-accordion>

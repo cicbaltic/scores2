@@ -81,7 +81,7 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: normal;
     vertical-align: baseline;
-    color: #5454d1;
+    color: #000000;
     font-size: 0.9em;
     font-weight: bold;
     margin-left: 4.84375%;
@@ -101,7 +101,7 @@
     border-radius: 0;
     padding: 0;
     padding-top: 0;
-    padding-bottom: 0.8em;
+    /* padding-bottom: 0.8em; */
     border-color: #c9d3cf;
 }
 
@@ -114,7 +114,7 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: normal;
     vertical-align: baseline;
-    color: #5454d1;
+    color: #424747 ;
     font-size: 0.9em;
     font-weight: bold;
     margin-left: 4.84375%;
@@ -171,3 +171,68 @@
     margin-bottom: 0.625em;
 }
 /*============================================================================*/
+
+/* ====new style==== */
+.customAccordion-front-panel-text {
+    /* padding-right:0.5em; */
+    padding-top:0.5em;
+    /* padding-bottom:0.5em; */
+    opacity: 0.8;
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #424747;
+    letter-spacing: 0.2px;
+    background-color: #FCFCFC;
+}
+
+.customAccordion-front-panel-criteria-text {
+    /* padding-right:0.5em; */
+    padding-top:0.5em;
+    /* padding-bottom:0.5em; */
+    opacity: 0.8;
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #424747;
+    letter-spacing: 0.2px;
+    background-color: white;
+}
+
+.customAccordion-front-panel-text-open {
+    padding-top:0.5em;
+    /* padding-bottom:0.5em; */
+    opacity: 0.8;
+    font-family: Helvetica;
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    border-left: 1px solid #5392FF;
+    border-right: 1px solid #5392FF;
+    border-top: 1px solid #5392FF;
+    background-color: white;
+}
+
+.customAccordion-criteria-desc{
+    opacity: 0.8;
+    font-family: Helvetica-Oblique;
+    font-size: 12px;
+    color: #424747;
+    letter-spacing: 0.17px;
+    line-height: 20px;
+    margin-bottom: 0em;
+}
+.customAccordion-criteria{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #424747;
+    letter-spacing: 0.2px;
+    line-height: 20px;
+    margin-bottom: 0em;
+}
+
+.customAccordion-group-open{
+    border-left: 1px solid #5392FF;
+    border-right: 1px solid #5392FF;
+    border-bottom: 1px solid #5392FF;
+    padding-bottom: 1em;
+}

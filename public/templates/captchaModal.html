@@ -1,0 +1,26 @@
+<div ng-controller="captchaModalController as cmc">
+    <div class="w3-bar">
+
+        <div class="w3-padding main-theme-color">
+            <label style="font: inherit;" class="w3-margin-left">Security code</label><br>
+            <button ng-click="cancel()" title="Close" class="w3-button w3-xlarge w3-transparent fa fa-close w3-display-topright" title="Close" />
+        </div>
+        <div class="modal-body">
+
+            <label style="font: inherit;">Type in security code numbers which you see in the image below:</label><br>
+
+            <form name="form" role="form" ng-submit="captchaSubmit(input)">
+                    <div class="w3-margin-bottom">
+                        <img src="data:image/png;base64,{{image}}" width="80" height="30" />
+                    </div>
+
+                    <input class="w3-input w3-border" placeholder="Security code" type="text" ng-model="input">
+                    <input class="custom-button-style btn main-theme-color default-button-action pointer-button w3-right"  style="margin:16px 0; width: 20%;" type="submit" value="Submit">
+                    <div ng-show="showErr" style="color:red;font: inherit;">
+                        You typed incorrect numbers
+                    </div>
+            </form>
+        </div>
+    </div>
+
+</div>

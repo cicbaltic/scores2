@@ -44,6 +44,9 @@ function Routes(app, services) {
     app.post('/api/organizer/assign');
     */
 
+    //return captcha
+    app.get('/api/getcaptcha', services.captchaService);
+
     // Retrievs the user token, TAKES username and password in the headers.
     app.get('/api/gettoken', services.tokenService.getToken);
 
@@ -85,15 +88,20 @@ function Routes(app, services) {
     app.post('/api/criteria/info/:criteriaId', auth.hasAccess(2), services.criteriaService.editCriteria);
 
     // Searches db for users
-    app.get('/api/autocomplete/user/:hackathonId', auth.hasAccess(2), services.autocompleteService.searchUsers);
+    app.get('/api/autocomplete/user/:hackathonId', services.autocompleteService.searchUsers); //auth.hasAccess(2), 
 
     // Assigns an existing jury to a hackathon
     app.post('/api/judge/assign', auth.hasAccess(2), services.judgeService.assignJudge);
+    // Get user Access by email
+    app.post('/api/judge/access', services.judgeService.getJudgeAccessByEmail); // auth.hasAccess(2),
 
     // Updates existing user information
     app.post('/api/user/info', auth.hasAccess(2), services.userService.updateUserInfo);
     // Creates a new user
     app.post('/api/user/register', auth.hasAccess(2), services.userService.registerNewUser);
+    ///Inform by email about new role'
+    app.post('/api/user/informemail', services.userService.informAboutNewRole); //auth.hasAccess(2), 
+    
     // Create new team
     app.post('/api/team/new', auth.hasAccess(2), services.teamService.newTeamCreate);
     // Assign new team to a HACKATHON
@@ -106,6 +114,10 @@ function Routes(app, services) {
     app.post('/api/scores/getjudgescores', auth.hasAccess(3), services.scoreService.getScoresForJudge);
     // Post scores for a team as a judge
     app.post('/api/scores/postjudgescores', auth.hasAccess(3), services.scoreService.setScoresForJudge);
+    // Retrieves the scores for anonymous user
+    app.post('/api/scores/getanonymousscores', services.scoreService.getScoresForAnonymous);
+    // Post scores for a team as an anonymous
+    app.post('/api/scores/postanonymousscores', services.scoreService.setScoresForAnonymous);
     // Create new mentor
     app.post('/api/mentor/new', auth.hasAccess(2), services.mentorService.newMentorCreate);
     // Assign new mentor to a HACKATHON

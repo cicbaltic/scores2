@@ -57,6 +57,13 @@
             });
         };
 
+        service.resetCredentials = function(callback){
+            if ($cookies.get('x-token') !== undefined) {
+                var xToken = $cookies.get('x-token');
+                service.setCredentials(xToken, function(res){});
+            }
+            callback($rootScope.globals);
+        }
         service.validateCredentials = function(callback) {
             if ($cookies.get('x-token') !== undefined) {
                 var xToken = $cookies.get('x-token');

@@ -37,6 +37,20 @@ function QueryService() {
         });
     };
 
+    this.getJudgeAccessByEmail = function(request, response){
+        var query = "SELECT USERS.ID, ACCESS.HACKATHONID, ACCESS.ROLEID " +
+        "FROM USERS " +
+        "LEFT JOIN ACCESS ON USERS.ID = ACCESS.USERID " +
+        "WHERE USERS.EMAIL = '" + request.body.email+ "';";
+        db.queryDb(query, [], function(result){
+            var resultStr = JSON.stringify(result, null, " ");
+            response.writeHead(200, {
+                "Content-Type": "application/json",
+            });
+            response.end(resultStr);
+        });
+    }
+
     this.assignJudge = function assignJudge(request, response) {
         var role = {
             userID: request.body.USERID,
